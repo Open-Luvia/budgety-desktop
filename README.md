@@ -3,6 +3,10 @@
 ## Project setup
 ```
 npm install
+npm i bootstrap jquery popper.js
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/vue-fontawesome
 ```
 
 ### Compiles and hot-reloads for development
