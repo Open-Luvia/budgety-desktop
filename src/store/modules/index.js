@@ -7,7 +7,7 @@ const modules = {};
 requireModule.keys().forEach(filename => {
 
     const moduleName = filename
-                   .replace(/(\.\/|\.store\.js)/g, '') // create the module name from fileName
+                   .replace(/(\.\/|\.store\.js)/g, '')   // create the module name from fileName
                    .replace(/^\w/, c => c.toUpperCase()) // remove the store.js extension and capitalize
 
     modules[moduleName] = requireModule(filename).default || requireModule(filename);
