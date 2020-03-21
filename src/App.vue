@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
-    
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'app',
   components: {
-    Navbar
   }
 }
 </script>
@@ -23,6 +20,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 0px;
+  height: 100vh;
+    min-height: 100vh;
+}
+.h-100 {
+    height: 100%;
+    min-height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 </style>
