@@ -15,13 +15,13 @@ export default {
 
 <style lang="scss" scoped>
 input {
-    margin: 0 0 24px 0;
+    margin: 0 0 16px 0;
     box-sizing: border-box;
     padding: 8px 16px 8px 16px;
     border: none;
-    border-radius: 28px;
+    border-radius: 18px;
     background-color: #f0f0f0;
-    height: 4em;
+    height: 3em;
     width: 100%;
     &:hover{
         outline: none;

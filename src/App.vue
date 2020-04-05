@@ -21,11 +21,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
-    min-height: 100vh;
+  min-height: 100vh;
 }
-.h-100 {
+.fullscreen {
     height: 100%;
     min-height: 100%;
+    width: 100%;
+    min-width: 100%;
     padding: 0px;
     margin: 0px;
 }
