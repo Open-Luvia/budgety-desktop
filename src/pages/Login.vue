@@ -7,9 +7,9 @@
                         <span>Accedi</span>
                     </div>
                     <div class="body">
-                        <b-form-input v-model="username" placeholder="Username"></b-form-input>
-                        <b-form-input v-model="password" placeholder="Password"></b-form-input>
-                        <b-button class="button" pill>Accedi</b-button>
+                        <BaseInput type="text" placeholder="Username"></BaseInput>
+                        <BaseInput type="password" placeholder="Password"></BaseInput>
+                        <BaseButton buttonClass="login">Accedi</BaseButton>
                     </div>
                 </div>
             </b-col>
