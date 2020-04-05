@@ -14,13 +14,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/global.scss';
+
 input {
     margin: 0 0 16px 0;
     box-sizing: border-box;
     padding: 8px 16px 8px 16px;
     border: none;
     border-radius: 18px;
-    background-color: #f0f0f0;
+    background-color: map-get($colors, "input");
     height: 3em;
     width: 100%;
     &:hover{
@@ -28,7 +30,7 @@ input {
     }
     &:focus{
         outline: none;
-        background-color: #dfdfdf;
+        background-color: map-get($colors, "active-input");
     }
 }
 </style>

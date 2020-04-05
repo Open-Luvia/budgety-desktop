@@ -1,6 +1,6 @@
 <template>
     <div class="container fullscreen">
-       <LoginCard type="login">Accedi</LoginCard> 
+       <LoginCard type="login" /> 
     </div>
 </template>
 
@@ -15,8 +15,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/global.scss';
+
 .container {
-    background-color: #232a33;
+    background-color: map-get($colors, "background");
     display: flex;
     justify-content: center;
     align-items: center;

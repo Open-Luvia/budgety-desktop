@@ -15,6 +15,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/global.scss';
+
 button {
     font-size: 17px;
     font-weight: 600;
@@ -24,6 +26,9 @@ button {
     border: none;
     border-radius: 18px;
     transition: box-shadow .4s;
+
+    margin: 10px 0px 10px 0px;
+    width: 140px;
     &:hover {
         outline: none;
         -webkit-box-shadow: 0px 0px 44px -16px rgba(0, 0, 0, 0.75);
@@ -34,14 +39,13 @@ button {
         outline: none;
     }
 }
-.login {
-    background: #44d7b6;
-    margin: 10px 0px 10px 0px;
-    width: 140px;
+.secondary {
+    background: map-get($colors, "secondary");
 }
-.primary {
-    background: #0091FF;
-    margin: 10px 0px 10px 0px;
-    width: 140px;
+.tertiary {
+    background: map-get($colors, "tertiary");
+}
+.cancel {
+    background: map-get($colors, "cancel");
 }
 </style>
