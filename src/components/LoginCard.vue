@@ -34,18 +34,18 @@ export default {
 @import '../assets/global.scss';
 
 .card {
-    margin: 0px auto;
+    border-radius: 20px;
     border: none;
     height: 440px;
+    margin: 0px auto;
     width: 440px;
-    border-radius: 20px;
     .header {
+        background-color: map-get($colors, 'primary');
+        border-radius: 20px 20px 0px 0px;
+        color: white;
         font-size: 24px;
         font-weight: 500;
-        color: white;
         height: 2.5em;
-        border-radius: 20px 20px 0px 0px;
-        background-color: map-get($colors, 'primary');
         line-height: 2.5em;
     }
     span {
@@ -55,8 +55,8 @@ export default {
     .body {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         height: 100%;
+        justify-content: center;
         padding: 48px 40px 40px 40px;
     }
 }

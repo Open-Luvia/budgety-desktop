@@ -15,20 +15,20 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  -webkit-font-smoothing: antialiased;
   color: #2c3e50;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   height: 100vh;
   min-height: 100vh;
+  text-align: center;
 }
 .fullscreen {
     height: 100%;
+    margin: 0px;
     min-height: 100%;
-    width: 100%;
     min-width: 100%;
     padding: 0px;
-    margin: 0px;
+    width: 100%;
 }
 </style>

@@ -18,9 +18,9 @@ export default {
 @import '../assets/global.scss';
 
 .container {
+    align-items: center;
     background-color: map-get($colors, "background");
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 </style>

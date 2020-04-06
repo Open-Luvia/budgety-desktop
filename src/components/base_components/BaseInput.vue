@@ -17,20 +17,20 @@ export default {
 @import '../../assets/global.scss';
 
 input {
-    margin: 0 0 16px 0;
-    box-sizing: border-box;
-    padding: 8px 16px 8px 16px;
-    border: none;
-    border-radius: 18px;
     background-color: map-get($colors, "input");
+    border-radius: 18px;
+    border: none;
+    box-sizing: border-box;
     height: 3em;
+    margin: 0 0 16px 0;
+    padding: 8px 16px 8px 16px;
     width: 100%;
     &:hover{
         outline: none;
     }
     &:focus{
-        outline: none;
         background-color: map-get($colors, "active-input");
+        outline: none;
     }
 }
 </style>

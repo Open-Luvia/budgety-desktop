@@ -4,13 +4,15 @@ import VueRouter from 'vue-router'
 import Login from '../pages/Login.vue'
 import SignUp from '../pages/SignUp.vue'
 import NotFound from '../pages/NotFound.vue'
+import Dashboard from '../pages/Dashboard.vue'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
+    mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '/login',
             name: 'login',
             component: Login
         },
@@ -22,7 +24,12 @@ export default new VueRouter({
         {
             path: '/404',
             name: '404',
-            component: NotFound,
+            component: NotFound
+        },
+        {
+            path: '/',
+            name: "dashboard",
+            component: Dashboard
         },
         {
             path: '*',
