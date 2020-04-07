@@ -18,8 +18,6 @@ export default {
 @import '../../assets/global.scss';
 
 button {
-
-
     border-radius: 18px;
     border: none;
     color: white;

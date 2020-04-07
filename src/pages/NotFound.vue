@@ -1,7 +1,14 @@
 <template>
-    <div>
-        <h1>Ooops!</h1>
-        <h3>La pagina che stai cercando non esiste</h3>
+    <div class="container fullscreen">
+        <div class="icon">
+        <font-awesome-icon icon="exclamation" size="6x" />
+
+        </div>
+        <div class="title">
+            <h1>Ooops!</h1>
+        <h3>I tuoi soldi non sono qui</h3>
+        </div>
+        
     </div>
 </template>
 
@@ -11,6 +18,16 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon{
+        padding: 24px;
+    }
+    .title{
+        text-align: left;
+    }
+}
 </style>
