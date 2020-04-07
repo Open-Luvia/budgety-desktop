@@ -10,7 +10,7 @@
                     <li>Budget</li>
                 </ul>
                 <ul class="settings">
-                    <li>Settings</li>
+                    <font-awesome-icon icon="sliders-h" />
                 </ul>
             </div>
         </nav>
@@ -18,7 +18,13 @@
 </template>
 
 <script>
-export default {}
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+export default {
+  components: {
+    FontAwesomeIcon
+  }
+}
 </script>
 
 <style lang="scss" scoped>
