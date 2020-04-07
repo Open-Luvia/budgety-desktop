@@ -24,8 +24,10 @@
 
 <script>
 export default {
-    props: {
-        type: String
+    computed: {
+        type() {
+            return this.$route.path.substring(1)
+        }
     }
 }
 </script>

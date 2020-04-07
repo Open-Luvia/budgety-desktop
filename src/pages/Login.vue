@@ -1,6 +1,6 @@
 <template>
     <div class="container fullscreen">
-       <LoginCard type="login" /> 
+       <LoginCard/> 
     </div>
 </template>
 
