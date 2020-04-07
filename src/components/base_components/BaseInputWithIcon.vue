@@ -27,11 +27,14 @@ export default {
     display: flex;
     height: 3em;
     margin: 0 0 16px 0;
+    &:hover {
+        background-color: map-get($colors, 'active-input');
+    }
     .icon {
         padding: 0px 0px 0px 16px;
     }
     input {
-        background-color: map-get($colors, 'input');
+        background-color: inherit;
         border: none;
         padding: 0px 16px 0px 16px;
         width: 100%;
