@@ -5,9 +5,9 @@
             <span v-if="type == 'signup'">Registrati</span>
         </div>
         <div class="body">
-            <BaseInputWithIcon v-if="type == 'signup'" placeholder="Name"></BaseInputWithIcon>
-            <BaseInputWithIcon type="text" placeholder="Username"></BaseInputWithIcon>
-            <BaseInputWithIcon type="password" placeholder="Password"></BaseInputWithIcon>
+            <BaseInputWithIcon v-if="type == 'signup'" placeholder="Name" icon="user-circle"></BaseInputWithIcon>
+            <BaseInputWithIcon type="text" placeholder="Email" icon="envelope"></BaseInputWithIcon>
+            <BaseInputWithIcon type="password" placeholder="Password" icon="lock"></BaseInputWithIcon>
             <BaseButton v-if="type == 'login'" buttonClass="secondary">Accedi</BaseButton>
             <BaseButton v-if="type == 'signup'" buttonClass="secondary">Registrati</BaseButton>
             <div v-if="type == 'login'">

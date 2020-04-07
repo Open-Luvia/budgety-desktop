@@ -1,7 +1,7 @@
 <template>
     <div class="inputBox">
         <div class="icon">
-            <font-awesome-icon icon="user-circle" />
+            <font-awesome-icon :icon="icon" />
         </div>
         <input :type="type" :placeholder="placeholder" />
     </div>
@@ -11,6 +11,7 @@
 export default {
     props: {
         placeholder: String,
+        icon: String,
         type: String
     }
 }
@@ -32,6 +33,7 @@ export default {
     }
     .icon {
         padding: 0px 0px 0px 16px;
+        opacity: 30%;
     }
     input {
         background-color: inherit;
