@@ -2,12 +2,16 @@
     <div>
         <nav>
             <div class="hamburger" @click="toggleNavbar">
-                <font-awesome-icon icon="bars" />
+                <font-awesome-icon :icon="icon" />
             </div>
             <div class="desktop-navbar" ref="desktop-navbar">
                 <ul class="nav-links">
-                    <li><router-link :to="{ name: 'dashboard' }">Dashboard</router-link></li>
-                    <li><router-link :to="{ name: 'accounts' }">Conti</router-link></li>
+                    <li>
+                        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{ name: 'accounts' }">Conti</router-link>
+                    </li>
                     <li>Report</li>
                     <li>Budget</li>
                 </ul>
@@ -21,10 +25,31 @@
 
 <script>
 export default {
+    data() {
+        return {
+            icon: 'bars'
+        }
+    },
     methods: {
         toggleNavbar() {
             const nav = this.$refs['desktop-navbar'].classList
-            nav.contains('open') ? nav.remove('open') : nav.add('open')
+            if (nav.contains('open')) {
+                //chiusura
+                clearTimeout()
+                nav.remove('open')
+                this.icon = 'bars'
+                setTimeout(() => {
+                    nav.add('closed')
+                }, 400)
+            } else {
+                //apertura
+                clearTimeout()
+                this.icon = 'times'
+                nav.remove('closed')
+                setTimeout(() => {
+                    nav.add('open')
+                }, 100)
+            }
         }
     }
 }
@@ -91,16 +116,33 @@ nav {
             cursor: pointer;
         }
         .desktop-navbar {
-            height: 0;
+            background: map-get($colors, 'navbar');
+            opacity: 1;
+            height: 0px;
+            transition: height 0.4s linear;
+            display: flex;
+            flex-direction: column;
+            .nav-links {
+                flex-direction: column;
+                li {
+                    padding: 32px 0px;
+                }
+            }
+            .settings {
+                padding: 32px 0px;
+                flex-direction: column;
+            }
+        }
+        .closed {
             display: none;
         }
         .open {
-            transition: height .4s linear;
+            opacity: 1;
+            transition: height 0.4s linear;
             height: calc(100vh - 64px);
             background: map-get($colors, 'navbar');
             display: flex;
             flex-direction: column;
-            opacity: 1;
             .nav-links {
                 flex-direction: column;
                 li {
