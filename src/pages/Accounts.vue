@@ -1,7 +1,7 @@
 <template>
-    <div class="fullscreen">
-        <Navbar/>
-        <h1>Dashboard</h1>
+    <div>
+        <Navbar />
+        <h1>Accounts</h1>
     </div>
 </template>
 

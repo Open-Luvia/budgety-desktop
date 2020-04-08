@@ -24,6 +24,10 @@ export default {
   height: 100vh;
   min-height: 100vh;
   text-align: center;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 .fullscreen {
     height: 100%;

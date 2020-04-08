@@ -5,6 +5,7 @@ import Login from '../pages/Login.vue'
 import SignUp from '../pages/SignUp.vue'
 import NotFound from '../pages/NotFound.vue'
 import Dashboard from '../pages/Dashboard.vue'
+import Accounts from '../pages/Accounts.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ export default new VueRouter({
             path: '/',
             name: "dashboard",
             component: Dashboard
+        },
+        {
+            path: '/accounts',
+            name: "accounts",
+            component: Accounts
         },
         {
             path: '*',

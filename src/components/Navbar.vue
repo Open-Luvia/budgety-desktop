@@ -6,8 +6,8 @@
             </div>
             <div class="desktop-navbar" ref="desktop-navbar">
                 <ul class="nav-links">
-                    <li>Dashboard</li>
-                    <li>Conti</li>
+                    <li><router-link :to="{ name: 'dashboard' }">Dashboard</router-link></li>
+                    <li><router-link :to="{ name: 'accounts' }">Conti</router-link></li>
                     <li>Report</li>
                     <li>Budget</li>
                 </ul>
@@ -52,6 +52,7 @@ nav {
         height: 100%;
         justify-content: space-between;
         padding: 0px 16px;
+        color: inherit;
         .settings {
             align-items: center;
             display: flex;
@@ -63,6 +64,7 @@ nav {
             text-decoration: none;
         }
         .nav-links {
+            color: inherit;
             align-items: center;
             display: flex;
             height: 100%;
@@ -89,15 +91,16 @@ nav {
             cursor: pointer;
         }
         .desktop-navbar {
+            height: 0;
             display: none;
-            height: 0px;
         }
         .open {
-            transition: all 1s;
+            transition: height .4s linear;
             height: calc(100vh - 64px);
             background: map-get($colors, 'navbar');
-            flex-direction: column;
             display: flex;
+            flex-direction: column;
+            opacity: 1;
             .nav-links {
                 flex-direction: column;
                 li {
