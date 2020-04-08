@@ -39,7 +39,7 @@ export default {
                 nav.remove('open')
                 this.icon = 'bars'
                 setTimeout(() => {
-                    nav.add('closed')
+                    nav.add('closed') //add the display: none to remove the expanded navbar
                 }, 400)
             } else {
                 //apertura
@@ -108,20 +108,20 @@ nav {
 @media (max-width: 600px) {
     nav {
         .hamburger {
-            height: 100%;
-            padding: 0px 24px;
-            display: flex;
-            justify-content: flex-end;
             align-items: center;
             cursor: pointer;
+            display: flex;
+            height: 100%;
+            justify-content: flex-end;
+            padding: 0px 24px;
         }
         .desktop-navbar {
-            background: map-get($colors, 'navbar');
-            opacity: 1;
-            height: 0px;
-            transition: height 0.4s linear;
+            background: inherit;
             display: flex;
             flex-direction: column;
+            height: 0px;
+            transition: height 0.4s linear;
+            //mantain the structure of the navigation element
             .nav-links {
                 flex-direction: column;
                 li {
@@ -129,20 +129,20 @@ nav {
                 }
             }
             .settings {
-                padding: 32px 0px;
                 flex-direction: column;
+                padding: 32px 0px;
             }
         }
         .closed {
+            //remove navigation elements from the DOM after the animation
             display: none;
         }
         .open {
-            opacity: 1;
-            transition: height 0.4s linear;
-            height: calc(100vh - 64px);
             background: map-get($colors, 'navbar');
             display: flex;
             flex-direction: column;
+            height: calc(100vh - 64px);
+            transition: height 0.4s linear;
             .nav-links {
                 flex-direction: column;
                 li {
@@ -150,8 +150,8 @@ nav {
                 }
             }
             .settings {
-                padding: 32px 0px;
                 flex-direction: column;
+                padding: 32px 0px;
             }
         }
     }
