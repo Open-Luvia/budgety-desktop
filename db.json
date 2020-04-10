@@ -1,0 +1,41 @@
+{
+    "transactions": [
+        {
+            "id": 1,
+            "amount": 43,
+            "note": "Tastiera meccanica per il computer",
+            "date": "17-06-2019",
+            "category_id": "2"
+        }
+    ],
+    "category": [
+        {
+            "id": 2,
+            "name": "Elettronica",
+            "budget": 100,
+            "parent_id": null
+        }
+    ],
+    "accounts": [
+        {
+            "id": 1,
+            "name": "Portafoglio",
+            "parent_id": null
+        },
+        {
+            "id": 2,
+            "name": "N26",
+            "parent_id": null
+        },
+        {
+            "id": 3,
+            "name": "Fineco",
+            "parent_id": null
+        },
+        {
+            "id": 4,
+            "name": "Unicredit",
+            "parent_id": null
+        }
+    ]
+}
