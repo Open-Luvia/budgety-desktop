@@ -1,8 +1,10 @@
 <template>
     <div class="fullscreen">
-        <Navbar />
-        <h1>Dashboard</h1>
-        <Sidebar />
+        <Navbar class="nav" />
+        <div class="body">
+            <Sidebar />
+            <h1>Dashboard</h1>
+        </div>
     </div>
 </template>
 
@@ -19,4 +21,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/global.scss';
+.body {
+    height: calc(100vh - #{$navbarHeight});
+    display: flex;
+}
 </style>

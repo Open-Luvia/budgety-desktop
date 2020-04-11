@@ -59,12 +59,14 @@ export default {
 @import '../assets/global.scss';
 
 nav {
+    position: relative;
+    z-index: 999;
     background: map-get($colors, 'navbar');
     box-sizing: border-box;
     color: white;
     font-size: 24px;
     font-weight: 700;
-    height: 64px;
+    height: $navbarHeight;
     list-style: none;
     padding: 0px 0px;
     text-decoration: none;

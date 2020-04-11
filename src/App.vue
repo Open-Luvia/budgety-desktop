@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    <router-view :key="$route.fullPath" />
-  </div>
+    <div id="app">
+        <router-view :key="$route.fullPath" />
+    </div>
 </template>
 
 <script>
-
 export default {
-  name: 'app',
-  components: {
-  }
+    name: 'app',
+    components: {}
 }
 </script>
 
@@ -17,17 +15,17 @@ export default {
 @import '/assets/global.scss';
 
 #app {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  color: #2c3e50;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  height: 100vh;
-  min-height: 100vh;
-  text-align: center;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: #2c3e50;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    height: 100vh;
+    min-height: 100vh;
+    text-align: center;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 .fullscreen {
     height: 100%;

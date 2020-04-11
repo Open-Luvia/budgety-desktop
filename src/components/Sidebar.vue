@@ -1,5 +1,5 @@
 <template>
-    <div @click="displayEvents" class="box"></div>
+    <div class="sidebar"></div>
 </template>
 
 <script>
@@ -13,9 +13,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box {
-    height: 40px;
-    width: 40px;
+@import '@/assets/global.scss';
+
+.sidebar {
+    height: 100%;
+    width: $sidebarWidth;
     background: blue;
 }
 </style>
