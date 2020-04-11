@@ -16,7 +16,7 @@ export default {
 
 <style lang="sass" scoped>
 
-@import '../../assets/global.scss'
+@import '../../assets/global.sass'
 button
     border-radius: 18px
     border: none

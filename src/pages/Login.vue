@@ -16,7 +16,7 @@ export default {
 
 <style lang="sass" scoped>
 
-@import '../assets/global.scss'
+@import '../assets/global.sass'
 .container 
     align-items: center
     background-color: map-get($colors, "background")

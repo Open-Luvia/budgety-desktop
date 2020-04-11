@@ -15,6 +15,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '@/assets/global.scss'
+@import '@/assets/global.sass'
 
 </style>

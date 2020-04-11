@@ -15,7 +15,7 @@ export default {
 
 <style lang="sass" scoped>
 
-@import '../../assets/global.scss'
+@import '../../assets/global.sass'
 input
     background-color: map-get($colors, 'input')
     border-radius: 18px

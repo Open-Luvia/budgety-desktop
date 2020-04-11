@@ -57,7 +57,7 @@ export default {
 
 <style lang="sass" scoped>
 
-@import '../assets/global.scss'
+@import '../assets/global.sass'
 
 nav 
     position: relative
@@ -67,7 +67,7 @@ nav
     color: white
     font-size: 24px
     font-weight: 700
-    height: $navbarHeight
+    height: $navbar-height
     list-style: none
     padding: 0px 0px
     text-decoration: none
@@ -132,7 +132,7 @@ nav
             background: map-get($colors, 'navbar')
             display: flex
             flex-direction: column
-            height: calc(100vh - 64px)
+            height: calc(100vh - #{$navbar-height})
             transition: height 0.4s linear
             .nav-links 
                 flex-direction: column

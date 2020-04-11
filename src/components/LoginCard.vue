@@ -34,7 +34,7 @@ export default {
 
 <style lang="sass" scoped>
 
-@import '../assets/global.scss'
+@import '../assets/global.sass'
 .card 
     border-radius: 20px
     border: none
