@@ -9,7 +9,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: modules,
-    state: {},
+    state: {
+        accounts: ['N26', 'Portafoglio']
+    },
     actions: {},
     mutations: {} // all your modules automatically imported
 })

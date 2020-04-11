@@ -1,8 +1,10 @@
 <template>
     <div class="fullscreen">
-        <Navbar class="nav" />
+        <Navbar />
         <div class="body">
-            <Sidebar />
+            <div class="sidebar">
+                <div v-for="account in this.$store.accounts" :key="account">{{ account }}</div>
+            </div>
             <h1>Dashboard</h1>
         </div>
     </div>
@@ -10,12 +12,10 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Sidebar from '../components/Sidebar.vue'
 
 export default {
     components: {
-        Navbar,
-        Sidebar
+        Navbar
     }
 }
 </script>

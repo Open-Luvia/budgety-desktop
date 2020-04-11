@@ -1,23 +1,13 @@
 <template>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+        
+    </div>
 </template>
 
 <script>
-export default {
-    methods: {
-        displayEvents() {
-            this.$store.dispatch('accounts/getAccounts')
-        }
-    }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/global.scss';
-
-.sidebar {
-    height: 100%;
-    width: $sidebarWidth;
-    background: blue;
-}
 </style>

@@ -35,4 +35,9 @@ export default {
     padding: 0px;
     width: 100%;
 }
+.sidebar {
+    height: 100%;
+    width: $sidebarWidth;
+    background: map-get($colors, 'sidebar');
+}
 </style>
