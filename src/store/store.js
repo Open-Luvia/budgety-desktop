@@ -3,11 +3,13 @@ import Vuex from 'vuex'
 
 //import the auto importer
 import modules from './modules'
-import accounts from './modules/accounts.js'
+//import accounts from '@/store/modules/accounts.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules,
-    accounts // all your modules automatically imported
+    modules: modules,
+    state: {},
+    actions: {},
+    mutations: {} // all your modules automatically imported
 })

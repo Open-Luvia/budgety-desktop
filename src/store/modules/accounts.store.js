@@ -6,7 +6,7 @@ export default {
         accounts: []
     },
     mutations: {
-        GET_ACCOUNTS(state, accounts) {
+        SET_ACCOUNTS(state, accounts) {
             state.accounts = accounts
         }
     },
@@ -14,7 +14,7 @@ export default {
         getAccounts({ commit }) {
             return AccountsService.getAccounts()
                 .then(response => {
-                    commit('GET_ACCOUNTS', response.data)
+                    commit('SET_ACCOUNTS', response.data)
                 })
                 .catch(error => {
                     console.log(

@@ -3,13 +3,10 @@
 </template>
 
 <script>
-import AccountsService from '@/services/AccountsService.js'
 export default {
     methods: {
         displayEvents() {
-            AccountsService.getAccounts().then(response => {
-                console.log(response.data)
-            })
+            this.$store.dispatch('accounts/getAccounts')
         }
     }
 }
