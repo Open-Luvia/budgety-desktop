@@ -14,13 +14,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/global.scss';
+<style lang="sass" scoped>
 
-.container {
-    align-items: center;
-    background-color: map-get($colors, "background");
-    display: flex;
-    justify-content: center;
-}
+@import '../assets/global.scss'
+.container 
+    align-items: center
+    background-color: map-get($colors, "background")
+    display: flex
+    justify-content: center
+
 </style>

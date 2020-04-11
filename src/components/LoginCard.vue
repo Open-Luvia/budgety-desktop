@@ -32,34 +32,31 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/global.scss';
+<style lang="sass" scoped>
 
-.card {
-    border-radius: 20px;
-    border: none;
-    height: 440px;
-    margin: 0px auto;
-    width: 440px;
-    .header {
-        background-color: map-get($colors, 'primary');
-        border-radius: 20px 20px 0px 0px;
-        color: white;
+@import '../assets/global.scss'
+.card 
+    border-radius: 20px
+    border: none
+    height: 440px
+    margin: 0px auto
+    width: 440px
+    .header 
+        background-color: map-get($colors, 'primary')
+        border-radius: 20px 20px 0px 0px
+        color: white
         font-size: 24px;
-        font-weight: 500;
-        height: 2.5em;
-        line-height: 2.5em;
-    }
-    span {
-        height: 100%;
-        vertical-align: middle;
-    }
-    .body {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: center;
-        padding: 48px 40px 40px 40px;
-    }
-}
+        font-weight: 500
+        height: 2.5em
+        line-height: 2.5em
+    span
+        height: 100%
+        vertical-align: middle
+    .body
+        display: flex
+        flex-direction: column
+        height: 100%
+        justify-content: center
+        padding: 48px 40px 40px 40px
+        
 </style>

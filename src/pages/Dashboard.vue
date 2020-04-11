@@ -1,12 +1,6 @@
 <template>
     <div class="fullscreen">
         <Navbar />
-        <div class="body">
-            <div class="sidebar">
-                <div v-for="account in this.$store.accounts" :key="account">{{ account }}</div>
-            </div>
-            <h1>Dashboard</h1>
-        </div>
     </div>
 </template>
 
@@ -20,10 +14,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/assets/global.scss';
-.body {
-    height: calc(100vh - #{$navbarHeight});
-    display: flex;
-}
+<style lang="sass" scoped>
+@import '@/assets/global.scss'
+
 </style>

@@ -3,6 +3,7 @@ import AccountsService from '@/services/accounts.service.js'
 export default {
     namespaced: true,
     state: {
+        accounts: []
     },
     mutations: {
         SET_ACCOUNTS(state, accounts) {

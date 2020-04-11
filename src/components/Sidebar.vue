@@ -8,6 +8,8 @@
 export default {}
 </script>
 
-<style lang="scss" scoped>
-@import '@/assets/global.scss';
+<style lang="sass" scoped>
+
+@import '@/assets/global.scss'
+
 </style>

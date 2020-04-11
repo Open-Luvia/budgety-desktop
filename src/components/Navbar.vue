@@ -55,107 +55,91 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/global.scss';
+<style lang="sass" scoped>
 
-nav {
-    position: relative;
-    z-index: 999;
-    background: map-get($colors, 'navbar');
-    box-sizing: border-box;
-    color: white;
-    font-size: 24px;
-    font-weight: 700;
-    height: $navbarHeight;
-    list-style: none;
-    padding: 0px 0px;
-    text-decoration: none;
-    width: 100vw;
-    .hamburger {
-        display: none;
-    }
-    .desktop-navbar {
-        display: flex;
-        height: 100%;
-        justify-content: space-between;
-        padding: 0px 16px;
-        color: inherit;
-        .settings {
-            align-items: center;
-            display: flex;
-            height: 100%;
-            justify-content: flex-end;
-            list-style: none;
-            margin: 0px;
-            padding: 0px 16px;
-            text-decoration: none;
-        }
-        .nav-links {
-            color: inherit;
-            align-items: center;
-            display: flex;
-            height: 100%;
-            justify-content: flex-start;
-            list-style: none;
-            margin: 0px;
-            padding: 0px 0px;
-            text-decoration: none;
-            li {
-                padding: 0px 16px;
-            }
-        }
-    }
-}
+@import '../assets/global.scss'
 
-@media (max-width: 600px) {
-    nav {
-        .hamburger {
-            align-items: center;
-            cursor: pointer;
-            display: flex;
-            height: 100%;
-            justify-content: flex-end;
-            padding: 0px 24px;
-        }
-        .desktop-navbar {
-            background: inherit;
-            display: flex;
-            flex-direction: column;
-            height: 0px;
-            transition: height 0.4s linear;
+nav 
+    position: relative
+    z-index: 999
+    background: map-get($colors, 'navbar')
+    box-sizing: border-box
+    color: white
+    font-size: 24px
+    font-weight: 700
+    height: $navbarHeight
+    list-style: none
+    padding: 0px 0px
+    text-decoration: none
+    width: 100vw
+    .hamburger 
+        display: none
+    .desktop-navbar 
+        display: flex
+        height: 100%
+        justify-content: space-between
+        padding: 0px 16px
+        color: inherit
+        .settings
+            align-items: center
+            display: flex
+            height: 100%
+            justify-content: flex-end
+            list-style: none
+            margin: 0px
+            padding: 0px 16px
+            text-decoration: none
+        .nav-links 
+            color: inherit
+            align-items: center
+            display: flex
+            height: 100%
+            justify-content: flex-start
+            list-style: none
+            margin: 0px
+            padding: 0px 0px
+            text-decoration: none
+            li 
+                padding: 0px 16px
+
+@media (max-width: 600px) 
+    nav 
+        .hamburger 
+            align-items: center
+            cursor: pointer
+            display: flex
+            height: 100%
+            justify-content: flex-end
+            padding: 0px 24px
+        .desktop-navbar 
+            background: inherit
+            display: flex
+            flex-direction: column
+            height: 0px
+            transition: height 0.4s linear
             //mantain the structure of the navigation element
-            .nav-links {
-                flex-direction: column;
-                li {
-                    padding: 32px 0px;
-                }
-            }
-            .settings {
-                flex-direction: column;
-                padding: 32px 0px;
-            }
-        }
-        .closed {
+            .nav-links 
+                flex-direction: column
+                li 
+                    padding: 32px 0px
+            .settings 
+                flex-direction: column
+                padding: 32px 0px
+        .closed 
             //remove navigation elements from the DOM after the animation
-            display: none;
-        }
-        .open {
-            background: map-get($colors, 'navbar');
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 64px);
-            transition: height 0.4s linear;
-            .nav-links {
-                flex-direction: column;
-                li {
-                    padding: 32px 0px;
-                }
-            }
-            .settings {
-                flex-direction: column;
-                padding: 32px 0px;
-            }
-        }
-    }
-}
+            display: none
+        .open 
+            background: map-get($colors, 'navbar')
+            display: flex
+            flex-direction: column
+            height: calc(100vh - 64px)
+            transition: height 0.4s linear
+            .nav-links 
+                flex-direction: column
+                li 
+                    padding: 32px 0px
+            .settings 
+                flex-direction: column
+                padding: 32px 0px
+
 </style>

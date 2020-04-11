@@ -18,16 +18,14 @@
     }
 </script>
 
-<style lang="scss" scoped>
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .icon{
-        padding: 24px;
-    }
-    .title{
-        text-align: left;
-    }
-}
+<style lang="sass" scoped>
+.container
+    display: flex
+    align-items: center
+    justify-content: center
+    .icon
+        padding: 24px
+    .title
+        text-align: left
+
 </style>
