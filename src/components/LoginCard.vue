@@ -1,76 +1,94 @@
 <template>
-  <div class="card">
-    <div class="header">
-      <span v-if="type == 'login'">Accedi</span>
-      <span v-if="type == 'signup'">Registrati</span>
-    </div>
-    <div class="body">
-      <BaseInputWithIcon
-        v-if="type == 'signup'"
-        placeholder="Name"
-        v-model="name"
-        icon="user-circle"
-      ></BaseInputWithIcon>
-      <BaseInputWithIcon
-        type="text"
-        placeholder="Email"
-        v-model="email"
-        icon="envelope"
-      ></BaseInputWithIcon>
-      <BaseInputWithIcon
-        type="password"
-        placeholder="Password"
-        v-model="password"
-        icon="lock"
-      ></BaseInputWithIcon>
-
-      <BaseButton v-if="type == 'login'" buttonClass="secondary">
-        Accedi
-      </BaseButton>
-      <BaseButton
-        v-if="type == 'signup'"
-        buttonClass="secondary"
-        @click="register"
-      >
-        Registrati
-      </BaseButton>
-
-      <div v-if="type == 'login'">
-        Non hai un account?
-        <router-link :to="{ name: 'signup' }">Registrati</router-link>
+   <div class="card">
+      <div class="header">
+         <span v-if="type == 'login'">Accedi</span>
+         <span v-if="type == 'signup'">Registrati</span>
       </div>
-      <div v-if="type == 'signup'">
-        Hai già un account?
-        <router-link :to="{ name: 'login' }">Accedi</router-link>
+      <div class="body">
+         <form @submit.prevent="login">
+            <BaseInputWithIcon
+               v-if="type == 'signup'"
+               placeholder="Name"
+               v-model="credentials.name"
+               icon="user-circle"
+            ></BaseInputWithIcon>
+            <BaseInputWithIcon
+               type="text"
+               placeholder="Email"
+               v-model="credentials.email"
+               icon="envelope"
+            ></BaseInputWithIcon>
+            <BaseInputWithIcon
+               type="password"
+               placeholder="Password"
+               v-model="credentials.password"
+               icon="lock"
+            ></BaseInputWithIcon>
+
+            <BaseButton
+               v-if="type == 'login'"
+               buttonClass="secondary"
+               type="submit"
+            >
+               Accedi
+            </BaseButton>
+            <BaseButton
+               v-if="type == 'signup'"
+               buttonClass="secondary"
+               @click="register"
+            >
+               Registrati
+            </BaseButton>
+         </form>
+         <div v-if="type == 'login'">
+            Non hai un account?
+            <router-link :to="{ name: 'signup' }">Registrati</router-link>
+         </div>
+         <div v-if="type == 'signup'">
+            Hai già un account?
+            <router-link :to="{ name: 'login' }">Accedi</router-link>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </template>
 
 <script>
+import UserService from '@/services/user.service.js'
+
 export default {
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-    };
-  },
-  computed: {
-    type() {
-      return this.$route.path.substring(1);
-    },
-  },
-  methods: {
-    register() {
-      this.$store.dispatch("register", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      });
-    },
-  },
-};
+   data() {
+      return {
+         credentials: {
+            email: 'ale@gmail.com',
+            password: 'password'
+         }
+      }
+   },
+   computed: {
+      type() {
+         return this.$route.path.substring(1)
+      }
+   },
+   methods: {
+      register() {
+         console.log(this.name, this.email, this.password)
+         this.$store.dispatch('register', {
+            name: this.name,
+            email: this.email,
+            password: this.password
+         })
+      },
+      login() {
+         console.log('Credenziali:',this.credentials.email, this.credentials.password)
+         this.$store.dispatch('login', this.credentials)
+         UserService.checkLogin().then(response => {
+            console.log(response.data)
+         }).catch(error => {
+            console.log("That was an error with your test: " + error)
+         })
+      }
+   }
+}
 </script>
 
 <style lang="sass" scoped>

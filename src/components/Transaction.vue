@@ -1,30 +1,30 @@
 <template>
-    <div class="transaction">
-        <div class="transaction-element">
-            {{category_name}}
-        </div>
-        <div class="transaction-element">
-            {{date}}
-        </div>
-        <div class="transaction-element">
-            {{note}}
-        </div>
-        <div class="transaction-element amount">
-            {{amount}}
-        </div>
-    </div>
+   <div class="transaction">
+      <div class="transaction-element">
+         {{ category_name }}
+      </div>
+      <div class="transaction-element">
+         {{ date }}
+      </div>
+      <div class="transaction-element">
+         {{ note }}
+      </div>
+      <div class="transaction-element amount">
+         {{ amount }}
+      </div>
+   </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            id: Number,
-            amount: Number,
-            note: String,
-            date: String,
-            category_name: String
-        }
-    }
+export default {
+   props: {
+      id: Number,
+      amount: Number,
+      note: String,
+      date: String,
+      category_name: String
+   }
+}
 </script>
 
 <style lang="sass" scoped>

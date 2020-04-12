@@ -1,12 +1,12 @@
 {
-  "prettier.arrowParens": "avoid",
-  "prettier.jsxSingleQuote": true,
-  "prettier.trailingComma": "none",
-  "prettier.tabWidth": 4,
-  "prettier.singleQuote": true,
-  "prettier.semi": false,
-  "prettier.bracketSpacing": true,
-  "prettier.jsxBracketSameLine": true,
-  "prettier.htmlWhitespaceSensitivity": "strict",
-  "prettier.endOfLine": "lf"
+   "arrowParens": "avoid",
+   "jsxSingleQuote": true,
+   "trailingComma": "none",
+   "tabWidth": 3,
+   "singleQuote": true,
+   "semi": false,
+   "bracketSpacing": true,
+   "jsxBracketSameLine": true,
+   "htmlWhitespaceSensitivity": "strict",
+   "endOfLine": "lf"
 }
