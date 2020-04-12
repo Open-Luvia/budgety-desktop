@@ -29,5 +29,10 @@ export default new Vuex.Store({
             commit('SET_TOKEN', response.data.access_token)
          })
       }
+   },
+   getters: {
+      loggedIn(state){
+         return !!state.accessToken
+      }
    }
 })

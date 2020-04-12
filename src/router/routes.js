@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '../pages/Login.vue'
-import Register from '../pages/Register.vue'
-import NotFound from '../pages/NotFound.vue'
-import Dashboard from '../pages/Dashboard.vue'
-import Accounts from '../pages/Accounts.vue'
+import Login from '@/pages/Login.vue'
+import Register from '@/pages/Register.vue'
+import NotFound from '@/pages/NotFound.vue'
+import Dashboard from '@/pages/Dashboard.vue'
+import Accounts from '@/pages/Accounts.vue'
+import Settings from '@/pages/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ export default new VueRouter({
    mode: 'history',
    routes: [
       {
-         path: '/login',
+         path: '/',
          name: 'login',
          component: Login
       },
@@ -28,7 +29,12 @@ export default new VueRouter({
          component: NotFound
       },
       {
-         path: '/',
+         path: '/settings',
+         name: 'settings',
+         component: Settings
+      },
+      {
+         path: '/dashboard',
          name: 'dashboard',
          component: Dashboard
       },

@@ -1,28 +1,26 @@
 <template>
-   <div>
-      <nav>
-         <div class="hamburger" @click="toggleNavbar">
-            <font-awesome-icon :icon="icon" />
-         </div>
-         <div class="desktop-navbar" ref="desktop-navbar">
-            <ul class="nav-links">
-               <li>
-                  <router-link :to="{ name: 'dashboard' }"
-                     >Dashboard</router-link
-                  >
-               </li>
-               <li>
-                  <router-link :to="{ name: 'accounts' }">Conti</router-link>
-               </li>
-               <li>Report</li>
-               <li>Budget</li>
-            </ul>
-            <ul class="settings">
+   <nav>
+      <div class="hamburger" @click="toggleNavbar">
+         <font-awesome-icon :icon="icon" />
+      </div>
+      <div class="desktop-navbar" ref="desktop-navbar">
+         <ul class="nav-links">
+            <li>
+               <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
+            </li>
+            <li>
+               <router-link :to="{ name: 'accounts' }">Conti</router-link>
+            </li>
+            <li>Report</li>
+            <li>Budget</li>
+         </ul>
+         <ul class="settings">
+            <router-link :to="{ name: 'settings' }">
                <font-awesome-icon icon="sliders-h" />
-            </ul>
-         </div>
-      </nav>
-   </div>
+            </router-link>
+         </ul>
+      </div>
+   </nav>
 </template>
 
 <script>
