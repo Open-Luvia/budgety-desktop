@@ -8,11 +8,14 @@
             "category_id": "2"
         }
     ],
-    "category": [
+    "categories": [
         {
             "id": 2,
             "name": "Elettronica",
             "budget": 100,
+            "budget_start": "17-01-2019",
+            "budget_renewal": 14,
+            "is_credit_card": true,
             "parent_id": null
         }
     ],
