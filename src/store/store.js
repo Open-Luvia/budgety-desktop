@@ -15,7 +15,17 @@ export default new Vuex.Store({
    mutations: {
       SET_TOKEN(state, token) {
          state.accessToken = token
-         localStorage.setItem('user', JSON.stringify(token))
+         localStorage.setItem('accessToken', JSON.stringify(token))
+      },
+      CLEAR_TOKEN(){
+         localStorage.removeItem('accessToken')
+         location.reload()
+      },
+      CHECK_TOKEN(state){
+         const token = localStorage.getItem('accessToken')
+         if(token){
+            state.accessToken = token
+         }
       }
    },
    actions: {
@@ -25,9 +35,17 @@ export default new Vuex.Store({
          })
       },
       login({ commit }, credentials) {
-         return AuthService.login(credentials).then(response => {
+         AuthService.login(credentials).then(response => {
             commit('SET_TOKEN', response.data.access_token)
          })
+      },
+      logout({ commit }){
+         AuthService.logout().then(() => {
+            commit('CLEAR_TOKEN')
+         })
+      },
+      checkToken({ commit }){
+         commit('CHECK_TOKEN')
       }
    },
    getters: {

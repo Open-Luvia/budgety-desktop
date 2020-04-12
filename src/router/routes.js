@@ -10,9 +10,13 @@ import Settings from '@/pages/Settings.vue'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
    mode: 'history',
    routes: [
+      {
+         path: '*',
+         redirect: { name: '404' }
+      },
       {
          path: '/',
          name: 'login',
@@ -31,21 +35,30 @@ export default new VueRouter({
       {
          path: '/settings',
          name: 'settings',
-         component: Settings
+         component: Settings,
+         meta: { requireAuth: true }
       },
       {
          path: '/dashboard',
          name: 'dashboard',
-         component: Dashboard
+         component: Dashboard,
+         meta: { requireAuth: true }
       },
       {
          path: '/accounts',
          name: 'accounts',
-         component: Accounts
-      },
-      {
-         path: '*',
-         redirect: { name: '404' }
+         component: Accounts,
+         meta: { requireAuth: true }
       }
    ]
 })
+
+router.beforeEach((to, from, next) => {
+   const loggedIn = localStorage.getItem('accessToken')
+   if (to.matched.some(record => record.meta.requireAuth) && !loggedIn) {
+      next('/')
+   }
+   next()
+})
+
+export default router

@@ -7,18 +7,15 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-   export default {
-      components: {
-         Navbar
-      },
-      methods: {
-         logout(){
-            console.log("User logged out")
-         }
-      }
+import { mapActions } from 'vuex'
+export default {
+   components: {
+      Navbar
+   },
+   methods: {
+      ...mapActions(['logout'])
    }
+}
 </script>
 
-<style lang="sass" scoped>
-
-</style>
+<style lang="sass" scoped></style>

@@ -5,8 +5,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
    name: 'app',
+   methods: {
+      ...mapActions(['checkToken'])
+   },
+   created(){
+      this.checkToken()
+   }
 }
 </script>
 

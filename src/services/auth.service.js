@@ -6,5 +6,8 @@ export default {
    },
    login(credentials) {
       return apiClient.post('/users/login', credentials)
+   },
+   logout(){
+      return apiClient.get('/users/logout')
    }
 }
