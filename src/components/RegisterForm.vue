@@ -22,10 +22,7 @@
                v-model="credentials.password"
                icon="lock"
             ></BaseInputWithIcon>
-            <BaseButton
-               buttonClass="secondary"
-              type="submit"
-            >
+            <BaseButton buttonClass="secondary" type="submit">
                Registrati
             </BaseButton>
          </form>
@@ -52,22 +49,13 @@ export default {
    },
    methods: {
       ...mapActions(['register']),
-      register() {
-         console.log(this.name, this.email, this.password)
-         this.$store.dispatch('register', {
-            name: this.name,
-            email: this.email,
-            password: this.password
+      signUp() {
+         this.register(this.credentials).then(() => {
+            this.$router.push({ name: 'dashboard' })
          })
-      },
-      signIn() {
-         console.log('Credenziali:',this.credentials.email, this.credentials.password)
-         this.login(this.credentials)
-         this.$router.push('/')
       }
    }
 }
-
 </script>
 
 <style lang="sass" scoped>

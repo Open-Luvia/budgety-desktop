@@ -1,19 +1,10 @@
-import axios from 'axios'
-
-const apiClient = axios.create({
-   baseURL: 'http://tdw-api.mooo.com/api',
-   headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-   },
-   timeout: 1000
-})
+import apiClient from '@/services/apiClient'
 
 export default {
-   sendRegistrationCredentials(credentials) {
+   register(credentials) {
       return apiClient.post('/users/register', credentials)
    },
-   sendLoginCredentials(credentials) {
+   login(credentials) {
       return apiClient.post('/users/login', credentials)
    }
 }

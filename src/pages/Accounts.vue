@@ -1,62 +1,65 @@
 <template>
-  <div>
-    <Navbar />
-    <div class="body">
-      <div class="sidebar">
-        <div class="sidebar-elements">
-          <div>
-            <div
-              class="sidebar-element"
-              v-for="account in accounts"
-              :key="account.id"
-            >
-              {{ account.name }}
+   <div>
+      <Navbar />
+      <div class="body">
+         <div class="sidebar">
+            <div class="sidebar-elements">
+               <div>
+                  <div
+                     class="sidebar-element"
+                     v-for="account in accounts"
+                     :key="account.id"
+                  >
+                     {{ account.name }}
+                  </div>
+               </div>
+               <div class="add-account">
+                  <font-awesome-icon
+                     icon="plus-circle"
+                     :style="{ color: 'white' }"
+                  />
+                  <span>Aggiungi conto</span>
+               </div>
             </div>
-          </div>
-          <div class="add-account">
-            <font-awesome-icon icon="plus-circle" :style="{ color: 'white' }" />
-            <span>Aggiungi conto</span>
-          </div>
-        </div>
+         </div>
+         <div class="transaction-list">
+            <transaction
+               :id="transaction.id"
+               :amount="transaction.amount"
+               :note="transaction.note"
+               :date="transaction.date"
+               :category_name="transaction.category_name"
+            />
+         </div>
       </div>
-      <div class="transaction-list">
-        <transaction
-          :id="transaction.id"
-          :amount="transaction.amount"
-          :note="transaction.note"
-          :date="transaction.date"
-          :category_name="transaction.category_name"
-        />
-      </div>
-    </div>
-  </div>
+   </div>
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue";
-import Transaction from "../components/Transaction.vue";
-import { mapState } from "vuex";
+import Navbar from '../components/Navbar.vue'
+import Transaction from '../components/Transaction.vue'
+import { mapState } from 'vuex'
 
 export default {
-  components: {
-    Navbar,
-    Transaction
-  },
-  data() {
-    return {
-      transaction: {
-        note: "Aquisto di tastiera meccanica",
-        amount: 43,
-        date: "17-06-2019",
-        id: 1,
-        category_name: "Elettronica"
+   components: {
+      Navbar,
+      Transaction
+   },
+   data() {
+      return {
+         transaction: {
+            note: 'Aquisto di tastiera meccanica',
+            amount: 43,
+            date: '17-06-2019',
+            id: 1,
+            category_name: 'Elettronica'
+         }
       }
-    };
-  },
-  computed: {
-    ...mapState("accounts", ["accounts"])
-  }
-};
+   },
+   computed: {
+      ...mapState('accounts', ['accounts'])
+   }
+}
 </script>
 
 <style lang="sass" scoped>

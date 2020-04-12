@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <input :type="type" :placeholder="placeholder" />
-    </div>
+   <div>
+      <input :type="type" :placeholder="placeholder" />
+   </div>
 </template>
 
 <script>
 export default {
-    props: {
-        placeholder: String,
-        type: String
-    },
+   props: {
+      placeholder: String,
+      type: String
+   }
 }
 </script>
 
@@ -30,5 +30,4 @@ input
     &:focus
         background-color: map-get($colors, 'active-input')
         outline: none
-
 </style>

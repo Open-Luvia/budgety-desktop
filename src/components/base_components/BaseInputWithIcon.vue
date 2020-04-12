@@ -1,19 +1,19 @@
 <template>
-    <div class="inputBox">
-        <div class="icon">
-            <font-awesome-icon :icon="icon" />
-        </div>
-        <input :type="type" :placeholder="placeholder" />
-    </div>
+   <div class="inputBox">
+      <div class="icon">
+         <font-awesome-icon :icon="icon" />
+      </div>
+      <input :type="type" :placeholder="placeholder" />
+   </div>
 </template>
 
 <script>
 export default {
-    props: {
-        placeholder: String,
-        icon: String,
-        type: String
-    }
+   props: {
+      placeholder: String,
+      icon: String,
+      type: String
+   }
 }
 </script>
 
@@ -40,5 +40,4 @@ export default {
         width: 100%
         &:focus
             outline: none
-            
 </style>

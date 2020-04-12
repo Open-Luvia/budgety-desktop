@@ -1,16 +1,13 @@
 <template>
-    <div id="app">
-        <router-view :key="$route.fullPath" />
-    </div>
+   <div id="app">
+      <router-view :key="$route.fullPath" />
+   </div>
 </template>
 
 <script>
 export default {
-    name: 'app',
-    created() {
-        this.$store.dispatch('accounts/getAccounts');
-    }
-};
+   name: 'app',
+}
 </script>
 
 <style lang="sass">

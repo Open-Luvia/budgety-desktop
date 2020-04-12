@@ -1,16 +1,16 @@
 <template>
-    <div>
-        <button :class="buttonClass">
-            <slot></slot>
-        </button>
-    </div>
+   <div>
+      <button :class="buttonClass">
+         <slot></slot>
+      </button>
+   </div>
 </template>
 
 <script>
 export default {
-    props: {
-        buttonClass: String
-    }
+   props: {
+      buttonClass: String
+   }
 }
 </script>
 
@@ -40,5 +40,4 @@ button
     background: map-get($colors, "tertiary")
 .cancel
     background: map-get($colors, "cancel")
-
 </style>

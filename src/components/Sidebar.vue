@@ -1,7 +1,5 @@
 <template>
-    <div class="sidebar">
-        
-    </div>
+   <div class="sidebar"> </div>
 </template>
 
 <script>
@@ -11,5 +9,4 @@ export default {}
 <style lang="sass" scoped>
 
 @import '@/assets/global.sass'
-
 </style>

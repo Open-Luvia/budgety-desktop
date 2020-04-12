@@ -44,8 +44,9 @@ export default {
    methods: {
       ...mapActions(['login']),
       signIn() {
-         this.login(this.credentials)
-         this.$router.push('/')
+         this.login(this.credentials).then(() => {
+            this.$router.push({ name: 'dashboard' })
+         })
       }
    }
 }
