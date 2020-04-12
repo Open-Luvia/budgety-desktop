@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Login from '../pages/Login.vue'
-import SignUp from '../pages/SignUp.vue'
+import Register from '../pages/Register.vue'
 import NotFound from '../pages/NotFound.vue'
 import Dashboard from '../pages/Dashboard.vue'
 import Accounts from '../pages/Accounts.vue'
@@ -18,9 +18,9 @@ export default new VueRouter({
             component: Login
         },
         {
-            path: '/signup',
-            name: 'signup',
-            component: SignUp
+            path: '/register',
+            name: 'register',
+            component: Register
         },
         {
             path: '/404',

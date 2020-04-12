@@ -1,15 +1,15 @@
 <template>
     <div class="container fullscreen">
-       <LoginCard/> 
+       <RegisterForm/> 
     </div>
 </template>
 
 <script>
-import LoginCard from '@/components/LoginCard.vue'
+import RegisterForm from '@/components/RegisterForm.vue'
 
 export default {
     components: {
-        LoginCard
+        RegisterForm
     }
 }
 </script>

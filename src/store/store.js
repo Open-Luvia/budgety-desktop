@@ -20,8 +20,8 @@ export default new Vuex.Store({
     },
     actions: {
         register({ commit }, credentials) {
-            AuthService.sendRegistrationCredentials(credentials).then(({data}) => {
-                commit('SET_USER_DATA', data)
+            AuthService.sendRegistrationCredentials(credentials).then(response => {
+                commit('SET_TOKEN', response.data.access_token)
             })
         },
         login({commit}, credentials) {

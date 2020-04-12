@@ -1,13 +1,11 @@
 <template>
    <div class="card">
       <div class="header">
-         <span v-if="type == 'login'">Accedi</span>
-         <span v-if="type == 'signup'">Registrati</span>
+         Registrati
       </div>
       <div class="body">
-         <form @submit.prevent="login">
+         <form @submit.prevent="signUp">
             <BaseInputWithIcon
-               v-if="type == 'signup'"
                placeholder="Name"
                v-model="credentials.name"
                icon="user-circle"
@@ -24,27 +22,14 @@
                v-model="credentials.password"
                icon="lock"
             ></BaseInputWithIcon>
-
             <BaseButton
-               v-if="type == 'login'"
                buttonClass="secondary"
-               type="submit"
-            >
-               Accedi
-            </BaseButton>
-            <BaseButton
-               v-if="type == 'signup'"
-               buttonClass="secondary"
-               @click="register"
+              type="submit"
             >
                Registrati
             </BaseButton>
          </form>
-         <div v-if="type == 'login'">
-            Non hai un account?
-            <router-link :to="{ name: 'signup' }">Registrati</router-link>
-         </div>
-         <div v-if="type == 'signup'">
+         <div>
             Hai già un account?
             <router-link :to="{ name: 'login' }">Accedi</router-link>
          </div>
@@ -53,23 +38,20 @@
 </template>
 
 <script>
-import UserService from '@/services/user.service.js'
+import { mapActions } from 'vuex'
 
 export default {
    data() {
       return {
          credentials: {
-            email: 'ale@gmail.com',
-            password: 'password'
+            name: '',
+            email: '',
+            password: ''
          }
       }
    },
-   computed: {
-      type() {
-         return this.$route.path.substring(1)
-      }
-   },
    methods: {
+      ...mapActions(['register']),
       register() {
          console.log(this.name, this.email, this.password)
          this.$store.dispatch('register', {
@@ -78,17 +60,14 @@ export default {
             password: this.password
          })
       },
-      login() {
+      signIn() {
          console.log('Credenziali:',this.credentials.email, this.credentials.password)
-         this.$store.dispatch('login', this.credentials)
-         UserService.checkLogin().then(response => {
-            console.log(response.data)
-         }).catch(error => {
-            console.log("That was an error with your test: " + error)
-         })
+         this.login(this.credentials)
+         this.$router.push('/')
       }
    }
 }
+
 </script>
 
 <style lang="sass" scoped>
