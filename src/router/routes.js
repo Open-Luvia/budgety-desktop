@@ -20,12 +20,24 @@ const router = new VueRouter({
       {
          path: '/',
          name: 'login',
-         component: Login
+         component: Login,
+         beforeEnter: (to, from, next) => {
+            const loggedIn = localStorage.getItem('accessToken')
+            if(loggedIn){
+               next({ name: 'dashboard' })
+            }
+         }
       },
       {
          path: '/register',
          name: 'register',
-         component: Register
+         component: Register,
+         beforeEnter: (to, from, next) => {
+            const loggedIn = localStorage.getItem('accessToken')
+            if(loggedIn){
+               next({ name: 'dashboard' })
+            }
+         }
       },
       {
          path: '/404',
