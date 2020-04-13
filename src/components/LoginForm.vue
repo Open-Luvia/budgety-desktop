@@ -24,7 +24,7 @@
          </form>
          <div>
             Non hai un account?
-            <router-link :to="{ name: 'signup' }">Registrati</router-link>
+            <router-link :to="{ name: 'register' }">Registrati</router-link>
          </div>
       </div>
    </div>
@@ -36,16 +36,19 @@ export default {
    data() {
       return {
          credentials: {
-            email: 'ale@gmail.com',
-            password: 'password'
+            email: '',
+            password: ''
          }
       }
    },
    methods: {
       ...mapActions(['login']),
       signIn() {
+         console.log(this.credentials)
          this.login(this.credentials).then(() => {
             this.$router.push({ name: 'dashboard' })
+         }).catch(error => {
+            console.log(error.response)
          })
       }
    }

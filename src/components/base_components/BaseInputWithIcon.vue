@@ -3,12 +3,14 @@
       <div class="icon">
          <font-awesome-icon :icon="icon" />
       </div>
-      <input :type="type" :placeholder="placeholder" />
+      <input :type="type" :placeholder="placeholder" @input="updateValue" v-on="listeners"/>
    </div>
 </template>
 
 <script>
+import { formListener } from '@/mixins/formListener.mixin.js'
 export default {
+   mixins: [formListener],
    props: {
       placeholder: String,
       icon: String,

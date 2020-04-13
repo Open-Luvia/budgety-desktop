@@ -1,11 +1,13 @@
 <template>
    <div>
-      <input :type="type" :placeholder="placeholder" />
+      <input :type="type" @input="updateValue" :placeholder="placeholder" v-on="listener"/>
    </div>
 </template>
 
 <script>
+import { formListener } from '@/mixins/formListener.mixin.js'
 export default {
+   mixins: [formListener],
    props: {
       placeholder: String,
       type: String
