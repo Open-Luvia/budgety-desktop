@@ -1,7 +1,7 @@
-import apiClient from '@/services/apiClient'
+import apiClient from '@/api/apiClient'
 
 export default {
-   checkLogin() {
+   getUserInfo() {
       return apiClient.get('/users/me')
    }
 }

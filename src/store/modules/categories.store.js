@@ -1,4 +1,4 @@
-import CategoriesService from '@/services/categories.service.js'
+import CategoriesApi from '@/api/categories.api.js'
 
 export default {
    namespaced: true,
@@ -12,7 +12,7 @@ export default {
    },
    actions: {
       getCategories({ commit }) {
-         return CategoriesService.getCategories()
+         return CategoriesApi.getCategories()
             .then(response => {
                commit('SET_CATEGORIES', response.data)
             })

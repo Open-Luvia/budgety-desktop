@@ -1,4 +1,4 @@
-import AccountsService from '@/services/accounts.service.js'
+import AccountsApi from '@/api/accounts.api.js'
 
 export default {
    namespaced: true,
@@ -11,8 +11,12 @@ export default {
       }
    },
    actions: {
-      getAccounts({ commit }) {
-         return AccountsService.getAccounts()
+      getAccounts({ commit, rootState }) {
+         const payload = {
+            user_id: rootState.user.id
+         }
+         console.log(payload)
+         AccountsApi.getAccounts(JSON.stringify(payload))
             .then(response => {
                commit('SET_ACCOUNTS', response.data)
             })

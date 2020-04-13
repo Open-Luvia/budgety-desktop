@@ -1,4 +1,4 @@
-import apiClient from '@/services/apiClient'
+import apiClient from '@/api/apiClient'
 
 apiClient.interceptors.request.use(
    config => {

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AuthService from '@/services/auth.service.js'
-import TokenValidator from '@/services/tokenValidator.service.js'
+import AuthApi from '@/api/auth.api.js'
+import UsersApi from '@/api/users.api.js'
+import TokenValidator from '@/api/tokenValidator.api.js'
 
 //import the auto importer
 import modules from './modules'
@@ -11,7 +12,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
    modules: modules, // all your modules automatically imported
    state: {
-      accessToken: ''
+      accessToken: '',
+      user: null
    },
    mutations: {
       SET_TOKEN(state, token) {
@@ -24,11 +26,14 @@ export default new Vuex.Store({
       },
       GET_TOKEN(state) {
          state.accessToken = localStorage.getItem('accessToken')
+      },
+      SET_USER(state, payload) {
+         state.user = payload
       }
    },
    actions: {
       register({ commit }, credentials) {
-         AuthService.register(credentials)
+         AuthApi.register(credentials)
             .then(response => {
                commit('SET_TOKEN', response.data.access_token)
             })
@@ -37,7 +42,7 @@ export default new Vuex.Store({
             })
       },
       login({ commit }, credentials) {
-         AuthService.login(credentials)
+         AuthApi.login(credentials)
             .then(response => {
                commit('SET_TOKEN', response.data.access_token)
             })
@@ -46,7 +51,7 @@ export default new Vuex.Store({
             })
       },
       logout({ commit }) {
-         AuthService.logout()
+         AuthApi.logout()
             .then(() => {
                commit('CLEAR_TOKEN')
             })
@@ -61,12 +66,24 @@ export default new Vuex.Store({
          TokenValidator.checkTokenValidity()
             .then(response => {
                if (response.status == 200) {
-                  console.log('Valid token')
+                  return true
                }
             })
             .catch(() => {
-               console.log('Expired token')
                localStorage.removeItem('accessToken')
+               return false
+            })
+      },
+      async getUserInfo({ commit }){
+         await UsersApi.getUserInfo()
+            .then(response => {
+               commit('SET_USER', response.data.user)
+            })
+            .catch(error => {
+               console.log(
+                  'There was a problem setting your user info: ',
+                  error.response
+               )
             })
       }
    },

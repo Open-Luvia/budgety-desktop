@@ -23,13 +23,6 @@
             </div>
          </div>
          <div class="transaction-list">
-            <transaction
-               :id="transaction.id"
-               :amount="transaction.amount"
-               :note="transaction.note"
-               :date="transaction.date"
-               :category_name="transaction.category_name"
-            />
          </div>
       </div>
    </div>
@@ -37,27 +30,20 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Transaction from '../components/Transaction.vue'
 import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
    components: {
       Navbar,
-      Transaction
-   },
-   data() {
-      return {
-         transaction: {
-            note: 'Aquisto di tastiera meccanica',
-            amount: 43,
-            date: '17-06-2019',
-            id: 1,
-            category_name: 'Elettronica'
-         }
-      }
    },
    computed: {
-      ...mapState('accounts', ['accounts'])
+      ...mapState('accounts',{
+         accounts: state => state.accounts.accounts
+      }),
+   },
+   methods: {
+      ...mapActions('accounts',['getAccounts'])
    }
 }
 </script>
