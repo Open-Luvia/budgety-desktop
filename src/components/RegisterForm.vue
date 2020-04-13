@@ -53,7 +53,7 @@ export default {
          this.register(this.credentials).then(() => {
             this.$router.push({ name: 'dashboard' })
          }).catch(error => {
-            console.log('There was an error with your registration: ' + error.response)
+            console.log(error)
          })
       }
    }
