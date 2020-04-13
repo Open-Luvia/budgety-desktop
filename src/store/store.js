@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AuthApi from '@/api/auth.api.js'
-import UsersApi from '@/api/users.api.js'
-import TokenValidator from '@/api/tokenValidator.api.js'
+import AuthApi from '@/api/modules/auth.api.js'
+import UsersApi from '@/api/modules/users.api.js'
+import TokenValidator from '@/api/modules/tokenValidator.api.js'
 
 //import the auto importer
 import modules from './modules'

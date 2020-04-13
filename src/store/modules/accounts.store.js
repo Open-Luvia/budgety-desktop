@@ -1,4 +1,4 @@
-import AccountsApi from '@/api/accounts.api.js'
+import AccountsApi from '@/api/modules/accounts.api.js'
 
 export default {
    namespaced: true,

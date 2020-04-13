@@ -1,4 +1,4 @@
-import CategoriesApi from '@/api/categories.api.js'
+import CategoriesApi from '@/api/modules/categories.api.js'
 
 export default {
    namespaced: true,
