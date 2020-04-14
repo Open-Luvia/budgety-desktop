@@ -24,6 +24,13 @@
             </div>
          </div>
          <div class="transaction-list">
+            <div
+               class="transaction"
+               v-for="transaction in transactionList"
+               :key="transaction.date"
+            >
+               {{ transaction.description }}
+            </div>
          </div>
       </div>
    </div>
@@ -36,22 +43,30 @@ import { mapActions } from 'vuex'
 
 export default {
    components: {
-      Navbar,
+      Navbar
    },
-   computed: {
-      ...mapState('accounts',{
-         accounts: state => state.accounts.accounts
-      }),
-   },
-   methods: {
-      ...mapActions('accounts',['getAccounts']),
-      ...mapActions('transactions',['getTransactionsByAccount']),
-      currentAccount(accountID){
-         this.getTransactionsByAccount(accountID)
+   data() {
+      return {
+         transactionList: null
       }
    },
-   created(){
-      if(this.accounts == null){
+   computed: {
+      ...mapState('accounts', {
+         accounts: state => state.accounts.accounts
+      }),
+      ...mapState('transactions', ['transactions'])
+   },
+   methods: {
+      ...mapActions('accounts', ['getAccounts']),
+      ...mapActions('transactions', ['getTransactionsByAccount']),
+      currentAccount(accountID) {
+         this.getTransactionsByAccount(accountID).then(() => {
+            this.transactionList = this.transactions.get(accountID)
+         })
+      }
+   },
+   created() {
+      if (this.accounts == null) {
          this.getAccounts()
       }
    }

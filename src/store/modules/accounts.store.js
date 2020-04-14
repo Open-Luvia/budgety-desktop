@@ -11,14 +11,14 @@ export default {
       }
    },
    actions: {
-      async getAccounts({ commit, getters, rootState }) {
+      async getAccounts({ commit, dispatch, getters, rootState }) {
          const payload = {
             user_id: rootState.userID
          }
          await AccountsApi.getAccounts(JSON.stringify(payload))
             .then(response => {
                commit('SET_ACCOUNTS', response.data)
-               commit('transactions/SET_ACCOUNTS', getters.accountsIDs, { root: true })
+               dispatch('transactions/setAccounts', getters.accountsIDs, { root: true })
             })
             .catch(error => {
                console.log(
