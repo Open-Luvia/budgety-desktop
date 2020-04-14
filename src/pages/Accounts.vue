@@ -24,13 +24,14 @@
             </div>
          </div>
          <div class="transaction-list">
-            <div
+            <Transaction
                class="transaction"
                v-for="transaction in transactionList"
-               :key="transaction.date"
-            >
-               {{ transaction.description }}
-            </div>
+               :key="transaction.id"
+               :amount="transaction.amount"
+               :date="transaction.date"
+               :note="transaction.description"
+            />
          </div>
       </div>
    </div>
@@ -38,16 +39,23 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import Transaction from '../components/Transaction.vue'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 
 export default {
    components: {
-      Navbar
+      Navbar,
+      Transaction
    },
    data() {
       return {
-         transactionList: null
+         transactionList: null,
+         transaction: {
+            amount: null,
+            date: null,
+            description: null
+         }
       }
    },
    computed: {

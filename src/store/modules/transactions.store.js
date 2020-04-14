@@ -9,7 +9,7 @@ export default {
       SET_ACCOUNTS(state, accounts) {
          state.transactions = accounts
       },
-      SET_TRANSACTIONS_BY_ACCOUNT(state, params){
+      SET_TRANSACTIONS_BY_ACCOUNT(state, params) {
          const accountID = params.accountID
          const data = params.data
          state.transactions.set(accountID, data)
@@ -38,13 +38,11 @@ export default {
       },
       setAccounts({ commit }, param) {
          var accountsIDs = new Map()
-         param.forEach((item) => {
+         param.forEach(item => {
             accountsIDs.set(item, new Array())
          })
 
          commit('SET_ACCOUNTS', accountsIDs)
       }
-   },
-   getters: {
    }
 }

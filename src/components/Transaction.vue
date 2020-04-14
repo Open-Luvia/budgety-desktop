@@ -1,9 +1,6 @@
 <template>
    <div class="transaction">
       <div class="transaction-element">
-         {{ category_name }}
-      </div>
-      <div class="transaction-element">
          {{ date }}
       </div>
       <div class="transaction-element">
@@ -18,11 +15,9 @@
 <script>
 export default {
    props: {
-      id: Number,
       amount: Number,
       note: String,
       date: String,
-      category_name: String
    }
 }
 </script>
