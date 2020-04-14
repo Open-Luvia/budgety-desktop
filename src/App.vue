@@ -9,16 +9,14 @@ import { mapActions } from 'vuex'
 export default {
    name: 'app',
    methods: {
-      ...mapActions(['getTokenFromLocalStorage','checkTokenValidity','getUserInfo']),
+      ...mapActions(['getDataFromLocalStorage','checkTokenValidity','getUserInfo']),
       ...mapActions('accounts',['getAccounts'])
    },
    created(){
       if(localStorage.getItem('accessToken') != null){
          if(this.checkTokenValidity()){
-            this.getTokenFromLocalStorage()
-            this.getUserInfo().then(() => {
-               this.getAccounts()
-            })
+            this.getDataFromLocalStorage()
+            this.getUserInfo()
          }
       }
    }

@@ -11,20 +11,25 @@ export default {
       }
    },
    actions: {
-      getAccounts({ commit, rootState }) {
+      async getAccounts({ commit, getters, rootState }) {
          const payload = {
-            user_id: rootState.user.id
+            user_id: rootState.userID
          }
-         console.log(payload)
-         AccountsApi.getAccounts(JSON.stringify(payload))
+         await AccountsApi.getAccounts(JSON.stringify(payload))
             .then(response => {
                commit('SET_ACCOUNTS', response.data)
+               commit('transactions/SET_ACCOUNTS', getters.accountsIDs, { root: true })
             })
             .catch(error => {
                console.log(
                   'There was a problem fetching your accounts: ' + error.message
                )
             })
+      }
+   },
+   getters: {
+      accountsIDs(state) {
+         return state.accounts.accounts.map(account => account.id)
       }
    }
 }

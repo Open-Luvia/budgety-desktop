@@ -9,6 +9,7 @@
                      class="sidebar-element"
                      v-for="account in accounts"
                      :key="account.id"
+                     @click="currentAccount(account.id)"
                   >
                      {{ account.name }}
                   </div>
@@ -43,7 +44,16 @@ export default {
       }),
    },
    methods: {
-      ...mapActions('accounts',['getAccounts'])
+      ...mapActions('accounts',['getAccounts']),
+      ...mapActions('transactions',['getTransactionsByAccount']),
+      currentAccount(accountID){
+         this.getTransactionsByAccount(accountID)
+      }
+   },
+   created(){
+      if(this.accounts == null){
+         this.getAccounts()
+      }
    }
 }
 </script>
