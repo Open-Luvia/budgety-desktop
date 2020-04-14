@@ -17,7 +17,8 @@ export default {
          }
          await AccountsApi.getAccounts(JSON.stringify(payload))
             .then(response => {
-               commit('SET_ACCOUNTS', response.data)
+               commit('SET_ACCOUNTS', response.data.data)
+               console.log(response)
                dispatch('transactions/setAccounts', getters.accountsIDs, { root: true })
             })
             .catch(error => {
@@ -29,7 +30,7 @@ export default {
    },
    getters: {
       accountsIDs(state) {
-         return state.accounts.accounts.map(account => account.id)
+         return state.accounts.map(account => account.id)
       }
    }
 }

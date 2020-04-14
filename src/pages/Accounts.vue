@@ -59,9 +59,7 @@ export default {
       }
    },
    computed: {
-      ...mapState('accounts', {
-         accounts: state => state.accounts.accounts
-      }),
+      ...mapState('accounts', ['accounts']),
       ...mapState('transactions', ['transactions'])
    },
    methods: {
@@ -74,7 +72,7 @@ export default {
       }
    },
    created() {
-      if (this.accounts == null) {
+      if (this.accounts.length == 0) {
          this.getAccounts()
       }
    }
