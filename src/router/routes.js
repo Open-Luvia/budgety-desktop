@@ -8,7 +8,8 @@ import Dashboard from '@/pages/Dashboard.vue'
 import Accounts from '@/pages/Accounts.vue'
 import Settings from '@/pages/Settings.vue'
 
-import TransactionForm from '@/components/view_components/TransactionForm.vue'
+import NewTransaction from '@/components/view_components/NewTransaction.vue'
+import NewAccount from '@/components/view_components/NewAccount.vue'
 
 Vue.use(VueRouter)
 
@@ -70,8 +71,13 @@ const router = new VueRouter({
             // },
             {
                path: 'transaction/new',
-               name: 'transactionForm',
-               component: TransactionForm
+               name: 'newTransaction',
+               component: NewTransaction
+            },
+            {
+               path: '/new',
+               name: 'newAccount',
+               component: NewAccount
             }
          ],
          meta: { requireAuth: true }

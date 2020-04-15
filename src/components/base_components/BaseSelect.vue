@@ -1,11 +1,7 @@
 <template>
    <div class="container">
-      <select
-         :value="value"
-         v-on="listeners"
-         @change="updateValue"
-         :placeholder="placeholder"
-      >
+      <select :value="value" v-on="listeners" @change="updateValue">
+         <option value="" disabled selected hidden>{{ placeholder }}</option>
          <option
             v-for="option in options"
             :value="option"
@@ -34,13 +30,16 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
 .container
+   background-color: map-get($colors, 'input')
    border-radius: 18px
-   overflow: hidden
    display: inline-block
+   height: 3em
+   overflow: hidden
+   width: 100%
    select
-      width: inherit
-      height: 100%
-      background-color: map-get($colors, 'input')
+      background-color: inherit
       border: none
+      height: inherit
       outline: none
+      width: inherit
 </style>

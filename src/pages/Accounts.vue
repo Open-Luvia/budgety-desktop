@@ -15,11 +15,13 @@
                   </div>
                </div>
                <div class="add-account">
-                  <font-awesome-icon
-                     icon="plus-circle"
-                     :style="{ color: 'white' }"
-                  />
-                  <span>Aggiungi conto</span>
+                  <router-link :to="{ name: 'newAccount' }">
+                     <font-awesome-icon
+                        icon="plus-circle"
+                        :style="{ color: 'white' }"
+                     />
+                     <span>Aggiungi conto</span>
+                  </router-link>
                </div>
             </div>
          </div>
@@ -27,7 +29,7 @@
             <router-view></router-view>
             <div class="new-transaction-button">
                <div class="new-transaction-text">
-                  <router-link :to="{ name: 'transactionForm' }">
+                  <router-link :to="{ name: 'newTransaction' }">
                      <font-awesome-icon
                         icon="plus-circle"
                         :style="{ color: '#A7AEB7' }"
@@ -64,7 +66,7 @@ export default {
    },
    data() {
       return {
-         showForm: false,
+         accountToShow: null,
          transactionList: null,
          transaction: {
             amount: null,
@@ -87,12 +89,15 @@ export default {
          this.getTransactionsByAccount(accountID).then(() => {
             this.transactionList = this.transactions.get(accountID)
          })
+         this.accountToShow = accountID
       }
    },
    created() {
       if (this.accounts.length == 0) {
          this.getAccounts()
       }
+      this.accountToShow = this.accounts[0].id
+      this.currentAccount(this.accountToShow)
    }
 }
 </script>
@@ -112,6 +117,8 @@ export default {
         flex-direction: row
         justify-content: center
         padding: 16px
+        span
+           margin: 0px 0px 0px 10px
     .transaction-list
         width: calc(100vw - #{$sidebar-width})
         .new-transaction-button

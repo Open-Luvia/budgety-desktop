@@ -1,5 +1,5 @@
 <template>
-   <div class="transactionForm">
+   <div class="new-transaction">
       <div class="header">
          <div class="exit">
             <router-link :to="{ name: 'accounts' }">
@@ -44,6 +44,10 @@
             </div>
          </div>
          <div class="confirmation-buttons">
+            <BaseButton class="button" buttonClass="cancel">Annulla</BaseButton>
+            <BaseButton class="button" buttonClass="tertiary"
+               >Conferma</BaseButton
+            >
          </div>
       </div>
    </div>
@@ -78,60 +82,66 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
-.transactionForm
-   width: 100%
-   height: 100%
+.new-transaction
    background: white;
+   height: 100%
+   width: 100%
    .header
       background-color: map-get($colors, 'primary')
-      font-size: 24px
-      font-weight: 500
-      height: 2.5em
-      line-height: 2.5em
       color: white
       display: grid
+      font-size: 24px
+      font-weight: 500
       grid-template-columns: 50px auto 50px
+      height: 2.5em
+      line-height: 2.5em
       .title
          grid-column: 2/3
       .exit
          grid-column: 1/2
    .body
       .item
-         margin: 10px 10px 10px 10px
          display: flex
-         width: inherit
          justify-content: space-between
+         margin: 10px 10px 10px 10px
+         width: inherit
          .name-input
             flex-grow: 1
             .name
                margin: 0px 10px 0px 0px
          .other-informations
             display: flex
-            flex-direction: row
             flex-basis: content
+            flex-direction: row
             .amount
                width: 100px
             .category
+               box-sizing: border-box
                margin: 0px 10px 0px 0px
                width: 150px
-               box-sizing: border-box
             .delete
-               display: flex
                align-items: center
+               cursor: pointer
+               display: flex
                height: inherit
                margin: 10px
-               cursor: pointer
       .new-item-button
          align-items: center
          color: map-get($colors, 'new-line')
+         cursor: pointer
          display: flex
          font-size: 18px
          font-weight: 500
          justify-content: center
          margin: 10px 10px 0px 10px
-         cursor: pointer
          .new-item-text
             padding: 0px 10px 0px 10px
       .description
          margin: 10px 10px 10px 10px
+      .confirmation-buttons
+         align-items: center
+         display: flex
+         justify-content: flex-end
+         .button
+            margin: 0px 10px 0px 0px
 </style>
