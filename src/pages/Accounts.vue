@@ -25,7 +25,7 @@
          </div>
          <div class="transaction-list">
          <router-view></router-view>
-            <div class="new-transaction-form">
+            <div class="new-transaction-button">
                <font-awesome-icon
                   icon="plus-circle"
                   :style="{ color: '#A7AEB7' }"
@@ -116,7 +116,7 @@ export default {
             padding: 0px 0px 0px 8px
     .transaction-list
         width: calc(100vw - #{$sidebar-width})
-        .new-transaction-form
+        .new-transaction-button
            align-items: center
            color: map-get($colors, 'new-line')
            display: flex
@@ -124,6 +124,7 @@ export default {
            font-weight: 600
            justify-content: flex-start
            margin: 10px 10px 0px 10px
+           cursor: pointer
            .new-transaction-text
               padding: 0px 10px 0px 10px
 </style>

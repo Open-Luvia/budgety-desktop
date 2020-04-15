@@ -24,7 +24,7 @@ input
     border: none
     box-sizing: border-box
     height: 3em
-    margin: 0 0 16px 0
+    margin: 0 0 0 0
     padding: 8px 16px 8px 16px
     width: 100%
     &:hover
