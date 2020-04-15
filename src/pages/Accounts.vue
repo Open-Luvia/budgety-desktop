@@ -24,6 +24,12 @@
             </div>
          </div>
          <div class="transaction-list">
+            <div class="new-transaction-form">
+               <font-awesome-icon icon="plus-circle" :style="{ color: '#A7AEB7' }" />
+               <div class="new-transaction-text">
+               Nuova transazione
+               </div>
+            </div>
             <Transaction
                class="transaction"
                v-for="transaction in transactionList"
@@ -96,4 +102,14 @@ export default {
             padding: 0px 0px 0px 8px
     .transaction-list
         width: calc(100vw - #{$sidebar-width})
+        .new-transaction-form
+           align-items: center
+           color: map-get($colors, 'new-line')
+           display: flex
+           font-size: 22px
+           font-weight: 600
+           justify-content: flex-start
+           margin: 10px 10px 0px 10px
+           .new-transaction-text
+              padding: 0px 10px 0px 10px
 </style>

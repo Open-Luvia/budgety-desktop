@@ -27,33 +27,33 @@ export default {
 .transaction
     border-bottom: 1px solid black
     box-sizing: border-box
-    justify-content: space-between
     display: flex
     font-size: 20px
     font-weight: 500
+    justify-content: space-between
     margin-left: 15px
     margin-right: 15px
     .info
        display: flex
        width: calc( 100% - 120px )
        .date
-          display: flex
           align-items: center
-          justify-content: flex-start
+          display: flex
           flex-grow: 1
+          justify-content: flex-start
        .note
-          flex-grow: 3
-          display: flex
           align-items: center
+          display: flex
+          flex-grow: 3
           justify-content: flex-start
     .amount
+       align-items: center
        background-color: map-get($colors, "positive-transaction")
+       border-radius: 12px
        color: white
        display: flex
-       align-items: center
+       height: 2em
        justify-content: center
        margin: 6px 0px 6px 0px
        width: 120px
-       height: 2em
-       border-radius: 12px
 </style>
