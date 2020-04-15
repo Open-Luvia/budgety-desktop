@@ -1,6 +1,6 @@
 <template>
    <div>
-      <input :type="type" @input="updateValue" :placeholder="placeholder" v-on="listener"/>
+      <input :type="type" @input="updateValue" :placeholder="placeholder" v-on="listeners"/>
    </div>
 </template>
 

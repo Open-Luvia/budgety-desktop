@@ -24,10 +24,16 @@
             </div>
          </div>
          <div class="transaction-list">
+         <router-view></router-view>
             <div class="new-transaction-form">
-               <font-awesome-icon icon="plus-circle" :style="{ color: '#A7AEB7' }" />
+               <font-awesome-icon
+                  icon="plus-circle"
+                  :style="{ color: '#A7AEB7' }"
+               />
                <div class="new-transaction-text">
-               Nuova transazione
+                  <router-link :to="{ name: 'transactionForm' }">
+                  Nuova transazione
+                  </router-link>
                </div>
             </div>
             <Transaction
@@ -46,16 +52,19 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Transaction from '../components/Transaction.vue'
+// import TransactionForm from '../components/view_components/TransactionForm.vue'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 
 export default {
    components: {
       Navbar,
-      Transaction
+      Transaction,
+      // TransactionForm
    },
    data() {
       return {
+         showForm: false,
          transactionList: null,
          transaction: {
             amount: null,
@@ -66,7 +75,10 @@ export default {
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapState('transactions', ['transactions'])
+      ...mapState('transactions', ['transactions']),
+      isTransactionOpen() {
+         return this.$route.name === 'transactionForm'
+      }
    },
    methods: {
       ...mapActions('accounts', ['getAccounts']),
@@ -87,6 +99,8 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+.modal
+   background: black
 .body
     display: flex
     height: calc(100vh - #{$navbar-height})
