@@ -24,15 +24,15 @@
             </div>
          </div>
          <div class="transaction-list">
-         <router-view></router-view>
+            <router-view></router-view>
             <div class="new-transaction-button">
-               <font-awesome-icon
-                  icon="plus-circle"
-                  :style="{ color: '#A7AEB7' }"
-               />
                <div class="new-transaction-text">
                   <router-link :to="{ name: 'transactionForm' }">
-                  Nuova transazione
+                     <font-awesome-icon
+                        icon="plus-circle"
+                        :style="{ color: '#A7AEB7' }"
+                     />
+                     Nuova transazione
                   </router-link>
                </div>
             </div>
@@ -59,7 +59,7 @@ import { mapActions } from 'vuex'
 export default {
    components: {
       Navbar,
-      Transaction,
+      Transaction
       // TransactionForm
    },
    data() {
@@ -112,19 +112,17 @@ export default {
         flex-direction: row
         justify-content: center
         padding: 16px
-        span
-            padding: 0px 0px 0px 8px
     .transaction-list
         width: calc(100vw - #{$sidebar-width})
         .new-transaction-button
            align-items: center
            color: map-get($colors, 'new-line')
+           cursor: pointer
            display: flex
            font-size: 22px
            font-weight: 600
            justify-content: flex-start
            margin: 10px 10px 0px 10px
-           cursor: pointer
            .new-transaction-text
               padding: 0px 10px 0px 10px
 </style>
