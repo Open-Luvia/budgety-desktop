@@ -61,12 +61,12 @@ export default {
          grid-column: 1/2
    .body
       .form
-         margin: 10px 10px 10px 10px
+         column-gap: 10px
          display: grid
+         grid-template-areas: "name name" "balance type"
          grid-template-columns: auto auto
          grid-template-rows: auto auto
-         grid-template-areas: "name name" "balance type"
-         column-gap: 10px
+         margin: 10px 10px 10px 10px
          row-gap: 10px
          .name
             grid-area: name

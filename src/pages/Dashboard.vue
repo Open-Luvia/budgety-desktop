@@ -1,5 +1,5 @@
 <template>
-   <div class="fullscreen">
+   <div>
       <Navbar />
    </div>
 </template>

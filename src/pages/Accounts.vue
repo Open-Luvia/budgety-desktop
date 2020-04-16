@@ -1,8 +1,8 @@
 <template>
-   <div>
+   <div class="fullscreen">
       <Navbar />
       <div class="body">
-         <div class="sidebar">
+         <aside class="sidebar">
             <div class="sidebar-elements">
                <div>
                   <div
@@ -24,7 +24,7 @@
                   </router-link>
                </div>
             </div>
-         </div>
+         </aside>
          <div class="transaction-list">
             <router-view></router-view>
             <div class="new-transaction-button">
@@ -54,7 +54,6 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Transaction from '../components/Transaction.vue'
-// import TransactionForm from '../components/view_components/TransactionForm.vue'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 
@@ -62,7 +61,6 @@ export default {
    components: {
       Navbar,
       Transaction
-      // TransactionForm
    },
    data() {
       return {
@@ -108,7 +106,6 @@ export default {
    background: black
 .body
     display: flex
-    height: calc(100vh - #{$navbar-height})
     .add-account
         align-items: center
         color: white

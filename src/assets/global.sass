@@ -1,7 +1,7 @@
 $colors: ( "primary": #31A09B, "secondary": #44d7b6, "tertiary": #0091FF, "cancel": #6F6F6F, "background": #232A33, "sidebar": #393E46, "navbar": #232A33, "input": #f0f0f0, "active-input": #dfdfdf, "negative-transaction": #FF5B57, "positive-transaction": #4FD889, "new-line": #A7AEB7)
 
 $navbar-height: 64px
-$sidebar-width: 176px
+$sidebar-width: 208px
 
 #app
     -moz-osx-font-smoothing: grayscale
@@ -16,12 +16,15 @@ $sidebar-width: 176px
         text-decoration: none
         
 .fullscreen
-    height: 100%
+    height: 100vh
     margin: 0px
-    min-height: 100%
+    min-height: 100vh
     min-width: 100%
     padding: 0px
     width: 100%
+
+.body
+    height: calc(100% - #{$navbar-height})
 
 .sidebar
     background: map-get($colors, 'sidebar')
@@ -30,8 +33,8 @@ $sidebar-width: 176px
     .sidebar-elements
         display: flex
         flex-direction: column
-        height: 100%
         justify-content: space-between
+        height: 100%
         .sidebar-element
             align-items: center
             color: white

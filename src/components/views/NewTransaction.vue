@@ -97,14 +97,14 @@ export default {
          grid-column: 1/2
    .body
       .item
+         align-items: center
+         column-gap: 10px
          display: grid
+         grid-template-areas: "name price category delete"
          grid-template-columns: auto 150px 100px 50px
          grid-template-rows: auto
-         grid-template-areas: "name price category delete"
          margin: 10px 10px 10px 10px
-         column-gap: 10px
          width: inherit
-         align-items: center
          .name
             grid-area: name
          .category

@@ -8,8 +8,9 @@ import Dashboard from '@/pages/Dashboard.vue'
 import Accounts from '@/pages/Accounts.vue'
 import Settings from '@/pages/Settings.vue'
 
-import NewTransaction from '@/components/view_components/NewTransaction.vue'
-import NewAccount from '@/components/view_components/NewAccount.vue'
+import NewTransaction from '@/components/views/NewTransaction.vue'
+import NewAccount from '@/components/views/NewAccount.vue'
+import SettingsCategories from '@/components/views/SettingsCategories.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,7 @@ const router = new VueRouter({
       {
          path: '/',
          name: 'login',
-         component: Login,
+         component: Login
          // beforeEnter: (to, from, next) => {
          //    const loggedIn = localStorage.getItem('accessToken')
          //    if(loggedIn){
@@ -34,7 +35,7 @@ const router = new VueRouter({
       {
          path: '/register',
          name: 'register',
-         component: Register,
+         component: Register
          // beforeEnter: (to, from, next) => {
          //    const loggedIn = localStorage.getItem('accessToken')
          //    if(loggedIn){
@@ -51,7 +52,14 @@ const router = new VueRouter({
          path: '/settings',
          name: 'settings',
          component: Settings,
-         meta: { requireAuth: true }
+         meta: { requireAuth: true },
+         children: [
+            {
+               path: 'categories',
+               name: 'SettingsCategories',
+               component: SettingsCategories
+            }
+         ]
       },
       {
          path: '/dashboard',
