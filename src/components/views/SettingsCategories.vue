@@ -1,15 +1,32 @@
 <template>
-   <div>
-      <h1>Setting delle categorie</h1>
+   <div class="settings-categories">
+      <router-view>
+         <div
+            class="category"
+            v-for="category in categories"
+            :key="category.id"
+         >
+            {{ category.name }}
+         </div>
+         <div class="add-category">
+            <router-link :to="{ name: 'newCategory' }">
+               <font-awesome-icon icon="plus-circle" />
+               <span>Nuova Categoria</span>
+            </router-link>
+         </div>
+      </router-view>
    </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
    methods: {
       ...mapActions('categories', ['getCategories'])
+   },
+   computed: {
+      ...mapState('categories', ['categories'])
    },
    created() {
       this.getCategories()
@@ -17,4 +34,16 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.settings-categories
+   width: 100%
+   height: 100%
+   .add-category
+      display: flex
+      align-items: center
+      cursor: pointer
+      flex-direction: row
+      padding: 16px
+      span
+         margin: 0px 0px 0px 10px
+</style>

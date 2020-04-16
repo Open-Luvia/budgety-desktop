@@ -11,6 +11,7 @@ import Settings from '@/pages/Settings.vue'
 import NewTransaction from '@/components/views/NewTransaction.vue'
 import NewAccount from '@/components/views/NewAccount.vue'
 import SettingsCategories from '@/components/views/SettingsCategories.vue'
+import NewCategory from '@/components/views/NewCategory.vue'
 
 Vue.use(VueRouter)
 
@@ -45,7 +46,14 @@ const router = new VueRouter({
             {
                path: 'categories',
                name: 'SettingsCategories',
-               component: SettingsCategories
+               component: SettingsCategories,
+               children: [
+                  {
+                     path: 'new',
+                     name: 'newCategory',
+                     component: NewCategory
+                  }
+               ]
             }
          ]
       },

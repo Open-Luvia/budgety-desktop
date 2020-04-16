@@ -27,16 +27,14 @@
          </aside>
          <div class="transaction-list">
             <router-view></router-view>
-            <div class="new-transaction-button">
-               <div class="new-transaction-text">
-                  <router-link :to="{ name: 'newTransaction' }">
-                     <font-awesome-icon
-                        icon="plus-circle"
-                        :style="{ color: '#A7AEB7' }"
-                     />
-                     Nuova transazione
-                  </router-link>
-               </div>
+            <div class="add-transaction">
+               <router-link :to="{ name: 'newTransaction' }">
+                  <font-awesome-icon
+                     icon="plus-circle"
+                     :style="{ color: '#A7AEB7' }"
+                  />
+                  <span>Nuova transazione</span>
+               </router-link>
             </div>
             <Transaction
                class="transaction"
@@ -118,15 +116,16 @@ export default {
            margin: 0px 0px 0px 10px
     .transaction-list
         width: calc(100vw - #{$sidebar-width})
-        .new-transaction-button
+        .add-transaction
            align-items: center
            color: map-get($colors, 'new-line')
            cursor: pointer
            display: flex
+           flex-direction: row
            font-size: 22px
            font-weight: 600
            justify-content: flex-start
            margin: 10px 10px 0px 10px
-           .new-transaction-text
-              padding: 0px 10px 0px 10px
+           span
+              margin: 0px 0px 0px 10px
 </style>
