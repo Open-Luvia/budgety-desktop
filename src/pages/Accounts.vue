@@ -26,7 +26,6 @@
             </div>
          </aside>
          <div class="transaction-list">
-            <router-view></router-view>
             <div class="add-transaction">
                <router-link :to="{ name: 'newTransaction' }">
                   <font-awesome-icon
@@ -44,6 +43,7 @@
                :date="transaction.date"
                :note="transaction.description"
             />
+            <router-view class="overlay" />
          </div>
       </div>
    </div>
@@ -103,29 +103,50 @@ export default {
 .modal
    background: black
 .body
-    display: flex
-    .add-account
-        align-items: center
-        color: white
-        cursor: pointer
-        display: flex
-        flex-direction: row
-        justify-content: center
-        padding: 16px
-        span
-           margin: 0px 0px 0px 10px
-    .transaction-list
-        width: calc(100vw - #{$sidebar-width})
-        .add-transaction
-           align-items: center
-           color: map-get($colors, 'new-line')
-           cursor: pointer
-           display: flex
-           flex-direction: row
-           font-size: 22px
-           font-weight: 600
-           justify-content: flex-start
-           margin: 10px 10px 0px 10px
-           span
-              margin: 0px 0px 0px 10px
+   display: flex
+   .sidebar
+      background: map-get($colors, 'sidebar')
+      height: 100%
+      width: $sidebar-width
+      .sidebar-elements
+         display: flex
+         flex-direction: column
+         justify-content: space-between
+         height: 100%
+         .sidebar-element
+            align-items: center
+            color: white
+            cursor: pointer
+            display: flex
+            flex-direction: column
+            font-size: 21px
+            font-weight: 500
+            height: 3em
+            justify-content: center
+            width: 100%
+         .add-account
+            align-items: center
+            color: white
+            cursor: pointer
+            display: flex
+            flex-direction: row
+            justify-content: center
+            padding: 16px
+            span
+               margin: 0px 0px 0px 10px
+   .transaction-list
+      position: relative
+      width: calc(100vw - #{$sidebar-width})
+   .add-transaction
+      align-items: center
+      color: map-get($colors, 'new-line')
+      cursor: pointer
+      display: flex
+      flex-direction: row
+      font-size: 22px
+      font-weight: 600
+      justify-content: flex-start
+      margin: 10px 10px 0px 10px
+      span
+         margin: 0px 0px 0px 10px
 </style>

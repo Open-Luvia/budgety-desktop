@@ -1,20 +1,15 @@
 <template>
    <div class="settings-categories">
-      <router-view>
-         <div
-            class="category"
-            v-for="category in categories"
-            :key="category.id"
-         >
-            {{ category.name }}
-         </div>
-         <div class="add-category">
-            <router-link :to="{ name: 'newCategory' }">
-               <font-awesome-icon icon="plus-circle" />
-               <span>Nuova Categoria</span>
-            </router-link>
-         </div>
-      </router-view>
+      <div class="category" v-for="category in categories" :key="category.id">
+         {{ category.name }}
+      </div>
+      <div class="add-category">
+         <router-link :to="{ name: 'newCategory' }">
+            <font-awesome-icon icon="plus-circle" />
+            <span>Nuova Categoria</span>
+         </router-link>
+      </div>
+      <router-view class="overlay" />
    </div>
 </template>
 
@@ -38,6 +33,7 @@ export default {
 .settings-categories
    width: 100%
    height: 100%
+   position: relative
    .add-category
       display: flex
       align-items: center
