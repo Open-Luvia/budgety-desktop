@@ -9,7 +9,7 @@
             <span>Nuova Categoria</span>
          </router-link>
       </div>
-      <router-view class="overlay" />
+      <router-view class="popup" />
    </div>
 </template>
 
@@ -31,13 +31,13 @@ export default {
 
 <style lang="sass" scoped>
 .settings-categories
-   width: 100%
    height: 100%
    position: relative
+   width: 100%
    .add-category
-      display: flex
       align-items: center
       cursor: pointer
+      display: flex
       flex-direction: row
       padding: 16px
       span

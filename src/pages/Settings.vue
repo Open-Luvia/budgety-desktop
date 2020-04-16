@@ -38,8 +38,8 @@ export default {
    display: flex
    .sidebar
       background-color: white
-      width: 272px
       border-right: 1px solid black
+      width: 272px
       .sidebar-element
          color: black
 </style>

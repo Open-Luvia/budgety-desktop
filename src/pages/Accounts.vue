@@ -111,8 +111,8 @@ export default {
       .sidebar-elements
          display: flex
          flex-direction: column
-         justify-content: space-between
          height: 100%
+         justify-content: space-between
          .sidebar-element
             align-items: center
             color: white
