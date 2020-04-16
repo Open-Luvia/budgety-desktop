@@ -1,8 +1,6 @@
 <template>
-   <div>
-      <div class="new-category">
-         <h1>New Category Form</h1>
-      </div>
+   <div class="new-category">
+      <h1>New Category Form</h1>
    </div>
 </template>
 
@@ -13,6 +11,6 @@ export default {}
 <style lang="sass" scoped>
 .new-category
    background: white;
-   height: 600px
-   width: 600px
+   height: 100%
+   width: 100%
 </style>
