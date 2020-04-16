@@ -15,23 +15,19 @@
             <BaseInput placeholder="Descrizione" />
          </div>
          <div class="item" v-for="item in items" :key="item.id">
-            <div class="name-input">
-               <BaseInput class="name" placeholder="Nome" />
-            </div>
-            <div class="other-informations">
-               <BaseSelect
-                  class="category"
-                  placeholder="Categoria"
-                  :options="categories"
+            <BaseInput class="name" placeholder="Nome" />
+            <BaseSelect
+               class="category"
+               placeholder="Categoria"
+               :options="categories"
+            />
+            <BaseInput class="price" placeholder="Prezzo" />
+            <div class="delete" @click="deleteItem">
+               <font-awesome-icon
+                  icon="trash"
+                  :style="{ color: '#FF5B57' }"
+                  size="lg"
                />
-               <BaseInput class="amount" placeholder="Prezzo" />
-               <div class="delete" @click="deleteItem">
-                  <font-awesome-icon
-                     icon="trash"
-                     :style="{ color: '#FF5B57' }"
-                     size="lg"
-                  />
-               </div>
             </div>
          </div>
          <div class="new-item-button">
@@ -101,30 +97,22 @@ export default {
          grid-column: 1/2
    .body
       .item
-         display: flex
-         justify-content: space-between
+         display: grid
+         grid-template-columns: auto 150px 100px 50px
+         grid-template-rows: auto
+         grid-template-areas: "name price category delete"
          margin: 10px 10px 10px 10px
+         column-gap: 10px
          width: inherit
-         .name-input
-            flex-grow: 1
-            .name
-               margin: 0px 10px 0px 0px
-         .other-informations
-            display: flex
-            flex-basis: content
-            flex-direction: row
-            .amount
-               width: 100px
-            .category
-               box-sizing: border-box
-               margin: 0px 10px 0px 0px
-               width: 150px
-            .delete
-               align-items: center
-               cursor: pointer
-               display: flex
-               height: inherit
-               margin: 10px
+         align-items: center
+         .name
+            grid-area: name
+         .category
+            grid-area: price
+         .price
+            grid-area: category
+         .delete
+            grid-area: delete
       .new-item-button
          align-items: center
          color: map-get($colors, 'new-line')

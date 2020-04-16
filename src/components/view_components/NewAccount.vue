@@ -65,14 +65,15 @@ export default {
          display: grid
          grid-template-columns: auto auto
          grid-template-rows: auto auto
+         grid-template-areas: "name name" "balance type"
          column-gap: 10px
          row-gap: 10px
          .name
-            grid-area: 1/1/2/3
+            grid-area: name
          .balance
-            grid-area: 2/1/2/2
+            grid-area: balance
          .type
-            grid-area: 2/2/2/3
+            grid-area: type
       .confirmation-buttons
          align-items: center
          display: flex
