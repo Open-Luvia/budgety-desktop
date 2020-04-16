@@ -11,10 +11,13 @@ export default {
       }
    },
    actions: {
-      getCategories({ commit }) {
-         return CategoriesApi.getCategories()
+      getCategories({ commit, rootState }) {
+         const payload = {
+            user_id: rootState.userID
+         }
+         return CategoriesApi.getCategories(payload)
             .then(response => {
-               commit('SET_CATEGORIES', response.data)
+               commit('SET_CATEGORIES', response.data.categories)
             })
             .catch(error => {
                console.log(

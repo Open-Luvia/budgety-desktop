@@ -75,10 +75,7 @@ export default {
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapState('transactions', ['transactions']),
-      isTransactionOpen() {
-         return this.$route.name === 'transactionForm'
-      }
+      ...mapState('transactions', ['transactions'])
    },
    methods: {
       ...mapActions('accounts', ['getAccounts']),
@@ -92,7 +89,10 @@ export default {
    },
    created() {
       if (this.accounts.length == 0) {
-         this.getAccounts()
+         this.getAccounts().then(() => {
+            this.accountToShow = this.accounts[0].id
+            this.currentAccount(this.accountToShow)
+         })
       }
       this.accountToShow = this.accounts[0].id
       this.currentAccount(this.accountToShow)
