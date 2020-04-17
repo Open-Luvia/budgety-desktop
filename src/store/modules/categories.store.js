@@ -11,27 +11,13 @@ export default {
       }
    },
    actions: {
-      getCategories({ commit, rootState }) {
+      getCategories({ dispatch, rootState }) {
          const payload = {
             user_id: rootState.userID
          }
-         return CategoriesApi.getCategories(payload)
+         CategoriesApi.getCategories(payload)
             .then(response => {
-               console.log(response.data)
-               //commit('SET_CATEGORIES', response.data.categories)
-               var categoryTree = response.data.categories.filter(
-                  category => category.parent_id == null
-               )
-               categoryTree.forEach(item => (item['children'] = []))
-               response.data.categories.forEach(item => {
-                  if (item.parent_id != null) {
-                     const parentCategory = categoryTree.find(
-                        parent => parent.id == item.parent_id
-                     )
-                     parentCategory.children.push(item)
-                  }
-               })
-               commit('SET_CATEGORIES', categoryTree)
+               dispatch('makeCategoryTree', response.data)
             })
             .catch(error => {
                console.log(
@@ -39,6 +25,25 @@ export default {
                      error.message
                )
             })
+      },
+      makeCategoryTree({ commit }, apiResponse){
+         try {
+            var categoryTree = apiResponse.categories.filter(  //riempie il category tree con categorie parent
+               category => category.parent_id == null          //Le categorie parent hanno il parent_id nullo
+            )
+            categoryTree.forEach(item => (item['children'] = [])) //per ogni categoria padre crea un campo childer vuoto
+            apiResponse.categories.forEach(item => {
+               if (item.parent_id != null) {                      
+                  const parentCategory = categoryTree.find(
+                     parent => parent.id == item.parent_id  //cerca la categoria padre che ha come id il parent_id della figlia
+                  )
+                  parentCategory.children.push(item)
+               }
+            })
+         } catch (error) {
+            console.log("There was a problem building your category tree: ",error)
+         }
+         commit('SET_CATEGORIES', categoryTree)
       }
    }
 }
