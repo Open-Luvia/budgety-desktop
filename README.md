@@ -1,5 +1,6 @@
 # frontend
 A personal finance app written in VueJS
+
 **UNDER DEVELOPMENT**
 
 ## Project setup
