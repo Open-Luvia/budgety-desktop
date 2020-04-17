@@ -4,10 +4,10 @@
          <option value="" disabled selected hidden>{{ placeholder }}</option>
          <option
             v-for="option in options"
-            :value="option"
+            :value="option.id"
             :key="option.id"
             :selected="option === value"
-            >{{ option }}</option
+            >{{ option.name }}</option
          >
       </select>
    </div>
