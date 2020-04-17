@@ -24,12 +24,12 @@
                   class="category"
                   placeholder="Categoria"
                   :options="categories"
-                  v-model="item.categoryID"
+                  v-model.number="item.categoryID"
                />
                <BaseInput
                   class="price"
                   placeholder="Prezzo"
-                  v-model="item.amount"
+                  v-model.number="item.amount"
                />
                <div class="delete" @click="deleteItem">
                   <font-awesome-icon

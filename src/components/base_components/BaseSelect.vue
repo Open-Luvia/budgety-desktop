@@ -6,7 +6,6 @@
             v-for="option in options"
             :value="option.id"
             :key="option.id"
-            :selected="option === value"
             >{{ option.name }}</option
          >
       </select>
@@ -23,7 +22,7 @@ export default {
          required: true
       },
       placeholder: String,
-      value: String
+      value: Number
    }
 }
 </script>
