@@ -13,12 +13,12 @@ export default {
    actions: {
       async getAccounts({ commit, dispatch, getters, rootState }) {
          const payload = {
-            user_id: rootState.userID
+            user_id: rootState.user_id
          }
          await AccountsApi.getAccounts(JSON.stringify(payload))
             .then(response => {
                commit('SET_ACCOUNTS', response.data.data)
-               dispatch('transactions/setAccounts', getters.accountsIDs, {
+               dispatch('transactions/setAccounts', getters.accounts_ids, {
                   root: true
                })
             })
@@ -30,7 +30,7 @@ export default {
       }
    },
    getters: {
-      accountsIDs(state) {
+      accounts_ids(state) {
          return state.accounts.map(account => account.id)
       }
    }

@@ -30,7 +30,7 @@
                <router-link
                   :to="{
                      name: 'newTransaction',
-                     params: { id: this.accountToShow }
+                     params: { id: this.account_to_show }
                   }"
                >
                   <font-awesome-icon
@@ -42,7 +42,7 @@
             </div>
             <Transaction
                class="transaction"
-               v-for="transaction in transactionList"
+               v-for="transaction in transaction_list"
                :key="transaction.id"
                :amount="transaction.amount"
                :date="transaction.date"
@@ -67,8 +67,8 @@ export default {
    },
    data() {
       return {
-         accountToShow: null,
-         transactionList: null,
+         account_to_show: null,
+         transaction_list: null,
          transaction: {
             amount: null,
             date: null,
@@ -83,22 +83,22 @@ export default {
    methods: {
       ...mapActions('accounts', ['getAccounts']),
       ...mapActions('transactions', ['getTransactionsByAccount']),
-      currentAccount(accountID) {
-         this.getTransactionsByAccount(accountID).then(() => {
-            this.transactionList = this.transactions.get(accountID)
+      currentAccount(account_id) {
+         this.getTransactionsByAccount(account_id).then(() => {
+            this.transaction_list = this.transactions.get(account_id)
          })
-         this.accountToShow = accountID
+         this.account_to_show = account_id
       }
    },
    created() {
       if (this.accounts.length == 0) {
          this.getAccounts().then(() => {
-            this.accountToShow = this.accounts[0].id
-            this.currentAccount(this.accountToShow)
+            this.account_to_show = this.accounts[0].id
+            this.currentAccount(this.account_to_show)
          })
       }
-      this.accountToShow = this.accounts[0].id
-      this.currentAccount(this.accountToShow)
+      this.account_to_show = this.accounts[0].id
+      this.currentAccount(this.account_to_show)
    }
 }
 </script>

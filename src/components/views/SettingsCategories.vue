@@ -3,7 +3,7 @@
       <div class="categories">
          <div
             class="category"
-            v-for="category in categories"
+            v-for="category in category_tree"
             :key="category.id"
          >
             {{ category.name }}
@@ -36,7 +36,7 @@ export default {
       ...mapActions('categories', ['getCategories'])
    },
    computed: {
-      ...mapState('categories', ['categories'])
+      ...mapState('categories', ['category_tree'])
    },
    created() {
       this.getCategories()

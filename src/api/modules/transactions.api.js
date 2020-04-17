@@ -1,8 +1,8 @@
 import apiClient from '@/api/apiClient.js'
 
 export default {
-   getTransactionsByAccount(accountID, payload){
-      const baseUrl = '/transactions/account/'+accountID
+   getTransactionsByAccount(account_id, payload){
+      const baseUrl = '/transactions/account/'+account_id
       return apiClient.post(baseUrl, payload)
    },
    newTransaction(payload){

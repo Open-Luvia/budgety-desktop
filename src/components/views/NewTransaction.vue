@@ -24,12 +24,13 @@
                   class="category"
                   placeholder="Categoria"
                   :options="categories"
-                  v-model.number="item.categoryID"
+                  v-model.number="item.category_id"
                />
                <BaseInput
                   class="price"
                   placeholder="Prezzo"
                   v-model.number="item.amount"
+                  type="number"
                />
                <div class="delete" @click="deleteItem">
                   <font-awesome-icon
@@ -49,10 +50,10 @@
                </div>
             </div>
             <div class="confirmation-buttons">
-               <BaseButton class="button" buttonClass="cancel"
+               <BaseButton class="button" button_class="cancel"
                   >Annulla</BaseButton
                >
-               <BaseButton class="button" buttonClass="tertiary" type="submit"
+               <BaseButton class="button" button_class="tertiary" type="submit"
                   >Conferma</BaseButton
                >
             </div>
@@ -65,14 +66,14 @@
 import { mapState, mapActions } from 'vuex'
 export default {
    props: {
-      id: String
+      id: null //account_id received from router-link params
    },
    data() {
       return {
          transaction: {
             description: null,
             date: '2019-10-06 17:30:13',
-            accountID: null,
+            account_id: null,
             items: []
          }
       }
@@ -87,7 +88,7 @@ export default {
          const item = {
             name: '',
             amount: null,
-            categoryID: null
+            category_id: null
          }
          this.transaction.items.push(item)
       },
@@ -99,7 +100,7 @@ export default {
       }
    },
    created() {
-      this.transaction.accountID = parseInt(this.id)
+      this.transaction.account_id = parseInt(this.id)
       this.addItem()
       this.getCategories()
    }

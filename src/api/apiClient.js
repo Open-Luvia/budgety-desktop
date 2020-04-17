@@ -13,7 +13,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
    config => {
       if (store.getters.loggedIn) {
-         config.headers['Authorization'] = 'Bearer ' + store.state.accessToken
+         config.headers['Authorization'] = 'Bearer ' + store.state.access_token
       }
       return config
    },

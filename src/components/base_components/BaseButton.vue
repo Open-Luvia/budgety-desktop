@@ -1,6 +1,6 @@
 <template>
    <div>
-      <button :class="buttonClass" @click="click">
+      <button :class="button_class" @click="click">
          <slot></slot>
       </button>
    </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
    props: {
-      buttonClass: String
+      button_class: String
    },
    methods: {
        click(){

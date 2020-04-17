@@ -1,8 +1,8 @@
 import apiClient from '@/api/apiClient.js'
 
 export default {
-   getUserInfo(userID) {
-      const url = '/users/'+userID
+   getUserInfo(user_id) {
+      const url = '/users/'+user_id
       return apiClient.get(url)
    }
 }

@@ -17,12 +17,12 @@
             <BaseSelect
                class="type"
                placeholder="Tipo"
-               :options="accountTypes"
+               :options="account_types"
             />
          </div>
          <div class="confirmation-buttons">
-            <BaseButton class="button" buttonClass="cancel">Annulla</BaseButton>
-            <BaseButton class="button" buttonClass="tertiary"
+            <BaseButton class="button" button_class="cancel">Annulla</BaseButton>
+            <BaseButton class="button" button_class="tertiary"
                >Conferma</BaseButton
             >
          </div>
@@ -34,7 +34,7 @@
 export default {
    data() {
       return {
-         accountTypes: ['Credito', 'Contanti']
+         account_types: ['Credito', 'Contanti']
       }
    }
 }

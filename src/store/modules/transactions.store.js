@@ -10,22 +10,22 @@ export default {
          state.transactions = accounts
       },
       SET_TRANSACTIONS_BY_ACCOUNT(state, params) {
-         const accountID = params.accountID
+         const account_id = params.account_id
          const data = params.data
-         state.transactions.set(accountID, data)
+         state.transactions.set(account_id, data)
       }
    },
    actions: {
-      async getTransactionsByAccount({ commit, rootState }, accountID) {
+      async getTransactionsByAccount({ commit, rootState }, account_id) {
          const payload = {
             per_page: 20,
-            user_id: rootState.userID
+            user_id: rootState.user_id
          }
-         await TransactionsApi.getTransactionsByAccount(accountID, payload)
+         await TransactionsApi.getTransactionsByAccount(account_id, payload)
             .then(response => {
                const params = {
                   data: response.data.data,
-                  accountID: accountID
+                  account_id: account_id
                }
                commit('SET_TRANSACTIONS_BY_ACCOUNT', params)
             })
@@ -37,23 +37,26 @@ export default {
             })
       },
       setAccounts({ commit }, param) {
-         var accountsIDs = new Map()
+         var accounts_ids = new Map()
          param.forEach(item => {
-            accountsIDs.set(item, new Array())
+            accounts_ids.set(item, new Array())
          })
 
-         commit('SET_ACCOUNTS', accountsIDs)
+         commit('SET_ACCOUNTS', accounts_ids)
       },
-      async newTransaction({ rootState }, transaction){
+      async newTransaction({ rootState }, transaction) {
          const payload = {
             description: transaction.description,
             date: transaction.date,
-            account_id: transaction.accountID,
-            user_id: rootState.userID,
+            account_id: transaction.account_id,
+            user_id: rootState.user_id,
             items: transaction.items
          }
          await TransactionsApi.newTransaction(payload).catch(error => {
-            console.log("There was a problem creating your transaction: ", error)
+            console.log(
+               'There was a problem creating your transaction: ',
+               error
+            )
          })
       }
    }

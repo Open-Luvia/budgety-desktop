@@ -12,28 +12,28 @@ Vue.use(Vuex)
 export default new Vuex.Store({
    modules: modules, // all your modules automatically imported
    state: {
-      accessToken: '',
-      userID: null,
+      access_token: '',
+      user_id: null,
       user: null
    },
    mutations: {
       SET_TOKEN(state, token) {
-         state.accessToken = token
-         localStorage.setItem('accessToken', token)
+         state.access_token = token
+         localStorage.setItem('access_token', token)
       },
       CLEAR_LOCAL_STORAGE() {
          localStorage.clear()
          location.reload()
       },
       GET_TOKEN(state) {
-         state.accessToken = localStorage.getItem('accessToken')
+         state.access_token = localStorage.getItem('access_token')
       },
       GET_USER_ID(state) {
-         state.userID = parseInt(localStorage.getItem('userID'))
+         state.user_id = parseInt(localStorage.getItem('user_id'))
       },
-      SET_USER_ID(state, userID) {
-         state.userID = userID
-         localStorage.setItem('userID', userID)
+      SET_USER_ID(state, user_id) {
+         state.user_id = user_id
+         localStorage.setItem('user_id', user_id)
       },
       SET_USER(state, user) {
          state.user = user
@@ -83,13 +83,13 @@ export default new Vuex.Store({
                }
             })
             .catch(() => {
-               localStorage.removeItem('accessToken')
+               localStorage.removeItem('access_token')
                return false
             })
       },
       async getUserInfo({ commit, state }) {
-         const userID = state.userID
-         await UserApi.getUserInfo(userID)
+         const user_id = state.user_id
+         await UserApi.getUserInfo(user_id)
             .then(response => {
                commit('SET_USER', response.data)
             })
@@ -102,7 +102,7 @@ export default new Vuex.Store({
    },
    getters: {
       loggedIn(state) {
-         return !!state.accessToken
+         return !!state.access_token
       }
    }
 })

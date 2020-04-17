@@ -1,6 +1,12 @@
 <template>
    <div>
-      <input :type="type" @input="updateValue" :placeholder="placeholder" v-on="listeners"/>
+      <input
+         :type="type"
+         @input="updateValue"
+         :placeholder="placeholder"
+         v-on="listeners"
+         step="0.01"
+      />
    </div>
 </template>
 
@@ -32,4 +38,8 @@ input
     &:focus
         background-color: map-get($colors, 'active-input')
         outline: none
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
 </style>

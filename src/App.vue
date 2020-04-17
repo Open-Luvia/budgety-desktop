@@ -13,7 +13,7 @@ export default {
       ...mapActions('accounts',['getAccounts'])
    },
    created(){
-      if(localStorage.getItem('accessToken') != null){
+      if(localStorage.getItem('access_token') != null){
          if(this.checkTokenValidity()){
             this.getDataFromLocalStorage()
             this.getUserInfo()

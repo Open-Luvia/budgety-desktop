@@ -22,7 +22,7 @@
                v-model="credentials.password"
                icon="lock"
             ></BaseInputWithIcon>
-            <BaseButton buttonClass="secondary" type="submit">
+            <BaseButton button_class="secondary" type="submit">
                Registrati
             </BaseButton>
          </form>

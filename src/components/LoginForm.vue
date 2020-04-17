@@ -18,7 +18,7 @@
                icon="lock"
             ></BaseInputWithIcon>
 
-            <BaseButton buttonClass="secondary" type="submit">
+            <BaseButton button_class="secondary" type="submit">
                Accedi
             </BaseButton>
          </form>

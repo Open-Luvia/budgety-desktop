@@ -9,7 +9,7 @@
                      Categorie
                   </router-link>
                </div>
-               <BaseButton buttonClass="secondary" @click="logout"
+               <BaseButton button_class="secondary" @click="logout"
                   >Logout</BaseButton
                >
             </div>
