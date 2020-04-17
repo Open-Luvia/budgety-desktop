@@ -22,7 +22,8 @@ export default {
          type: Array,
          required: true
       },
-      placeholder: String
+      placeholder: String,
+      value: String
    }
 }
 </script>

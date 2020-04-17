@@ -12,16 +12,24 @@
       </div>
       <div class="body">
          <div class="description">
-            <BaseInput placeholder="Descrizione" />
+            <BaseInput
+               placeholder="Descrizione"
+               v-model="transaction.description"
+            />
          </div>
-         <div class="item" v-for="item in items" :key="item.id">
-            <BaseInput class="name" placeholder="Nome" />
+         <div class="item" v-for="item in transaction.items" :key="item.id">
+            <BaseInput class="name" placeholder="Nome" v-model="item.name" />
             <BaseSelect
                class="category"
                placeholder="Categoria"
                :options="categories"
+               v-model="item.categoryID"
             />
-            <BaseInput class="price" placeholder="Prezzo" />
+            <BaseInput
+               class="price"
+               placeholder="Prezzo"
+               v-model="item.amount"
+            />
             <div class="delete" @click="deleteItem">
                <font-awesome-icon
                   icon="trash"
@@ -41,7 +49,7 @@
          </div>
          <div class="confirmation-buttons">
             <BaseButton class="button" buttonClass="cancel">Annulla</BaseButton>
-            <BaseButton class="button" buttonClass="tertiary"
+            <BaseButton class="button" buttonClass="tertiary" @click="check"
                >Conferma</BaseButton
             >
          </div>
@@ -54,24 +62,35 @@ import { mapState, mapActions } from 'vuex'
 export default {
    data() {
       return {
-         items: []
+         transaction: {
+            description: null,
+            date: null,
+            accountID: 1,
+            userID: null,
+            items: []
+         }
       }
    },
    computed: {
-      ...mapState('categories', ['categories'])
+      ...mapState('categories', ['categories']),
+      ...mapState(['userID'])
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
       addItem() {
          const item = {
             name: '',
-            amount: NaN,
-            categoryID: NaN
+            amount: null,
+            categoryID: null
          }
-         this.items.push(item)
+         this.transaction.items.push(item)
       },
       deleteItem() {
-         this.items.pop()
+         this.transaction.items.pop()
+      },
+      check() {
+         this.transaction.userID = this.userID
+         console.log(this.transaction)
       }
    },
    created() {
