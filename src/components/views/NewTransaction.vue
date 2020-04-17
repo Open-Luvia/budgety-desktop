@@ -50,14 +50,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
    data() {
       return {
-         items: [],
-         categories: ['Spesa', 'Svago']
+         items: []
       }
    },
+   computed: {
+      ...mapState('categories', ['categories'])
+   },
    methods: {
+      ...mapActions('categories', ['getCategories']),
       addItem() {
          const item = {
             name: '',
@@ -72,6 +76,7 @@ export default {
    },
    created() {
       this.addItem()
+      this.getCategories()
    }
 }
 </script>
