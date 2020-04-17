@@ -43,6 +43,18 @@ export default {
          })
 
          commit('SET_ACCOUNTS', accountsIDs)
+      },
+      async newTransaction({ rootState }, transaction){
+         const payload = {
+            description: transaction.description,
+            date: transaction.date,
+            account_id: transaction.accountID,
+            user_id: rootState.userID,
+            items: transaction.items
+         }
+         await TransactionsApi.newTransaction(payload).catch(error => {
+            console.log("There was a problem creating your transaction: ", error)
+         })
       }
    }
 }

@@ -15,11 +15,11 @@ export default {
       }
    },
    actions: {
-      getCategories({ commit, dispatch, rootState }) {
+      async getCategories({ commit, dispatch, rootState }) {
          const payload = {
             user_id: rootState.userID
          }
-         CategoriesApi.getCategories(payload)
+         await CategoriesApi.getCategories(payload)
             .then(response => {
                commit('SET_CATEGORIES', response.data.categories)
                dispatch('makeCategoryTree', response.data)

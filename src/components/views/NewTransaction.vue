@@ -11,48 +11,52 @@
          </div>
       </div>
       <div class="body">
-         <div class="description">
-            <BaseInput
-               placeholder="Descrizione"
-               v-model="transaction.description"
-            />
-         </div>
-         <div class="item" v-for="item in transaction.items" :key="item.id">
-            <BaseInput class="name" placeholder="Nome" v-model="item.name" />
-            <BaseSelect
-               class="category"
-               placeholder="Categoria"
-               :options="categories"
-               v-model="item.categoryID"
-            />
-            <BaseInput
-               class="price"
-               placeholder="Prezzo"
-               v-model="item.amount"
-            />
-            <div class="delete" @click="deleteItem">
-               <font-awesome-icon
-                  icon="trash"
-                  :style="{ color: '#FF5B57' }"
-                  size="lg"
+         <form @submit.prevent="submit">
+            <div class="description">
+               <BaseInput
+                  placeholder="Descrizione"
+                  v-model="transaction.description"
                />
             </div>
-         </div>
-         <div class="new-item-button">
-            <font-awesome-icon
-               icon="plus-circle"
-               :style="{ color: '#A7AEB7' }"
-            />
-            <div class="new-item-text" @click="addItem">
-               Nuovo elemento
+            <div class="item" v-for="item in transaction.items" :key="item.id">
+               <BaseInput class="name" placeholder="Nome" v-model="item.name" />
+               <BaseSelect
+                  class="category"
+                  placeholder="Categoria"
+                  :options="categories"
+                  v-model="item.categoryID"
+               />
+               <BaseInput
+                  class="price"
+                  placeholder="Prezzo"
+                  v-model="item.amount"
+               />
+               <div class="delete" @click="deleteItem">
+                  <font-awesome-icon
+                     icon="trash"
+                     :style="{ color: '#FF5B57' }"
+                     size="lg"
+                  />
+               </div>
             </div>
-         </div>
-         <div class="confirmation-buttons">
-            <BaseButton class="button" buttonClass="cancel">Annulla</BaseButton>
-            <BaseButton class="button" buttonClass="tertiary" @click="check"
-               >Conferma</BaseButton
-            >
-         </div>
+            <div class="new-item-button">
+               <font-awesome-icon
+                  icon="plus-circle"
+                  :style="{ color: '#A7AEB7' }"
+               />
+               <div class="new-item-text" @click="addItem">
+                  Nuovo elemento
+               </div>
+            </div>
+            <div class="confirmation-buttons">
+               <BaseButton class="button" buttonClass="cancel"
+                  >Annulla</BaseButton
+               >
+               <BaseButton class="button" buttonClass="tertiary" type="submit"
+                  >Conferma</BaseButton
+               >
+            </div>
+         </form>
       </div>
    </div>
 </template>
@@ -67,19 +71,18 @@ export default {
       return {
          transaction: {
             description: null,
-            date: null,
+            date: '2019-10-06 17:30:13',
             accountID: null,
-            userID: null,
             items: []
          }
       }
    },
    computed: {
-      ...mapState('categories', ['categories']),
-      ...mapState(['userID'])
+      ...mapState('categories', ['categories'])
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
+      ...mapActions('transactions', ['newTransaction']),
       addItem() {
          const item = {
             name: '',
@@ -91,12 +94,11 @@ export default {
       deleteItem() {
          this.transaction.items.pop()
       },
-      check() {
-         console.log(this.transaction)
+      submit() {
+         this.newTransaction(this.transaction)
       }
    },
    created() {
-      this.transaction.userID = this.userID
       this.transaction.accountID = parseInt(this.id)
       this.addItem()
       this.getCategories()
