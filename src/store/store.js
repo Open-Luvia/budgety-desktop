@@ -29,13 +29,13 @@ export default new Vuex.Store({
          state.accessToken = localStorage.getItem('accessToken')
       },
       GET_USER_ID(state) {
-         state.userID = localStorage.getItem('userID')
+         state.userID = parseInt(localStorage.getItem('userID'))
       },
       SET_USER_ID(state, userID) {
          state.userID = userID
          localStorage.setItem('userID', userID)
       },
-      SET_USER(state, user){
+      SET_USER(state, user) {
          state.user = user
       }
    },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
             .then(response => {
                commit('SET_TOKEN', response.data.access_token)
                commit('SET_USER_ID', response.data.user.id),
-               commit('SET_USER', response.data.user)
+                  commit('SET_USER', response.data.user)
             })
             .catch(error => {
                console.log(error)
@@ -87,13 +87,17 @@ export default new Vuex.Store({
                return false
             })
       },
-      async getUserInfo({ commit, state }){
+      async getUserInfo({ commit, state }) {
          const userID = state.userID
-         await UserApi.getUserInfo(userID).then(response => {
-            commit('SET_USER', response.data)
-         }).catch(error => {
-            console.log("There was a problem getting you user info: "+error)
-         })
+         await UserApi.getUserInfo(userID)
+            .then(response => {
+               commit('SET_USER', response.data)
+            })
+            .catch(error => {
+               console.log(
+                  'There was a problem getting you user info: ' + error
+               )
+            })
       }
    },
    getters: {

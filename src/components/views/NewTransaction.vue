@@ -60,12 +60,15 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
+   props: {
+      id: String
+   },
    data() {
       return {
          transaction: {
             description: null,
             date: null,
-            accountID: 1,
+            accountID: null,
             userID: null,
             items: []
          }
@@ -89,11 +92,12 @@ export default {
          this.transaction.items.pop()
       },
       check() {
-         this.transaction.userID = this.userID
          console.log(this.transaction)
       }
    },
    created() {
+      this.transaction.userID = this.userID
+      this.transaction.accountID = parseInt(this.id)
       this.addItem()
       this.getCategories()
    }

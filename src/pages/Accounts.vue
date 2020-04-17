@@ -27,7 +27,12 @@
          </aside>
          <div class="transaction-list">
             <div class="add-transaction">
-               <router-link :to="{ name: 'newTransaction' }">
+               <router-link
+                  :to="{
+                     name: 'newTransaction',
+                     params: { id: this.accountToShow }
+                  }"
+               >
                   <font-awesome-icon
                      icon="plus-circle"
                      :style="{ color: '#A7AEB7' }"

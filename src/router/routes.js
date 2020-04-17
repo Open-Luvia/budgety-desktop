@@ -74,9 +74,10 @@ const router = new VueRouter({
             //    component: TransactionView
             // },
             {
-               path: 'transaction/new',
+               path: ':id/transaction/new',
                name: 'newTransaction',
-               component: NewTransaction
+               component: NewTransaction,
+               props: true
             },
             {
                path: '/new',
