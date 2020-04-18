@@ -8,7 +8,10 @@
             {{ note }}
          </div>
       </div>
-      <div class="amount"> {{ amount }} $ </div>
+      <div v-if="is_amount_negative" class="amount negative">
+         {{ abs_amount }} €
+      </div>
+      <div v-else class="amount positive"> {{ abs_amount }} € </div>
    </div>
 </template>
 
@@ -18,6 +21,14 @@ export default {
       amount: Number,
       note: String,
       date: String
+   },
+   computed: {
+      is_amount_negative() {
+         return this.amount < 0
+      },
+      abs_amount() {
+         return Math.abs(this.amount)
+      }
    }
 }
 </script>
@@ -48,7 +59,6 @@ export default {
           justify-content: flex-start
     .amount
        align-items: center
-       background-color: map-get($colors, "positive-transaction")
        border-radius: 12px
        color: white
        display: flex
@@ -56,4 +66,8 @@ export default {
        justify-content: center
        margin: 6px 0px 6px 0px
        width: 120px
+    .negative
+       background-color: map-get($colors, "negative-transaction")
+    .positive
+       background-color: map-get($colors, "positive-transaction")
 </style>

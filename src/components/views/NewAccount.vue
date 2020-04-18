@@ -37,7 +37,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import ModalHeader from '@/components/ModalHeader.vue'
 export default {
+   components: {
+      ModalHeader
+   },
    data() {
       return {
          account_types: [
@@ -72,19 +76,6 @@ export default {
    background: white;
    height: 100%
    width: 100%
-   .header
-      background-color: map-get($colors, 'primary')
-      color: white
-      display: grid
-      font-size: 24px
-      font-weight: 500
-      grid-template-columns: 50px auto 50px
-      height: 2.5em
-      line-height: 2.5em
-      .title
-         grid-column: 2/3
-      .exit
-         grid-column: 1/2
    .body
       .form
          column-gap: 10px
