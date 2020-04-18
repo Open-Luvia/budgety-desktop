@@ -45,7 +45,7 @@ const router = new VueRouter({
          children: [
             {
                path: 'categories',
-               name: 'SettingsCategories',
+               name: 'settingsCategories',
                component: SettingsCategories,
                children: [
                   {

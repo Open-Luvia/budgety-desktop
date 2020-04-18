@@ -1,14 +1,22 @@
 <template>
    <div class="new-category">
-      <h1>New Category Form</h1>
+      <ModalHeader back_to="settingsCategories">
+         Nuova categoria
+      </ModalHeader>
    </div>
 </template>
 
 <script>
-export default {}
+import ModalHeader from '@/components/ModalHeader.vue'
+export default {
+   components: {
+      ModalHeader
+   }
+}
 </script>
 
 <style lang="sass" scoped>
+@import '@/assets/global.sass'
 .new-category
    background: white;
    height: 100%

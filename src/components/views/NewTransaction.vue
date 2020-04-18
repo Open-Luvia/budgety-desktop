@@ -1,15 +1,8 @@
 <template>
    <div class="new-transaction">
-      <div class="header">
-         <div class="exit">
-            <router-link :to="{ name: 'accounts' }">
-               <font-awesome-icon icon="chevron-left" />
-            </router-link>
-         </div>
-         <div class="title">
-            Nuova Transazione
-         </div>
-      </div>
+      <ModalHeader back_to="accounts">
+         Nuova Transazione
+      </ModalHeader>
       <div class="body">
          <div class="description">
             <BaseInput
@@ -64,7 +57,12 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import ModalHeader from '@/components/ModalHeader.vue'
+
 export default {
+   components: {
+      ModalHeader
+   },
    props: {
       id: null //account_id received from router-link params
    },
@@ -110,23 +108,11 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+
 .new-transaction
    background: white;
    height: 100%
    width: 100%
-   .header
-      background-color: map-get($colors, 'primary')
-      color: white
-      display: grid
-      font-size: 24px
-      font-weight: 500
-      grid-template-columns: 50px auto 50px
-      height: 2.5em
-      line-height: 2.5em
-      .title
-         grid-column: 2/3
-      .exit
-         grid-column: 1/2
    .body
       .item
          align-items: center

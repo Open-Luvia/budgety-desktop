@@ -1,15 +1,8 @@
 <template>
    <div class="new-transaction">
-      <div class="header">
-         <div class="exit">
-            <router-link :to="{ name: 'accounts' }">
-               <font-awesome-icon icon="chevron-left" />
-            </router-link>
-         </div>
-         <div class="title">
-            Nuovo Account
-         </div>
-      </div>
+      <ModalHeader back_to="accounts">
+         Nuovo Account
+      </ModalHeader>
       <div class="body">
          <div class="form">
             <BaseInput

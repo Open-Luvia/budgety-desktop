@@ -5,7 +5,7 @@
          <aside class="sidebar">
             <div class="sidebar-elements">
                <div class="sidebar-element">
-                  <router-link :to="{ name: 'SettingsCategories' }">
+                  <router-link :to="{ name: 'settingsCategories' }">
                      Categorie
                   </router-link>
                </div>
