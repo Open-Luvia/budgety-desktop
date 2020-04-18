@@ -52,7 +52,7 @@ export default {
             user_id: rootState.user_id,
             items: transaction.items
          }
-         await TransactionsApi.newTransaction(payload).catch(error => {
+         await TransactionsApi.createTransaction(payload).catch(error => {
             console.log(
                'There was a problem creating your transaction: ',
                error

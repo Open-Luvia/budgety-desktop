@@ -96,9 +96,10 @@ export default {
             this.account_to_show = this.accounts[0].id
             this.currentAccount(this.account_to_show)
          })
+      } else {
+         this.account_to_show = this.accounts[0].id
+         this.currentAccount(this.account_to_show)
       }
-      this.account_to_show = this.accounts[0].id
-      this.currentAccount(this.account_to_show)
    }
 }
 </script>

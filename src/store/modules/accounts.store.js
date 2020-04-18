@@ -15,9 +15,9 @@ export default {
          const payload = {
             user_id: rootState.user_id
          }
-         await AccountsApi.getAccounts(JSON.stringify(payload))
+         await AccountsApi.getAccounts(payload)
             .then(response => {
-               commit('SET_ACCOUNTS', response.data.data)
+               commit('SET_ACCOUNTS', response.data.accounts)
                dispatch('transactions/setAccounts', getters.accounts_ids, {
                   root: true
                })
@@ -26,6 +26,21 @@ export default {
                console.log(
                   'There was a problem fetching your accounts: ' + error.message
                )
+            })
+      },
+      async newAccount({ dispatch, rootState }, account) {
+         const payload = {
+            name: account.name,
+            account_type_id: 1,
+            initial_balance: account.initial_balance,
+            user_id: rootState.user_id
+         }
+         await AccountsApi.createAccount(payload)
+            .then(() => {
+               dispatch('getAccounts')
+            })
+            .catch(error => {
+               console.log('There was a problem creating your account: ', error)
             })
       }
    },

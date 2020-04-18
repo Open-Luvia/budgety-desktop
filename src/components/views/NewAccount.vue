@@ -12,8 +12,16 @@
       </div>
       <div class="body">
          <div class="form">
-            <BaseInput class="name" placeholder="Nome Account" />
-            <BaseInput class="balance" placeholder="Bilancio Iniziale" />
+            <BaseInput
+               class="name"
+               placeholder="Nome Account"
+               v-model="account.name"
+            />
+            <BaseInput
+               class="balance"
+               placeholder="Bilancio Iniziale"
+               v-model="account.initial_balance"
+            />
             <BaseSelect
                class="type"
                placeholder="Tipo"
@@ -21,8 +29,12 @@
             />
          </div>
          <div class="confirmation-buttons">
-            <BaseButton class="button" button_class="cancel">Annulla</BaseButton>
-            <BaseButton class="button" button_class="tertiary"
+            <BaseButton class="button" button_class="cancel"
+               ><router-link :to="{ name: 'accounts' }"
+                  >Annulla</router-link
+               ></BaseButton
+            >
+            <BaseButton class="button" button_class="tertiary" @click="submit"
                >Conferma</BaseButton
             >
          </div>
@@ -31,10 +43,31 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
    data() {
       return {
-         account_types: ['Credito', 'Contanti']
+         account_types: [
+            {
+               name: 'Contanti',
+               id: 1
+            },
+            {
+               name: 'Credito',
+               id: 2
+            }
+         ],
+         account: {
+            name: '',
+            initial_balance: null
+         }
+      }
+   },
+   methods: {
+      ...mapActions('accounts', ['newAccount']),
+      submit() {
+         this.newAccount(this.account)
+         this.$router.back()
       }
    }
 }

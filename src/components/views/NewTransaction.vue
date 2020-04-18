@@ -11,53 +11,53 @@
          </div>
       </div>
       <div class="body">
-         <form @submit.prevent="submit">
-            <div class="description">
-               <BaseInput
-                  placeholder="Descrizione"
-                  v-model="transaction.description"
-               />
-            </div>
-            <div class="item" v-for="item in transaction.items" :key="item.id">
-               <BaseInput class="name" placeholder="Nome" v-model="item.name" />
-               <BaseSelect
-                  class="category"
-                  placeholder="Categoria"
-                  :options="categories"
-                  v-model.number="item.category_id"
-               />
-               <BaseInput
-                  class="price"
-                  placeholder="Prezzo"
-                  v-model.number="item.amount"
-                  type="number"
-               />
-               <div class="delete" @click="deleteItem">
-                  <font-awesome-icon
-                     icon="trash"
-                     :style="{ color: '#FF5B57' }"
-                     size="lg"
-                  />
-               </div>
-            </div>
-            <div class="new-item-button">
+         <div class="description">
+            <BaseInput
+               placeholder="Descrizione"
+               v-model="transaction.description"
+            />
+         </div>
+         <div class="item" v-for="item in transaction.items" :key="item.id">
+            <BaseInput class="name" placeholder="Nome" v-model="item.name" />
+            <BaseSelect
+               class="category"
+               placeholder="Categoria"
+               :options="categories"
+               v-model.number="item.category_id"
+            />
+            <BaseInput
+               class="price"
+               placeholder="Prezzo"
+               v-model.number="item.amount"
+               type="number"
+            />
+            <div class="delete" @click="deleteItem">
                <font-awesome-icon
-                  icon="plus-circle"
-                  :style="{ color: '#A7AEB7' }"
+                  icon="trash"
+                  :style="{ color: '#FF5B57' }"
+                  size="lg"
                />
-               <div class="new-item-text" @click="addItem">
-                  Nuovo elemento
-               </div>
             </div>
-            <div class="confirmation-buttons">
-               <BaseButton class="button" button_class="cancel"
-                  >Annulla</BaseButton
-               >
-               <BaseButton class="button" button_class="tertiary" type="submit"
-                  >Conferma</BaseButton
-               >
+         </div>
+         <div class="new-item-button">
+            <font-awesome-icon
+               icon="plus-circle"
+               :style="{ color: '#A7AEB7' }"
+            />
+            <div class="new-item-text" @click="addItem">
+               Nuovo elemento
             </div>
-         </form>
+         </div>
+         <div class="confirmation-buttons">
+            <BaseButton class="button" button_class="cancel"
+               ><router-link :to="{ name: 'accounts' }"
+                  >Annulla</router-link
+               ></BaseButton
+            >
+            <BaseButton class="button" button_class="tertiary" @click="submit"
+               >Conferma</BaseButton
+            >
+         </div>
       </div>
    </div>
 </template>
@@ -97,6 +97,7 @@ export default {
       },
       submit() {
          this.newTransaction(this.transaction)
+         this.$router.back()
       }
    },
    created() {
