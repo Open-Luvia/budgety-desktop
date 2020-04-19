@@ -1,5 +1,23 @@
 import CategoriesApi from '@/api/modules/categories.api.js'
 
+function fillParentCategoryWithChildren(category_tree, categories) {
+   //per ogni categoria padre crea un campo children vuoto
+   category_tree.forEach(item => (item['children'] = []))
+   categories.forEach(item => {
+      if (item.parent_id != null) {
+         const parent_category = category_tree.find(
+            //cerca la categoria padre che ha come id il parent_id della figlia
+            parent => parent.id == item.parent_id
+         )
+         //se non trova alcun elemento padre non aggiunge nulla ai figli
+         if (parent_category) {
+            parent_category.children.push(item)
+         }
+      }
+   })
+   return category_tree
+}
+
 export default {
    namespaced: true,
    state: {
@@ -15,14 +33,13 @@ export default {
       }
    },
    actions: {
-      async getCategories({ commit, dispatch, rootState }) {
+      async getCategories({ commit, rootState }) {
          const payload = {
             user_id: rootState.user_id
          }
          await CategoriesApi.getCategories(payload)
             .then(response => {
                commit('SET_CATEGORIES', response.data.categories)
-               dispatch('makeCategoryTree', response.data)
             })
             .catch(error => {
                console.log(
@@ -30,29 +47,30 @@ export default {
                      error.message
                )
             })
+      }
+   },
+   getters: {
+      expense_categories(state) {
+         return state.categories.filter(category => category.is_expense == 1)
       },
-      makeCategoryTree({ commit }, apiResponse) {
-         try {
-            var category_tree = apiResponse.categories.filter(
-               //riempie il category tree con categorie parent
-               category => category.parent_id == null //Le categorie parent hanno il parent_id nullo
-            )
-            category_tree.forEach(item => (item['children'] = [])) //per ogni categoria padre crea un campo childer vuoto
-            apiResponse.categories.forEach(item => {
-               if (item.parent_id != null) {
-                  const parentCategory = category_tree.find(
-                     parent => parent.id == item.parent_id //cerca la categoria padre che ha come id il parent_id della figlia
-                  )
-                  parentCategory.children.push(item)
-               }
-            })
-         } catch (error) {
-            console.log(
-               'There was a problem building your category tree: ',
-               error
-            )
-         }
-         commit('SET_CATEGORY_TREE', category_tree)
+      income_categories(state) {
+         return state.categories.filter(category => category.is_expense == 0)
+      },
+      expense_category_tree(state) {
+         //riempie il category tree con categorie parent
+         var category_tree = state.categories.filter(
+            //Le categorie parent hanno il parent_id nullo e sono di spesa
+            category => category.parent_id == null && category.is_expense == 1
+         )
+         return fillParentCategoryWithChildren(category_tree, state.categories)
+      },
+      income_category_tree(state) {
+         //riempie il category tree con categorie parent
+         var category_tree = state.categories.filter(
+            //Le categorie parent hanno il parent_id nullo e sono di spesa
+            category => category.parent_id == null && category.is_expense == 0
+         )
+         return fillParentCategoryWithChildren(category_tree, state.categories)
       }
    }
 }

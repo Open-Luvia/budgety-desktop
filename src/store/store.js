@@ -101,7 +101,7 @@ export default new Vuex.Store({
       }
    },
    getters: {
-      loggedIn(state) {
+      logged_in(state) {
          return !!state.access_token
       }
    }
