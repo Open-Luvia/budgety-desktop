@@ -40,14 +40,13 @@
                   <span>Nuova transazione</span>
                </router-link>
             </div>
-            <Transaction
-               class="transaction"
-               v-for="transaction in transaction_list"
-               :key="transaction.id"
-               :amount="transaction.amount"
-               :date="transaction.date"
-               :note="transaction.description"
-            />
+            <div>
+               <Transaction
+                  v-for="transaction in transaction_list"
+                  :transaction="transaction"
+                  :key="transaction.id"
+               />
+            </div>
             <router-view class="overlay" />
          </div>
       </div>
@@ -68,12 +67,7 @@ export default {
    data() {
       return {
          account_to_show: null,
-         transaction_list: null,
-         transaction: {
-            amount: null,
-            date: null,
-            description: null
-         }
+         transaction_list: null
       }
    },
    computed: {

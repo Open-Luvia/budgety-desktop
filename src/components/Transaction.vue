@@ -2,10 +2,10 @@
    <div class="transaction">
       <div class="info">
          <div class="date">
-            {{ date }}
+            {{ transaction.date }}
          </div>
          <div class="note">
-            {{ note }}
+            {{ transaction.description }}
          </div>
       </div>
       <div v-if="is_amount_negative" class="amount negative">
@@ -18,16 +18,14 @@
 <script>
 export default {
    props: {
-      amount: Number,
-      note: String,
-      date: String
+      transaction: Object
    },
    computed: {
       is_amount_negative() {
-         return this.amount < 0
+         return this.transaction.amount < 0
       },
       abs_amount() {
-         return Math.abs(this.amount)
+         return Math.abs(this.transaction.amount)
       }
    }
 }
