@@ -48,13 +48,13 @@ export default {
        .date
           align-items: center
           display: flex
-          flex-grow: 1
+          flex-basis: content
           justify-content: flex-start
        .note
           align-items: center
           display: flex
-          flex-grow: 3
           justify-content: flex-start
+          margin: 0px 50px 0px 50px
     .amount
        align-items: center
        border-radius: 12px
