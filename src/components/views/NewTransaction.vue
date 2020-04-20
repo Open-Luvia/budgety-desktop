@@ -12,8 +12,11 @@
                />
             </div>
             <div class="type">
-               <BaseToggleSwitch :default_option="0" />
+               <BaseToggleSwitch :default_option="0" @selected="changeType" />
             </div>
+         </div>
+         <div class="item-title">
+            Articoli:
          </div>
          <div class="item" v-for="item in transaction.items" :key="item.id">
             <BaseInput class="name" placeholder="Nome" v-model="item.name" />
@@ -86,7 +89,8 @@ export default {
             date: '2019-10-06 17:30:13',
             account_id: null,
             items: []
-         }
+         },
+         is_expense: true
       }
    },
    computed: {
@@ -107,8 +111,20 @@ export default {
          this.transaction.items.pop()
       },
       submit() {
+         if (this.is_expense == true) {
+            this.transaction.items.forEach(item => {
+               item.amount = -Math.abs(item.amount)
+            })
+         }
          this.newTransaction(this.transaction)
          this.$router.back()
+      },
+      changeType(selected_option) {
+         if (selected_option === 0) {
+            this.is_expense = true
+         } else {
+            this.is_expense = false
+         }
       }
    },
    created() {
@@ -140,6 +156,12 @@ export default {
             flex-basis: auto
             flex-grow: 0
             margin: 0px 0px 0px 10px
+      .item-title
+         font-size: 22px
+         font-weight: 600
+         display: flex
+         justify-content: flex-start
+         padding: 0px 15px 0px 15px
       .item
          align-items: center
          column-gap: 10px
@@ -147,7 +169,7 @@ export default {
          grid-template-areas: "name price category delete"
          grid-template-columns: auto 150px 100px 50px
          grid-template-rows: auto
-         margin: 10px 10px 10px 10px
+         margin: 0px 10px 10px 10px
          width: inherit
          .name
             grid-area: name

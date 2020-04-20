@@ -14,7 +14,8 @@ apiClient.interceptors.request.use(
 )
 
 export default {
-   checkTokenValidity(){
+   checkTokenValidity() {
+      console.log('Validating token...')
       return apiClient.get('/users/token')
    }
 }

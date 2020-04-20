@@ -1,13 +1,16 @@
 import apiClient from '@/api/apiClient'
 
 export default {
-   register(credentials) {
-      return apiClient.post('/users/register', credentials)
+   register(payload) {
+      console.log('Registering...', payload)
+      return apiClient.post('/users/register', payload)
    },
-   login(credentials) {
-      return apiClient.post('/users/login', credentials)
+   login(payload) {
+      console.log('Logging in...', payload)
+      return apiClient.post('/users/login', payload)
    },
    logout(){
+      console.log('Logging out...')
       return apiClient.get('/users/logout')
    }
 }

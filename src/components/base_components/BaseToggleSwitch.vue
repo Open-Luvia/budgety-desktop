@@ -21,7 +21,7 @@ export default {
          type: Array,
          required: false,
          default: () => {
-            return [{ label: 'expense' }, { label: 'income' }]
+            return [{ label: 'spesa' }, { label: 'entrata' }]
          }
       },
       default_option: {
