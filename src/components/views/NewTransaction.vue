@@ -1,6 +1,6 @@
 <template>
    <div class="new-transaction">
-      <ModalHeader back_to="accounts">
+      <ModalHeader back_to="accounts" :toggle_switch="true">
          Nuova Transazione
       </ModalHeader>
       <div class="body">
@@ -9,11 +9,7 @@
                placeholder="Descrizione"
                v-model="transaction.description"
             />
-            <BaseSelect
-               v-model.number="type"
-               :options="type_of_transaction"
-               placeholder="Tipo"
-            />
+            <BaseToggleSwitch :default_option="0" />
          </div>
          <div class="item" v-for="item in transaction.items" :key="item.id">
             <BaseInput class="name" placeholder="Nome" v-model="item.name" />
@@ -171,6 +167,7 @@ export default {
             padding: 0px 10px 0px 10px
       .description
          margin: 10px 10px 10px 10px
+         display: flex
       .confirmation-buttons
          align-items: center
          display: flex

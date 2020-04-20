@@ -1,6 +1,8 @@
 <template>
    <div>
       <Navbar />
+      <BaseToggleSwitch :default_option="0" />
+      <BaseToggleSwitch :default_option="0" :inverted_colors="true" />
    </div>
 </template>
 

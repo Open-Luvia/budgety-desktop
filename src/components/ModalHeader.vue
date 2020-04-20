@@ -17,6 +17,10 @@ export default {
       back_to: {
          type: String,
          required: true
+      },
+      toggle_switch: {
+         type: Boolean,
+         default: false
       }
    }
 }
@@ -30,11 +34,15 @@ export default {
       display: grid
       font-size: 24px
       font-weight: 500
-      grid-template-columns: 50px auto 50px
+      justify-items: center;
+      align-items: center;
+      grid-template-columns: 200px auto 200px
       height: 2.5em
       line-height: 2.5em
-      .title
-         grid-column: 2/3
       .exit
          grid-column: 1/2
+         justify-self: start
+         margin: 0px 0px 0px 10px
+      .title
+         grid-column: 2/3
 </style>
