@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="base-input">
       <input
          :type="type"
          @input="updateValue"
@@ -24,22 +24,24 @@ export default {
 <style lang="sass" scoped>
 
 @import '../../assets/global.sass'
-input
-    background-color: map-get($colors, 'input')
-    border-radius: 18px
-    border: none
-    box-sizing: border-box
-    height: 3em
-    margin: 0 0 0 0
-    padding: 8px 16px 8px 16px
-    width: 100%
-    &:hover
-        outline: none
-    &:focus
-        background-color: map-get($colors, 'active-input')
-        outline: none
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button
-  -webkit-appearance: none
-  margin: 0
+.base-input
+   width: 100%
+   input
+      background-color: map-get($colors, 'input')
+      border-radius: 18px
+      border: none
+      box-sizing: border-box
+      height: 3em
+      margin: 0 0 0 0
+      padding: 8px 16px 8px 16px
+      width: 100%
+      &:hover
+         outline: none
+      &:focus
+         background-color: map-get($colors, 'active-input')
+         outline: none
+   input[type=number]::-webkit-inner-spin-button,
+   input[type=number]::-webkit-outer-spin-button
+   -webkit-appearance: none
+   margin: 0
 </style>

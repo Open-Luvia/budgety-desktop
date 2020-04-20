@@ -29,15 +29,15 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
 .header
+      align-items: center;
       background-color: map-get($colors, 'primary')
       color: white
       display: grid
       font-size: 24px
       font-weight: 500
-      justify-items: center;
-      align-items: center;
       grid-template-columns: 200px auto 200px
       height: 2.5em
+      justify-items: center;
       line-height: 2.5em
       .exit
          grid-column: 1/2

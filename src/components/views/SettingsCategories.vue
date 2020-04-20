@@ -46,26 +46,26 @@ export default {
 
 <style lang="sass" scoped>
 .settings-categories
+   align-items: flex-start
    display: flex
    flex-direction: column
-   align-items: flex-start
+   font-size: 22px
    height: 100%
    position: relative
    width: 100%
-   font-size: 22px
    .categories
       margin: 32px
       .category
-         margin:
-         padding: 0px 16px 24px 16px
+         align-items: flex-start
          display: flex
          flex-direction: column
-         align-items: flex-start
+         margin:
+         padding: 0px 16px 24px 16px
          .children
-            margin: 16px 0px 0px 32px
+            align-items: flex-start
             display: flex
             flex-direction: column
-            align-items: flex-start
+            margin: 16px 0px 0px 32px
             .child-category
                margin: 0px 0px 16px 0px
    .add-category

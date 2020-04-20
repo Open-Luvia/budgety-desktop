@@ -73,46 +73,46 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
 .toggle-switch
-   font-size: 16px
-   font-weight: 800
+   align-items: center
+   cursor: pointer
    display: flex
    flex-direction: row
-   align-items: center
+   font-size: 16px
+   font-weight: 800
    justify-content: stretch
-   cursor: pointer
    .toggle-option
-      font-size: inherit
-      padding: 0px
-      border-width: 4px 2px 4px 2px
-      border-style: solid
-      display: flex
-      height: 2.5em
       align-items: center
-      justify-content: center
-      width: 5em
-      color: map-get($colors, "primary")
-      border-color: map-get($colors, "primary")
       background-color: white
+      border-color: map-get($colors, "primary")
+      border-style: solid
+      border-width: 4px 2px 4px 2px
+      color: map-get($colors, "primary")
+      display: flex
+      font-size: inherit
+      height: 2.5em
+      justify-content: center
+      padding: 0px
+      width: 5em
    .inverted
-      color: white
-      border-color: white
       background-color: map-get($colors, "primary")
+      border-color: white
+      color: white
    .first-option
-      border-radius: 10px 0px 0px 10px
       border-left-width: 4px !important
+      border-radius: 10px 0px 0px 10px
    .last-option
       border-radius: 0px 10px 10px 0px
       border-right-width: 4px !important
    .selected-option
-      border-radius: 10px
-      font-size: inherit
-      height: 3.5em
       background: map-get($colors, "primary") !important
-      color: white !important
-   .selected-option-inverted
       border-radius: 10px
+      color: white !important
       font-size: inherit
       height: 3.5em
+   .selected-option-inverted
       background: white !important
+      border-radius: 10px
       color: map-get($colors, "primary") !important
+      font-size: inherit
+      height: 3.5em
 </style>

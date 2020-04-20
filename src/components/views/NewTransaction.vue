@@ -4,12 +4,16 @@
          Nuova Transazione
       </ModalHeader>
       <div class="body">
-         <div class="description">
-            <BaseInput
-               placeholder="Descrizione"
-               v-model="transaction.description"
-            />
-            <BaseToggleSwitch :default_option="0" />
+         <div class="transaction-info">
+            <div class="description">
+               <BaseInput
+                  placeholder="Descrizione"
+                  v-model="transaction.description"
+               />
+            </div>
+            <div class="type">
+               <BaseToggleSwitch :default_option="0" />
+            </div>
          </div>
          <div class="item" v-for="item in transaction.items" :key="item.id">
             <BaseInput class="name" placeholder="Nome" v-model="item.name" />
@@ -137,6 +141,19 @@ export default {
    height: 100%
    width: 100%
    .body
+      .transaction-info
+         display: flex
+         margin: 10px 10px 10px 10px
+         .description
+            align-items: center
+            display: flex
+            flex-grow: 1
+            justify-content: stretch
+         .type
+            display: flex
+            flex-basis: auto
+            flex-grow: 0
+            margin: 0px 0px 0px 10px
       .item
          align-items: center
          column-gap: 10px
@@ -165,9 +182,6 @@ export default {
          margin: 10px 10px 0px 10px
          .new-item-text
             padding: 0px 10px 0px 10px
-      .description
-         margin: 10px 10px 10px 10px
-         display: flex
       .confirmation-buttons
          align-items: center
          display: flex
