@@ -3,7 +3,7 @@
       <div class="categories">
          <div
             class="category"
-            v-for="category in category_tree"
+            v-for="category in expense_category_tree"
             :key="category.id"
          >
             {{ category.name }}
@@ -29,14 +29,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
    methods: {
       ...mapActions('categories', ['getCategories'])
    },
    computed: {
-      ...mapState('categories', ['category_tree'])
+      ...mapGetters('categories', ['expense_category_tree'])
    },
    created() {
       this.getCategories()

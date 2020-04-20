@@ -1,6 +1,6 @@
 <template>
    <div class="container">
-      <select :value="value" v-on="listeners" @change="updateValue">
+      <select v-on="listeners" @change="updateValue">
          <option value="" disabled selected hidden>{{ placeholder }}</option>
          <option
             v-for="option in options"
@@ -21,8 +21,12 @@ export default {
          type: Array,
          required: true
       },
-      placeholder: String,
-      value: Number
+      placeholder: String
+   },
+   data() {
+      return {
+         value: Number
+      }
    }
 }
 </script>

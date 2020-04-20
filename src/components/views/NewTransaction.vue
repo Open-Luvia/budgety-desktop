@@ -9,13 +9,26 @@
                placeholder="Descrizione"
                v-model="transaction.description"
             />
+            <BaseSelect
+               v-model.number="type"
+               :options="type_of_transaction"
+               placeholder="Tipo"
+            />
          </div>
          <div class="item" v-for="item in transaction.items" :key="item.id">
             <BaseInput class="name" placeholder="Nome" v-model="item.name" />
             <BaseSelect
+               v-if="is_expense"
                class="category"
                placeholder="Categoria"
-               :options="categories"
+               :options="expense_categories"
+               v-model.number="item.category_id"
+            />
+            <BaseSelect
+               v-else
+               class="category"
+               placeholder="Categoria"
+               :options="income_categories"
                v-model.number="item.category_id"
             />
             <BaseInput
@@ -42,21 +55,21 @@
             </div>
          </div>
          <div class="confirmation-buttons">
-            <BaseButton class="button" button_class="cancel"
-               ><router-link :to="{ name: 'accounts' }"
-                  >Annulla</router-link
-               ></BaseButton
-            >
-            <BaseButton class="button" button_class="tertiary" @click="submit"
-               >Conferma</BaseButton
-            >
+            <BaseButton class="button" button_class="cancel">
+               <router-link :to="{ name: 'accounts' }">
+                  Annulla
+               </router-link>
+            </BaseButton>
+            <BaseButton class="button" button_class="tertiary" @click="submit">
+               Conferma
+            </BaseButton>
          </div>
       </div>
    </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ModalHeader from '@/components/ModalHeader.vue'
 
 export default {
@@ -73,11 +86,25 @@ export default {
             date: '2019-10-06 17:30:13',
             account_id: null,
             items: []
-         }
+         },
+         type: 0,
+         type_of_transaction: [
+            {
+               name: 'Spesa',
+               id: 0
+            },
+            {
+               name: 'Entrata',
+               id: 1
+            }
+         ]
       }
    },
    computed: {
-      ...mapState('categories', ['categories'])
+      ...mapGetters('categories', ['expense_categories', 'income_categories']),
+      is_expense() {
+         return this.type == 0
+      }
    },
    methods: {
       ...mapActions('categories', ['getCategories']),

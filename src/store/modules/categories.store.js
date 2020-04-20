@@ -21,7 +21,6 @@ function fillParentCategoryWithChildren(category_tree, categories) {
 export default {
    namespaced: true,
    state: {
-      category_tree: [],
       categories: [] //category without tree structure. To use in case of form selection
    },
    mutations: {
