@@ -86,25 +86,11 @@ export default {
             date: '2019-10-06 17:30:13',
             account_id: null,
             items: []
-         },
-         type: 0,
-         type_of_transaction: [
-            {
-               name: 'Spesa',
-               id: 0
-            },
-            {
-               name: 'Entrata',
-               id: 1
-            }
-         ]
+         }
       }
    },
    computed: {
-      ...mapGetters('categories', ['expense_categories', 'income_categories']),
-      is_expense() {
-         return this.type == 0
-      }
+      ...mapGetters('categories', ['expense_categories', 'income_categories'])
    },
    methods: {
       ...mapActions('categories', ['getCategories']),

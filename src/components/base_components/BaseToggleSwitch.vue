@@ -42,6 +42,7 @@ export default {
    methods: {
       selectOption(option_index) {
          this.selected_option_index = option_index
+         this.$emit('selected', option_index)
       },
       optionStyle(option_index) {
          var result = 'toggle-option'
