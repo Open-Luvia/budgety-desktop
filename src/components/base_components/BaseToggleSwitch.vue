@@ -48,18 +48,19 @@ export default {
          if (this.inverted_colors) {
             result += ' inverted'
          }
-         if (option_index === this.selected_option_index) {
-            if (this.inverted_colors) {
-               result += ' selected-option-inverted'
-            } else {
-               result += ' selected-option'
-            }
-         }
-         if (option_index === 0) {
-            result += ' first-option'
-         }
-         if (option_index == this.options.length - 1) {
-            result += ' last-option'
+         switch (option_index) {
+            case this.selected_option_index:
+               if (this.inverted_colors) {
+                  result += ' selected-option-inverted'
+               } else {
+                  result += ' selected-option'
+               }
+               break
+            case 0:
+               result += ' first-option'
+               break
+            case this.options.length - 1:
+               result += ' last-option'
          }
          return result
       }
