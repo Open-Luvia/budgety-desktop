@@ -8,7 +8,7 @@
             <div class="description">
                <BaseInput
                   placeholder="Descrizione"
-                  v-model="transaction.description"
+                  @input="updateDescription"
                />
             </div>
             <div class="type">
@@ -19,7 +19,11 @@
             Articoli:
          </div>
          <div class="item" v-for="item in transaction.items" :key="item.id">
-            <BaseInput class="name" placeholder="Nome" v-model="item.name" />
+            <BaseInput
+               class="name"
+               :placeholder="item.name"
+               v-model="item.name"
+            />
             <BaseSelect
                v-if="is_expense"
                class="category"
@@ -101,7 +105,7 @@ export default {
       ...mapActions('transactions', ['newTransaction']),
       addItem() {
          const item = {
-            name: '',
+            name: 'Nome',
             amount: null,
             category_id: null
          }
@@ -125,6 +129,10 @@ export default {
          } else {
             this.is_expense = false
          }
+      },
+      updateDescription(description) {
+         this.transaction.description = description
+         this.transaction.items[0].name = description
       }
    },
    created() {

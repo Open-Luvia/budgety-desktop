@@ -1,11 +1,11 @@
 export const formListener = {
    methods: {
-      updateValue(event){
+      updateValue(event) {
          this.$emit('input', event.target.value)
       }
    },
    computed: {
-      listeners(){
+      listeners() {
          return {
             ...this.$listeners,
             input: this.updateValue
