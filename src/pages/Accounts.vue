@@ -77,6 +77,7 @@ export default {
    methods: {
       ...mapActions('accounts', ['getAccounts']),
       ...mapActions('transactions', ['getTransactionsByAccount']),
+      ...mapActions('categories', ['getCategories']),
       currentAccount(account_id) {
          this.getTransactionsByAccount(account_id).then(() => {
             this.transaction_list = this.transactions.get(account_id)
@@ -94,6 +95,7 @@ export default {
          this.account_to_show = this.accounts[0].id
          this.currentAccount(this.account_to_show)
       }
+      this.getCategories()
    }
 }
 </script>
