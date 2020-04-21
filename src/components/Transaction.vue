@@ -1,5 +1,10 @@
 <template>
-   <div class="transaction" @click="showItems">
+   <div
+      class="transaction"
+      @click="showItems"
+      @mouseover="showEdit"
+      @mouseout="showEdit"
+   >
       <div class="transaction-info">
          <div class="info">
             <div class="date">
@@ -8,6 +13,15 @@
             <div class="note">
                {{ transaction.description }}
             </div>
+         </div>
+         <div class="edit-buttons" v-show="show_edit">
+            <font-awesome-icon icon="edit" class="edit-button" size="lg" />
+            <font-awesome-icon
+               icon="trash"
+               class="delete-button"
+               size="lg"
+               @click="deleteTransaction(transaction.id)"
+            />
          </div>
          <div :class="priceStyle(transaction.amount)">
             <span> {{ format(transaction.amount) }} € </span>
@@ -28,12 +42,11 @@
             </div>
          </div>
       </div>
-      <div class="edit-buttons"> </div>
    </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { amountFormatter } from '@/mixins/amountFormatter.mixin.js'
 export default {
    mixins: [amountFormatter],
@@ -42,7 +55,8 @@ export default {
    },
    data() {
       return {
-         show_items: false
+         show_items: false,
+         show_edit: false
       }
    },
    computed: {
@@ -52,6 +66,7 @@ export default {
       }
    },
    methods: {
+      ...mapActions('transactions', ['deleteTransaction']),
       priceStyle(amount) {
          var result = 'amount'
          if (amount < 0) {
@@ -63,6 +78,9 @@ export default {
       },
       showItems() {
          this.show_items = !this.show_items
+      },
+      showEdit() {
+         this.show_edit = !this.show_edit
       },
       getCategoryName(id) {
          return this.categories.find(category => category.id == id).name
@@ -82,9 +100,10 @@ export default {
    margin-left: 15px
    margin-right: 15px
    .transaction-info
-      font-size: 20px
+      align-items: center
       display: flex
       flex-direction: row
+      font-size: 20px
       .info
          display: flex
          width: calc( 100% - 120px )
@@ -115,19 +134,19 @@ export default {
       font-size: 20px
       margin: 0px 0px 0px 50px
       .item
-         font-size: 16px
-         width: 100%
-         height: 2em
-         display: flex
-         justify-content: space-between
          align-items: center
+         display: flex
+         font-size: 18px
+         height: 2em
+         justify-content: space-between
+         width: 100%
          .item-info
             display: flex
             .category
-               width: 135px
                align-items: center
                display: flex
                justify-content: flex-start
+               width: 135px
             .name
                align-items: center
                display: flex
@@ -146,4 +165,19 @@ export default {
             background-color: map-get($colors, "negative-transaction")
          .positive
             background-color: map-get($colors, "positive-transaction")
+   .edit-buttons
+      align-items: center
+      display: flex
+      justify-content: flex-end
+      margin: 0px 15px 0px 0px
+      .delete-button
+         color: #232A33
+         margin: 0px 10px 0px 0px
+         &:hover
+            color: #0091FF
+      .edit-button
+         color: #232A33
+         margin: 0px 10px 0px 0px
+         &:hover
+            color: #0091FF
 </style>

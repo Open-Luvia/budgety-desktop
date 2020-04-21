@@ -36,14 +36,6 @@ export default {
                )
             })
       },
-      setAccounts({ commit }, param) {
-         var accounts_ids = new Map()
-         param.forEach(item => {
-            accounts_ids.set(item, new Array())
-         })
-
-         commit('SET_ACCOUNTS', accounts_ids)
-      },
       async newTransaction({ rootState }, transaction) {
          const payload = {
             description: transaction.description,
@@ -58,6 +50,26 @@ export default {
                error
             )
          })
+      },
+      async deleteTransaction({ rootState }, transaction_id) {
+         const payload = {
+            user_id: rootState.user_id
+         }
+         await TransactionsApi.deleteTransaction(transaction_id, payload).catch(
+            error => {
+               console.log(
+                  'There was a problem deleting your transaction',
+                  error
+               )
+            }
+         )
+      },
+      setAccounts({ commit }, param) {
+         var accounts_ids = new Map()
+         param.forEach(item => {
+            accounts_ids.set(item, new Array())
+         })
+         commit('SET_ACCOUNTS', accounts_ids)
       }
    }
 }

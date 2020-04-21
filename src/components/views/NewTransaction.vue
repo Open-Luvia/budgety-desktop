@@ -165,9 +165,9 @@ export default {
             flex-grow: 0
             margin: 0px 0px 0px 10px
       .item-title
+         display: flex
          font-size: 22px
          font-weight: 600
-         display: flex
          justify-content: flex-start
          padding: 0px 15px 0px 15px
       .item

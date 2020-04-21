@@ -12,9 +12,9 @@ export default {
       button_class: String
    },
    methods: {
-       click(){
-           this.$emit('click')
-       }
+      click() {
+         this.$emit('click')
+      }
    }
 }
 </script>
