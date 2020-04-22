@@ -11,7 +11,14 @@
                      :key="account.id"
                      @click="currentAccount(account.id)"
                   >
-                     {{ account.name }}
+                     <router-link
+                        :to="{
+                           name: 'showAccount',
+                           params: { id: account.id }
+                        }"
+                     >
+                        {{ account.name }}
+                     </router-link>
                   </div>
                </div>
                <div class="add-account">
@@ -84,18 +91,6 @@ export default {
          })
          this.account_to_show = account_id
       }
-   },
-   created() {
-      if (this.accounts.length == 0) {
-         this.getAccounts().then(() => {
-            this.account_to_show = this.accounts[0].id
-            this.currentAccount(this.account_to_show)
-         })
-      } else {
-         this.account_to_show = this.accounts[0].id
-         this.currentAccount(this.account_to_show)
-      }
-      this.getCategories()
    }
 }
 </script>

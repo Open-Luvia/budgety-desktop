@@ -5,13 +5,16 @@ import Login from '@/pages/Login.vue'
 import Register from '@/pages/Register.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Dashboard from '@/pages/Dashboard.vue'
-import Accounts from '@/pages/Accounts.vue'
+import Account from '@/pages/Account.vue'
 import Settings from '@/pages/Settings.vue'
+
+import AccountsLoader from '@/pages/AccountsLoader.vue'
 
 import NewTransaction from '@/components/views/NewTransaction.vue'
 import NewAccount from '@/components/views/NewAccount.vue'
 import SettingsCategories from '@/components/views/SettingsCategories.vue'
 import NewCategory from '@/components/views/NewCategory.vue'
+import EditTransaction from '@/components/views/EditTransaction.vue'
 
 Vue.use(VueRouter)
 
@@ -66,13 +69,20 @@ const router = new VueRouter({
       {
          path: '/accounts',
          name: 'accounts',
-         component: Accounts,
+         component: AccountsLoader
+      },
+      {
+         path: '/accounts/:account_id/show',
+         name: 'account',
+         component: Account,
+         props: true,
          children: [
-            // {
-            //    path: 'transaction/:id',
-            //    name: 'transaction',
-            //    component: TransactionView
-            // },
+            {
+               path: ':id/transaction/edit',
+               name: 'editTransaction',
+               component: EditTransaction,
+               props: true
+            },
             {
                path: ':id/transaction/new',
                name: 'newTransaction',
