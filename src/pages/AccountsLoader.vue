@@ -3,12 +3,18 @@
       <Navbar />
       <div class="body">
          <div class="no-accounts">
-            <h1>Prima devi creare un conto</h1>
+            <h1>Sembra che qui non ci sia nulla</h1>
+            <h4>
+               Per registrare qualsiasi spesa o entrata hai prima bisogno di
+               creare un conto
+            </h4>
          </div>
-         <router-link :to="{ name: 'newAccount' }">
-            <font-awesome-icon icon="plus-circle" :style="{ color: 'white' }" />
-            <span>Aggiungi conto</span>
+         <router-link :to="{ name: 'firstAccount' }">
+            <BaseButton button_class="secondary">
+               Crea un conto
+            </BaseButton>
          </router-link>
+         <router-view class="overlay" />
       </div>
    </div>
 </template>
@@ -46,13 +52,13 @@ export default {
       } else {
          this.account_to_show = this.accounts[0].id
       }
-      // if (!this.accounts_is_empty) {
-      //    this.$router.push({
-      //       name: 'account',
-      //       params: { account_id: this.account_to_show }
-      //    })
-      //    this.getCategories()
-      // }
+      if (this.accounts_is_empty == false) {
+         this.$router.push({
+            name: 'account',
+            params: { account_id: this.account_to_show }
+         })
+         this.getCategories()
+      }
    }
 }
 </script>
@@ -63,4 +69,7 @@ export default {
    flex-direction: column
    align-items: center
    justify-content: center
+   position: relative
+   .no-accounts
+      margin: 50px
 </style>

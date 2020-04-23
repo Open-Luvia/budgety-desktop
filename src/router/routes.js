@@ -69,7 +69,14 @@ const router = new VueRouter({
       {
          path: '/accounts',
          name: 'accounts',
-         component: AccountsLoader
+         component: AccountsLoader,
+         children: [
+            {
+               path: 'new',
+               name: 'firstAccount',
+               component: NewAccount
+            }
+         ]
       },
       {
          path: '/accounts/:account_id/show',
