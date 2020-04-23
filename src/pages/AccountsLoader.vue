@@ -59,17 +59,6 @@ export default {
          this.account_to_show = this.accounts[0].id
          this.redirect()
       }
-      // if (this.accounts.length == 0) {
-      //    this.getAccounts().then(() => {
-      //       if (this.accounts.length != 0) {
-      //          this.accounts_is_empty = false
-      //          this.account_to_show = this.accounts[0].id
-      //       }
-      //    })
-      // } else {
-      //    console.log('I know which account to show')
-      //    this.account_to_show = this.accounts[0].id
-      // }
    },
    updated() {
       this.redirect()

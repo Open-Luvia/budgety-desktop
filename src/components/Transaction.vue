@@ -31,7 +31,7 @@
          <div v-for="item in transaction.items" :key="item.id" class="item">
             <div class="item-info">
                <div class="category">
-                  {{ getCategoryName(item.category_id) }}
+                  {{ item.category_id }}
                </div>
                <div class="name">
                   {{ item.name }}
@@ -63,6 +63,9 @@ export default {
       ...mapState('categories', ['categories']),
       is_amount_negative() {
          return this.transaction.amount < 0
+      },
+      category_name(id) {
+         return this.categories.find(category => category.id == id).name
       }
    },
    methods: {
@@ -81,9 +84,6 @@ export default {
       },
       showEdit() {
          this.show_edit = !this.show_edit
-      },
-      getCategoryName(id) {
-         return this.categories.find(category => category.id == id).name
       }
    }
 }

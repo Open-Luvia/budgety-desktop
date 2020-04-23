@@ -83,8 +83,7 @@ export default {
       ...mapState('transactions', ['transactions'])
    },
    methods: {
-      ...mapActions('transactions', ['getTransactionsByAccount']),
-      ...mapActions('categories', ['getCategories'])
+      ...mapActions('transactions', ['getTransactionsByAccount'])
    },
    created() {
       this.getTransactionsByAccount(this.account_id).then(() => {

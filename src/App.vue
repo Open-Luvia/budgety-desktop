@@ -14,7 +14,8 @@ export default {
          'checkTokenValidity',
          'getUserInfo'
       ]),
-      ...mapActions('accounts', ['getAccounts'])
+      ...mapActions('accounts', ['getAccounts']),
+      ...mapActions('categories', ['getCategories'])
    },
    computed: {
       ...mapGetters(['logged_in'])
@@ -25,6 +26,7 @@ export default {
             this.getDataFromLocalStorage()
             this.getUserInfo()
             if (this.logged_in) {
+               this.getCategories()
                this.getAccounts()
             }
          }
