@@ -47,10 +47,9 @@
                </router-link>
             </div>
             <div>
-               <Transaction
-                  v-for="transaction in transaction_list"
-                  :transaction="transaction"
-                  :key="transaction.id"
+               <TransactionList
+                  v-if="!this.transactions_is_empty"
+                  :account_id="parseInt(account_id)"
                />
             </div>
             <router-view class="overlay" />
@@ -61,34 +60,20 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Transaction from '../components/Transaction.vue'
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+import TransactionList from '../components/TransactionList.vue'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
    components: {
       Navbar,
-      Transaction
+      TransactionList
    },
    props: {
-      account_id: null
-   },
-   data() {
-      return {
-         transaction_list: null
-      }
+      account_id: null //passato dal router
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapState('transactions', ['transactions'])
-   },
-   methods: {
-      ...mapActions('transactions', ['getTransactionsByAccount'])
-   },
-   created() {
-      this.getTransactionsByAccount(this.account_id).then(() => {
-         this.transaction_list = this.transactions.get(this.account_id)
-      })
+      ...mapGetters('transactions', ['transactions_is_empty'])
    }
 }
 </script>

@@ -70,6 +70,9 @@ export default {
             category => category.parent_id == null && category.is_expense == 0
          )
          return fillParentCategoryWithChildren(category_tree, state.categories)
+      },
+      categories_is_empty(state) {
+         return state.categories == 0
       }
    }
 }

@@ -71,5 +71,10 @@ export default {
          })
          commit('SET_ACCOUNTS', accounts_ids)
       }
+   },
+   getters: {
+      transactions_is_empty(state) {
+         return state.transactions == null
+      }
    }
 }
