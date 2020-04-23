@@ -9,12 +9,11 @@
                      class="sidebar-element"
                      v-for="account in accounts"
                      :key="account.id"
-                     @click="currentAccount(account.id)"
                   >
                      <router-link
                         :to="{
-                           name: 'showAccount',
-                           params: { id: account.id }
+                           name: 'account',
+                           params: { account_id: account.id }
                         }"
                      >
                         {{ account.name }}
@@ -37,7 +36,7 @@
                <router-link
                   :to="{
                      name: 'newTransaction',
-                     params: { id: this.account_to_show }
+                     params: { id: this.account_id }
                   }"
                >
                   <font-awesome-icon
@@ -71,9 +70,11 @@ export default {
       Navbar,
       Transaction
    },
+   props: {
+      account_id: null
+   },
    data() {
       return {
-         account_to_show: null,
          transaction_list: null
       }
    },
@@ -82,15 +83,13 @@ export default {
       ...mapState('transactions', ['transactions'])
    },
    methods: {
-      ...mapActions('accounts', ['getAccounts']),
       ...mapActions('transactions', ['getTransactionsByAccount']),
-      ...mapActions('categories', ['getCategories']),
-      currentAccount(account_id) {
-         this.getTransactionsByAccount(account_id).then(() => {
-            this.transaction_list = this.transactions.get(account_id)
-         })
-         this.account_to_show = account_id
-      }
+      ...mapActions('categories', ['getCategories'])
+   },
+   created() {
+      this.getTransactionsByAccount(this.account_id).then(() => {
+         this.transaction_list = this.transactions.get(this.account_id)
+      })
    }
 }
 </script>

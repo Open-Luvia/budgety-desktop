@@ -21,7 +21,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
    components: {
@@ -29,36 +29,50 @@ export default {
    },
    data() {
       return {
-         account_to_show: null,
-         accounts_is_empty: false
+         account_to_show: null
       }
    },
    methods: {
       ...mapActions('accounts', ['getAccounts']),
-      ...mapActions('categories', ['getCategories'])
+      redirect() {
+         if (!this.accounts_is_empty) {
+            this.$router.push({
+               name: 'account',
+               params: { account_id: this.account_to_show }
+            })
+         }
+      }
    },
    computed: {
-      ...mapState('accounts', ['accounts'])
+      ...mapState('accounts', ['accounts']),
+      ...mapGetters('accounts', ['accounts_is_empty'])
    },
    created() {
-      if (this.accounts.length == 0) {
+      if (this.accounts_is_empty) {
          this.getAccounts().then(() => {
-            if (this.accounts.length == 0) {
-               this.accounts_is_empty = true
-            } else {
+            if (!this.accounts_is_empty) {
                this.account_to_show = this.accounts[0].id
+               this.redirect()
             }
          })
       } else {
          this.account_to_show = this.accounts[0].id
+         this.redirect()
       }
-      if (this.accounts_is_empty == false) {
-         this.$router.push({
-            name: 'account',
-            params: { account_id: this.account_to_show }
-         })
-         this.getCategories()
-      }
+      // if (this.accounts.length == 0) {
+      //    this.getAccounts().then(() => {
+      //       if (this.accounts.length != 0) {
+      //          this.accounts_is_empty = false
+      //          this.account_to_show = this.accounts[0].id
+      //       }
+      //    })
+      // } else {
+      //    console.log('I know which account to show')
+      //    this.account_to_show = this.accounts[0].id
+      // }
+   },
+   updated() {
+      this.redirect()
    }
 }
 </script>

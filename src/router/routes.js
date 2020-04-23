@@ -97,7 +97,7 @@ const router = new VueRouter({
                props: true
             },
             {
-               path: '/new',
+               path: 'new',
                name: 'newAccount',
                component: NewAccount
             }

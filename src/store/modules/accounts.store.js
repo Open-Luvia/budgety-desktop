@@ -31,7 +31,7 @@ export default {
       async newAccount({ dispatch, rootState }, account) {
          const payload = {
             name: account.name,
-            account_type_id: 2,
+            account_type_id: 1,
             initial_balance: account.initial_balance,
             user_id: rootState.user_id
          }
@@ -47,6 +47,9 @@ export default {
    getters: {
       accounts_ids(state) {
          return state.accounts.map(account => account.id)
+      },
+      accounts_is_empty(state) {
+         return state.accounts == 0
       }
    }
 }
