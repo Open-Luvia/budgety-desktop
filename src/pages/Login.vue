@@ -6,10 +6,19 @@
 
 <script>
 import LoginForm from '@/components/LoginForm.vue'
+import { mapGetters } from 'vuex'
 
 export default {
    components: {
       LoginForm
+   },
+   computed: {
+      ...mapGetters(['logged_in'])
+   },
+   created() {
+      if (this.logged_in) {
+         this.$router.push({ name: 'dashboard' })
+      }
    }
 }
 </script>
