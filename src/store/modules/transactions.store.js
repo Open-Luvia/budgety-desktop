@@ -3,16 +3,20 @@ import TransactionsApi from '@/api/modules/transactions.api.js'
 export default {
    namespaced: true,
    state: {
-      transactions: null
+      transactions_tree: []
    },
    mutations: {
-      SET_ACCOUNTS(state, accounts) {
-         state.transactions = accounts
+      SET_ACCOUNTS(state, transactions_tree) {
+         state.transactions_tree = transactions_tree
       },
       SET_TRANSACTIONS_BY_ACCOUNT(state, params) {
          const account_id = params.account_id
          const data = params.data
-         state.transactions.set(account_id, data)
+         state.transactions_tree.find(
+            list => list.account_id == account_id
+         ).transactions = state.transactions_tree
+            .find(list => list.account_id == account_id)
+            .transactions.concat(data)
       }
    },
    actions: {
@@ -65,16 +69,25 @@ export default {
          )
       },
       setAccounts({ commit }, param) {
-         var accounts_ids = new Map()
+         var transactions_by_account = []
          param.forEach(item => {
-            accounts_ids.set(item, new Array())
+            var account = {
+               account_id: item,
+               transactions: []
+            }
+            transactions_by_account.push(account)
          })
-         commit('SET_ACCOUNTS', accounts_ids)
+         commit('SET_ACCOUNTS', transactions_by_account)
       }
    },
    getters: {
-      transactions_is_empty(state) {
-         return state.transactions == null
+      transactions_tree_is_empty(state) {
+         return state.transactions_tree.length == 0
+      },
+      transactions_by_account: state => account_id => {
+         return state.transactions_tree.find(
+            item => item.account_id == account_id
+         ).transactions
       }
    }
 }

@@ -48,7 +48,7 @@
             </div>
             <div>
                <TransactionList
-                  v-if="!this.transactions_is_empty"
+                  v-if="!this.transactions_tree_is_empty"
                   :account_id="parseInt(account_id)"
                />
             </div>
@@ -73,7 +73,7 @@ export default {
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapGetters('transactions', ['transactions_is_empty'])
+      ...mapGetters('transactions', ['transactions_tree_is_empty'])
    }
 }
 </script>

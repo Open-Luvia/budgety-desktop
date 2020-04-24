@@ -45,6 +45,7 @@ export default {
       }
    },
    getters: {
+      //Ritorna un array di con gli id degli account
       accounts_ids(state) {
          return state.accounts.map(account => account.id)
       },
