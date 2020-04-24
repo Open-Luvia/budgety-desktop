@@ -10,7 +10,7 @@
 
 <script>
 import Transaction from '@/components/Transaction.vue'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
    components: {
       Transaction
@@ -18,27 +18,19 @@ export default {
    props: {
       account_id: null
    },
-   data() {
-      return {
-         transaction_list: null
-      }
-   },
    computed: {
-      ...mapState('transactions', ['transactions_tree']),
-      ...mapGetters('transactions', ['transactions_by_account'])
+      ...mapGetters('transactions', ['transactions_by_account']),
+      transaction_list() {
+         return this.transactions_by_account(this.account_id)
+      }
    },
    methods: {
       ...mapActions('transactions', ['getTransactionsByAccount'])
    },
    created() {
       if (this.transactions_by_account(this.account_id).length == 0) {
-         this.getTransactionsByAccount(this.account_id).then(() => {
-            this.transaction_list = this.transactions_by_account(
-               this.account_id
-            )
-         })
+         this.getTransactionsByAccount(this.account_id)
       }
-      this.transaction_list = this.transactions_by_account(this.account_id)
    }
 }
 </script>

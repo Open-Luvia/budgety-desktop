@@ -14,9 +14,7 @@ export default {
          const data = params.data
          state.transactions_tree.find(
             list => list.account_id == account_id
-         ).transactions = state.transactions_tree
-            .find(list => list.account_id == account_id)
-            .transactions.concat(data)
+         ).transactions = data
       }
    },
    actions: {

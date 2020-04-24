@@ -39,16 +39,21 @@
                      params: { id: this.account_id }
                   }"
                >
-                  <font-awesome-icon
-                     icon="plus-circle"
-                     :style="{ color: '#A7AEB7' }"
-                  />
-                  <span>Nuova transazione</span>
+                  <div @click="changeTransactionsListVisibility">
+                     <font-awesome-icon
+                        icon="plus-circle"
+                        :style="{ color: '#A7AEB7' }"
+                     />
+                     <span>Nuova transazione</span>
+                  </div>
                </router-link>
             </div>
             <div>
                <TransactionList
-                  v-if="!this.transactions_tree_is_empty"
+                  v-if="
+                     !this.transactions_tree_is_empty &&
+                     this.transactions_list_is_visible
+                  "
                   :account_id="parseInt(account_id)"
                />
             </div>
@@ -71,9 +76,23 @@ export default {
    props: {
       account_id: null //passato dal router
    },
+   data() {
+      return {
+         transactions_list_is_visible: true
+      }
+   },
    computed: {
       ...mapState('accounts', ['accounts']),
       ...mapGetters('transactions', ['transactions_tree_is_empty'])
+   },
+   methods: {
+      changeTransactionsListVisibility() {
+         console.log('changing')
+         this.transactions_list_is_visible = !this.transactions_list_is_visible
+      }
+   },
+   created() {
+      console.log('renderizzato')
    }
 }
 </script>

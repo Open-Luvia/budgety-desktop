@@ -102,7 +102,10 @@ export default {
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
-      ...mapActions('transactions', ['newTransaction']),
+      ...mapActions('transactions', [
+         'newTransaction',
+         'getTransactionsByAccount'
+      ]),
       addItem() {
          const item = {
             name: 'Nome',
@@ -120,7 +123,9 @@ export default {
                item.amount = -Math.abs(item.amount)
             })
          }
-         this.newTransaction(this.transaction)
+         this.newTransaction(this.transaction).then(() => {
+            this.getTransactionsByAccount(this.id)
+         })
          this.$router.back()
       },
       changeType(selected_option) {
