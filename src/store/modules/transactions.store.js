@@ -15,6 +15,21 @@ export default {
          state.transactions_tree.find(
             list => list.account_id == account_id
          ).transactions = data
+      },
+      DELETE_TRANSACTION(state, transaction_id) {
+         state.transactions_tree.forEach(transactions_by_account => {
+            const transaction = transactions_by_account.transactions.find(
+               transaction => transaction.id == transaction_id
+            )
+            if (transaction != undefined) {
+               const index = transactions_by_account.transactions.indexOf(
+                  transaction
+               )
+               if (index > -1) {
+                  transactions_by_account.transactions.splice(index, 1)
+               }
+            }
+         })
       }
    },
    actions: {
@@ -53,7 +68,7 @@ export default {
             )
          })
       },
-      async deleteTransaction({ rootState }, transaction_id) {
+      async deleteTransaction({ commit, rootState }, transaction_id) {
          const payload = {
             user_id: rootState.user_id
          }
@@ -65,6 +80,7 @@ export default {
                )
             }
          )
+         commit('DELETE_TRANSACTION', transaction_id)
       },
       setAccounts({ commit }, param) {
          var transactions_by_account = []
