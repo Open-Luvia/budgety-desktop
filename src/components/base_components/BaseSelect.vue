@@ -1,7 +1,9 @@
 <template>
    <div class="container">
       <select v-on="listeners" @change="updateValue">
-         <option value="" disabled selected hidden>{{ placeholder }}</option>
+         <option v-if="placeholder != null" value="" disabled selected hidden>{{
+            placeholder
+         }}</option>
          <option
             v-for="option in options"
             :value="option.id"
@@ -21,7 +23,7 @@ export default {
          type: Array,
          required: true
       },
-      placeholder: String
+      placeholder: null
    },
    data() {
       return {

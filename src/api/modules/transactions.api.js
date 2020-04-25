@@ -14,5 +14,10 @@ export default {
       console.log('Deleting transaction...', payload)
       const base_url = '/transactions/' + transaction_id
       return apiClient.delete(base_url, { data: payload })
+   },
+   updateTransaction(transaction_id, payload) {
+      console.log('Updating transaction..', payload)
+      const base_url = '/transactions/' + transaction_id + '/update'
+      return apiClient.post(base_url, payload)
    }
 }

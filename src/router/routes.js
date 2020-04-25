@@ -85,10 +85,13 @@ const router = new VueRouter({
          props: true,
          children: [
             {
-               path: ':id/transaction/edit',
+               path: 'transaction/edit',
                name: 'editTransaction',
                component: EditTransaction,
-               props: true
+               props: (route) => ({
+                  transaction: null,
+                  ...route.params
+              })
             },
             {
                path: ':id/transaction/new',

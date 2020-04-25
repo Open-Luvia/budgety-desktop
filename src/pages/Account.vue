@@ -61,6 +61,9 @@
                </router-link>
             </div>
             <div>
+               <!-- TransactionList è un componente a parte perchè la lista di transazioni veniva renderizzata 
+               prima che le API riuscissero a restituire i dati. Ora il componente viene renderizzato 
+               solo se le transazioni sono state effetivamente caricate.  -->
                <TransactionList
                   v-if="!this.transactions_tree_is_empty"
                   :account_id="parseInt(account_id)"
@@ -90,12 +93,6 @@ export default {
    computed: {
       ...mapState('accounts', ['accounts']),
       ...mapGetters('transactions', ['transactions_tree_is_empty'])
-   },
-   methods: {
-      changeTransactionsListVisibility() {
-         console.log('changing')
-         this.transactions_list_is_visible = !this.transactions_list_is_visible
-      }
    }
 }
 </script>

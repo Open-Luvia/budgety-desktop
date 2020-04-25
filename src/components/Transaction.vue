@@ -15,7 +15,14 @@
             </div>
          </div>
          <div class="edit-buttons" v-show="show_edit">
-            <font-awesome-icon icon="edit" class="edit-button" size="lg" />
+            <router-link
+               :to="{
+                  name: 'editTransaction',
+                  params: { transaction: transaction }
+               }"
+            >
+               <font-awesome-icon icon="edit" class="edit-button" size="lg" />
+            </router-link>
             <font-awesome-icon
                icon="trash"
                class="delete-button"

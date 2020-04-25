@@ -82,6 +82,17 @@ export default {
          )
          commit('DELETE_TRANSACTION', transaction_id)
       },
+      async updateTransaction({ rootState }, transaction) {
+         const payload = {
+            description: transaction.description,
+            date: transaction.date,
+            account_id: transaction.account_id,
+            items: transaction.items,
+            user_id: rootState.user_id
+         }
+         const transaction_id = transaction.id
+         await TransactionsApi.updateTransaction(transaction_id, payload)
+      },
       setAccounts({ commit }, param) {
          var transactions_by_account = []
          param.forEach(item => {

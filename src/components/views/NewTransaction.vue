@@ -124,7 +124,6 @@ export default {
          this.transaction.items.push(item)
       },
       deleteItem(index) {
-         console.log(index)
          this.transaction.items.splice(index, 1)
       },
       submit() {

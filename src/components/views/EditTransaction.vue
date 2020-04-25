@@ -1,55 +1,93 @@
 <template>
    <div class="new-transaction">
       <ModalHeader back_to="accounts" :toggle_switch="true">
-         Nuova Transazione
+         Modifica Transazione
       </ModalHeader>
       <div class="body">
          <div class="transaction-info">
             <div class="description">
                <BaseInput
-                  placeholder="Descrizione"
+                  :placeholder="transaction.description"
                   @input="updateDescription"
                />
             </div>
             <div class="type">
-               <BaseToggleSwitch :default_option="0" @selected="changeType" />
+               <BaseToggleSwitch
+                  :default_option="is_expense ? 0 : 1"
+                  @selected="changeType"
+               />
             </div>
          </div>
          <div class="item-title">
             Articoli:
          </div>
-         <div class="item" v-for="item in transaction.items" :key="item.id">
-            <BaseInput
-               class="name"
-               :placeholder="item.name"
-               v-model="item.name"
-            />
-            <BaseSelect
-               v-if="is_expense"
-               class="category"
-               placeholder="Categoria"
-               :options="expense_categories"
-               v-model.number="item.category_id"
-            />
-            <BaseSelect
-               v-else
-               class="category"
-               placeholder="Categoria"
-               :options="income_categories"
-               v-model.number="item.category_id"
-            />
-            <BaseInput
-               class="price"
-               placeholder="Prezzo"
-               v-model.number="item.amount"
-               type="number"
-            />
-            <div class="delete" @click="deleteItem">
-               <font-awesome-icon
-                  icon="trash"
-                  :style="{ color: '#FF5B57' }"
-                  size="lg"
+         <div v-for="(item, index) in transaction.items" :key="index">
+            <div v-if="item.amount != null" class="item">
+               <BaseInput
+                  class="name"
+                  :placeholder="item.name"
+                  v-model="item.name"
                />
+               <BaseSelect
+                  v-if="is_expense"
+                  class="category"
+                  :options="expense_categories"
+                  v-model.number="item.category_id"
+               />
+               <BaseSelect
+                  v-else
+                  class="category"
+                  placeholder="Categoria"
+                  :options="income_categories"
+                  v-model.number="item.category_id"
+               />
+               <BaseInput
+                  class="price"
+                  :placeholder="formatWithoutMinus(item.amount)"
+                  v-model.number="item.amount"
+                  type="number"
+               />
+               <div class="delete" @click="deleteItem(index)">
+                  <font-awesome-icon
+                     icon="trash"
+                     :style="{ color: '#FF5B57' }"
+                     size="lg"
+                  />
+               </div>
+            </div>
+            <div v-else class="item">
+               <BaseInput
+                  class="name"
+                  :placeholder="item.name"
+                  v-model="item.name"
+               />
+               <BaseSelect
+                  v-if="is_expense"
+                  class="category"
+                  placeholder="Categoria"
+                  :options="expense_categories"
+                  v-model.number="item.category_id"
+               />
+               <BaseSelect
+                  v-else
+                  class="category"
+                  placeholder="Categoria"
+                  :options="income_categories"
+                  v-model.number="item.category_id"
+               />
+               <BaseInput
+                  class="price"
+                  placeholder="Prezzo"
+                  v-model.number="item.amount"
+                  type="number"
+               />
+               <div class="delete" @click="deleteItem(index)">
+                  <font-awesome-icon
+                     icon="trash"
+                     :style="{ color: '#FF5B57' }"
+                     size="lg"
+                  />
+               </div>
             </div>
          </div>
          <div class="new-item-button">
@@ -58,7 +96,7 @@
                :style="{ color: '#A7AEB7' }"
             />
             <div class="new-item-text" @click="addItem">
-               Nuovo elemento
+               Nuovo articolo
             </div>
          </div>
          <div class="confirmation-buttons">
@@ -78,31 +116,30 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ModalHeader from '@/components/ModalHeader.vue'
+import { amountFormatter } from '@/mixins/amountFormatter.mixin.js'
 
 export default {
+   mixins: [amountFormatter],
    components: {
       ModalHeader
    },
    props: {
-      id: null //account_id received from router-link params
-   },
-   data() {
-      return {
-         transaction: {
-            description: null,
-            date: '2019-10-06 17:30:13',
-            account_id: null,
-            items: []
-         },
-         is_expense: true
-      }
+      transaction: null //transaction received from router-link params
    },
    computed: {
-      ...mapGetters('categories', ['expense_categories', 'income_categories'])
+      ...mapGetters('categories', [
+         'expense_categories',
+         'income_categories',
+         'categories_is_empty',
+         'category_is_expense'
+      ]),
+      is_expense() {
+         return this.category_is_expense(this.transaction.items[0].category_id)
+      }
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
-      ...mapActions('transactions', ['newTransaction']),
+      ...mapActions('transactions', ['updateTransaction']),
       addItem() {
          const item = {
             name: 'Nome',
@@ -111,8 +148,8 @@ export default {
          }
          this.transaction.items.push(item)
       },
-      deleteItem() {
-         this.transaction.items.pop()
+      deleteItem(index) {
+         this.transaction.items.splice(index, 1)
       },
       submit() {
          if (this.is_expense == true) {
@@ -120,7 +157,7 @@ export default {
                item.amount = -Math.abs(item.amount)
             })
          }
-         this.newTransaction(this.transaction)
+         this.updateTransaction(this.transaction)
          this.$router.back()
       },
       changeType(selected_option) {
@@ -136,9 +173,12 @@ export default {
       }
    },
    created() {
-      this.transaction.account_id = parseInt(this.id)
-      this.addItem()
-      this.getCategories()
+      if (this.categories_is_empty) {
+         this.getCategories()
+      }
+      if (this.transaction == null) {
+         this.$router.push({ name: 'accounts' })
+      }
    }
 }
 </script>

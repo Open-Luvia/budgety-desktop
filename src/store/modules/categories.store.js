@@ -73,6 +73,11 @@ export default {
       },
       categories_is_empty(state) {
          return state.categories == 0
+      },
+      category_is_expense: state => id => {
+         return (
+            state.categories.find(category => category.id == id).is_expense == 1
+         )
       }
    }
 }
