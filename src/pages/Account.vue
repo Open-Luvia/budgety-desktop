@@ -6,6 +6,10 @@
             <div class="sidebar-elements">
                <div>
                   <div
+                     :class="{
+                        'sidebar-element': true,
+                        active: account_id == account.id
+                     }"
                      class="sidebar-element"
                      v-for="account in accounts"
                      :key="account.id"
@@ -15,8 +19,18 @@
                            name: 'account',
                            params: { account_id: account.id }
                         }"
+                        class="container"
                      >
                         {{ account.name }}
+                        <div
+                           :class="{
+                              amount: true,
+                              positive: account.amount > 0,
+                              negative: account.amount < 0
+                           }"
+                        >
+                           {{ format(account.amount) }}
+                        </div>
                      </router-link>
                   </div>
                </div>
@@ -62,8 +76,10 @@
 import Navbar from '../components/Navbar.vue'
 import TransactionList from '../components/TransactionList.vue'
 import { mapGetters, mapState } from 'vuex'
+import { amountFormatter } from '@/mixins/amountFormatter.mixin.js'
 
 export default {
+   mixins: [amountFormatter],
    components: {
       Navbar,
       TransactionList
@@ -100,16 +116,34 @@ export default {
          height: 100%
          justify-content: space-between
          .sidebar-element
-            align-items: center
             color: white
             cursor: pointer
-            display: flex
-            flex-direction: column
             font-size: 21px
             font-weight: 500
             height: 3em
-            justify-content: center
             width: 100%
+            .container
+               height: 100%
+               width: 100%
+               padding: 0px 30px 0px 30px
+               display: flex
+               flex-direction: row
+               justify-content: space-between
+               align-items: center
+               .amount
+                  color: white
+                  padding: 3px
+                  border-radius: 5px
+                  font-weight: 700
+                  width: 100px
+               .positive
+                  background-color: map-get($colors, 'positive-transaction')
+               .negative
+                  background-color: map-get($colors, 'negative-transaction')
+         .active
+            background-color: white !important
+            color: black !important
+            font-weight: 700 !important
          .add-account
             align-items: center
             color: white

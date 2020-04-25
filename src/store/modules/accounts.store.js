@@ -18,9 +18,11 @@ export default {
          await AccountsApi.getAccounts(payload)
             .then(response => {
                commit('SET_ACCOUNTS', response.data.accounts)
-               dispatch('transactions/setAccounts', getters.accounts_ids, {
-                  root: true
-               })
+               if (rootState.transactions.transactions_tree.length == 0) {
+                  dispatch('transactions/setAccounts', getters.accounts_ids, {
+                     root: true
+                  })
+               }
             })
             .catch(error => {
                console.log(

@@ -102,6 +102,7 @@ export default {
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
+      ...mapActions('accounts', ['getAccounts']),
       ...mapActions('transactions', [
          'newTransaction',
          'getTransactionsByAccount'
@@ -125,6 +126,7 @@ export default {
          }
          this.newTransaction(this.transaction).then(() => {
             this.getTransactionsByAccount(this.id)
+            this.getAccounts()
          })
          this.$router.back()
       },
