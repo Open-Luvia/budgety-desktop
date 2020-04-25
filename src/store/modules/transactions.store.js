@@ -68,7 +68,7 @@ export default {
             )
          })
       },
-      async deleteTransaction({ commit, rootState }, transaction_id) {
+      async deleteTransaction({ commit, dispatch, rootState }, transaction_id) {
          const payload = {
             user_id: rootState.user_id
          }
@@ -80,6 +80,7 @@ export default {
                )
             }
          )
+         await dispatch('accounts/getAccounts', null, { root: true })
          commit('DELETE_TRANSACTION', transaction_id)
       },
       async updateTransaction({ rootState }, transaction) {
