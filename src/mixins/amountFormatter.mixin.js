@@ -4,6 +4,7 @@ export const amountFormatter = {
          var result = amount.toString()
          if (result[0] == '-') {
             result = result.slice(1)
+            result = '- ' + result
          }
          if (
             result.indexOf('.') != -1 &&

@@ -123,18 +123,18 @@ export default {
             height: 3em
             width: 100%
             .container
-               height: 100%
-               width: 100%
-               padding: 0px 30px 0px 30px
+               align-items: center
                display: flex
                flex-direction: row
+               height: 100%
                justify-content: space-between
-               align-items: center
+               padding: 0px 30px 0px 30px
+               width: 100%
                .amount
-                  color: white
-                  padding: 3px
                   border-radius: 5px
+                  color: white
                   font-weight: 700
+                  padding: 3px
                   width: 100px
                .positive
                   background-color: map-get($colors, 'positive-transaction')
