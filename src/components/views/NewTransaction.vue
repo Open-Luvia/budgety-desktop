@@ -18,7 +18,11 @@
          <div class="item-title">
             Articoli:
          </div>
-         <div class="item" v-for="item in transaction.items" :key="item.id">
+         <div
+            class="item"
+            v-for="(item, index) in transaction.items"
+            :key="index"
+         >
             <BaseInput
                class="name"
                :placeholder="item.name"
@@ -44,7 +48,7 @@
                v-model.number="item.amount"
                type="number"
             />
-            <div class="delete" @click="deleteItem">
+            <div class="delete" @click="deleteItem(index)">
                <font-awesome-icon
                   icon="trash"
                   :style="{ color: '#FF5B57' }"
@@ -98,7 +102,11 @@ export default {
       }
    },
    computed: {
-      ...mapGetters('categories', ['expense_categories', 'income_categories'])
+      ...mapGetters('categories', [
+         'expense_categories',
+         'income_categories',
+         'categories_is_empty'
+      ])
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
@@ -115,8 +123,9 @@ export default {
          }
          this.transaction.items.push(item)
       },
-      deleteItem() {
-         this.transaction.items.pop()
+      deleteItem(index) {
+         console.log(index)
+         this.transaction.items.splice(index, 1)
       },
       submit() {
          if (this.is_expense == true) {
@@ -145,7 +154,9 @@ export default {
    created() {
       this.transaction.account_id = parseInt(this.id)
       this.addItem()
-      this.getCategories()
+      if (this.categories_is_empty) {
+         this.getCategories()
+      }
    }
 }
 </script>
