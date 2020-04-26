@@ -85,7 +85,7 @@ const router = new VueRouter({
          props: true,
          children: [
             {
-               path: 'transaction/edit',
+               path: 'transaction/:transaction_id/edit',
                name: 'editTransaction',
                component: EditTransaction,
                props: (route) => ({

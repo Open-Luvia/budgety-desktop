@@ -18,7 +18,10 @@
             <router-link
                :to="{
                   name: 'editTransaction',
-                  params: { transaction: transaction }
+                  params: {
+                     transaction_id: transaction.id,
+                     transaction: this.transaction
+                  }
                }"
             >
                <font-awesome-icon icon="edit" class="edit-button" size="lg" />

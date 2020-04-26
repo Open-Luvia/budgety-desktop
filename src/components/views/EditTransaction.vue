@@ -7,7 +7,7 @@
          <div class="transaction-info">
             <div class="description">
                <BaseInput
-                  :placeholder="transaction.description"
+                  :placeholder="edited_transaction.description"
                   @input="updateDescription"
                />
             </div>
@@ -21,7 +21,7 @@
          <div class="item-title">
             Articoli:
          </div>
-         <div v-for="(item, index) in transaction.items" :key="index">
+         <div v-for="(item, index) in edited_transaction.items" :key="index">
             <div v-if="item.amount != null" class="item">
                <BaseInput
                   class="name"
@@ -101,7 +101,12 @@
          </div>
          <div class="confirmation-buttons">
             <BaseButton class="button" button_class="cancel">
-               <router-link :to="{ name: 'accounts' }">
+               <router-link
+                  :to="{
+                     name: 'account',
+                     params: { account_id: this.edited_transaction.account_id }
+                  }"
+               >
                   Annulla
                </router-link>
             </BaseButton>
@@ -124,7 +129,12 @@ export default {
       ModalHeader
    },
    props: {
-      transaction: null //transaction received from router-link params
+      transaction: null //received from router-link params
+   },
+   data() {
+      return {
+         edited_transaction: {}
+      }
    },
    computed: {
       ...mapGetters('categories', [
@@ -146,10 +156,10 @@ export default {
             amount: null,
             category_id: null
          }
-         this.transaction.items.push(item)
+         this.edited_transaction.items.push(item)
       },
       deleteItem(index) {
-         this.transaction.items.splice(index, 1)
+         this.edited_transaction.items.splice(index, 1)
       },
       submit() {
          if (this.is_expense == true) {
@@ -157,8 +167,10 @@ export default {
                item.amount = -Math.abs(item.amount)
             })
          }
-         this.updateTransaction(this.transaction)
-         this.$router.back()
+         console.log(this.transaction)
+         console.log(this.edited_transaction)
+         // this.updateTransaction(this.transaction)
+         // this.$router.back()
       },
       changeType(selected_option) {
          if (selected_option === 0) {
@@ -168,17 +180,15 @@ export default {
          }
       },
       updateDescription(description) {
-         this.transaction.description = description
-         this.transaction.items[0].name = description
+         this.edited_transaction.description = description
+         this.edited_transaction.items[0].name = description
       }
    },
    created() {
       if (this.categories_is_empty) {
          this.getCategories()
       }
-      if (this.transaction == null) {
-         this.$router.push({ name: 'accounts' })
-      }
+      this.edited_transaction = JSON.parse(JSON.stringify(this.transaction))
    }
 }
 </script>
@@ -191,6 +201,7 @@ export default {
    height: 100%
    width: 100%
    .body
+      padding: 10px
       .transaction-info
          display: flex
          margin: 10px 10px 10px 10px
@@ -222,10 +233,12 @@ export default {
          .name
             grid-area: name
          .category
+            cursor: pointer
             grid-area: price
          .price
             grid-area: category
          .delete
+            cursor: pointer
             grid-area: delete
       .new-item-button
          align-items: center
