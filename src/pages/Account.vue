@@ -126,7 +126,7 @@ export default {
             cursor: pointer
             font-size: 21px
             font-weight: 500
-            height: 3.5em
+            height: 3.2em
             width: 100%
             .container
                align-items: center
