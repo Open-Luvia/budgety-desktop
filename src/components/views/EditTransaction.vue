@@ -1,6 +1,9 @@
 <template>
    <div class="new-transaction">
-      <ModalHeader back_to="accounts" :toggle_switch="true">
+      <ModalHeader
+         back_to="account"
+         :params="{ account_id: this.edited_transaction.account_id }"
+      >
          Modifica Transazione
       </ModalHeader>
       <div class="body">

@@ -1,7 +1,7 @@
 <template>
    <div class="header">
       <div class="exit">
-         <router-link :to="{ name: back_to }">
+         <router-link :to="{ name: back_to, params: this.params }">
             <font-awesome-icon icon="chevron-left" />
          </router-link>
       </div>
@@ -18,9 +18,8 @@ export default {
          type: String,
          required: true
       },
-      toggle_switch: {
-         type: Boolean,
-         default: false
+      params: {
+         type: Object
       }
    }
 }
