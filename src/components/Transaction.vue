@@ -104,8 +104,7 @@ export default {
    display: flex
    flex-direction: column
    font-weight: 500
-   margin-left: 15px
-   margin-right: 15px
+   margin: 0px 30px 0px 30px
    .transaction-info
       align-items: center
       display: flex

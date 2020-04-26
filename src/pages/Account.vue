@@ -126,7 +126,7 @@ export default {
             cursor: pointer
             font-size: 21px
             font-weight: 500
-            height: 3em
+            height: 3.5em
             width: 100%
             .container
                align-items: center
@@ -172,7 +172,7 @@ export default {
       font-size: 22px
       font-weight: 600
       justify-content: flex-start
-      margin: 10px 10px 0px 10px
+      margin: 30px 30px 0px 30px
       span
          margin: 0px 0px 0px 10px
 </style>
