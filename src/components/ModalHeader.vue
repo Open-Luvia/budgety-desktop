@@ -36,9 +36,9 @@ export default {
       font-size: 24px
       font-weight: 500
       grid-template-columns: 200px auto 200px
-      height: 2.5em
+      height: 2.8em
       justify-items: center;
-      line-height: 2.5em
+      line-height: 2.8em
       .exit
          grid-column: 1/2
          justify-self: start
