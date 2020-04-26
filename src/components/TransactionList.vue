@@ -1,3 +1,6 @@
+<!-- TransactionList è un componente a parte perchè la lista di transazioni veniva renderizzata 
+prima che le API riuscissero a restituire i dati. Ora il componente viene renderizzato 
+solo se le transazioni sono state effetivamente caricate.  -->
 <template>
    <div>
       <Transaction

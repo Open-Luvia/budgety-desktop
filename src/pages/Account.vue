@@ -61,11 +61,10 @@
                </router-link>
             </div>
             <div>
-               <!-- TransactionList è un componente a parte perchè la lista di transazioni veniva renderizzata 
-               prima che le API riuscissero a restituire i dati. Ora il componente viene renderizzato 
-               solo se le transazioni sono state effetivamente caricate.  -->
                <TransactionList
-                  v-if="!this.transactions_tree_is_empty"
+                  v-if="
+                     !this.transactions_tree_is_empty && this.showTransactions
+                  "
                   :account_id="parseInt(account_id)"
                />
             </div>
@@ -90,9 +89,19 @@ export default {
    props: {
       account_id: null //passato dal router
    },
+   data() {
+      return {
+         showTransactions: true
+      }
+   },
    computed: {
       ...mapState('accounts', ['accounts']),
       ...mapGetters('transactions', ['transactions_tree_is_empty'])
+   },
+   created() {
+      if (this.$router.currentRoute.name != 'account') {
+         this.showTransactions = false
+      }
    }
 }
 </script>

@@ -79,7 +79,7 @@ const router = new VueRouter({
          ]
       },
       {
-         path: '/accounts/:account_id/show',
+         path: '/accounts/:account_id/',
          name: 'account',
          component: Account,
          props: true,
@@ -89,7 +89,7 @@ const router = new VueRouter({
                name: 'editTransaction',
                component: EditTransaction,
                props: (route) => ({
-                  transaction: null,
+                  transaction: null, 
                   ...route.params
               })
             },
