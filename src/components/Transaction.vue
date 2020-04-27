@@ -4,6 +4,7 @@
       @click="showItems"
       @mouseover="showEdit"
       @mouseout="showEdit"
+      v-if="this.transaction != null"
    >
       <div class="transaction-info">
          <div class="info">

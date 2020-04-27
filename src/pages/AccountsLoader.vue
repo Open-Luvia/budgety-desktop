@@ -34,8 +34,9 @@ export default {
    },
    methods: {
       ...mapActions('accounts', ['getAccounts']),
+      ...mapActions('categories', ['getCategories']),
       redirect() {
-         if (!this.accounts_is_empty) {
+         if (!this.accounts_is_empty && !this.categories_is_empty) {
             this.$router.push({
                name: 'account',
                params: { account_id: this.account_to_show }
@@ -45,9 +46,13 @@ export default {
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapGetters('accounts', ['accounts_is_empty'])
+      ...mapGetters('accounts', ['accounts_is_empty']),
+      ...mapGetters('categories', ['categories_is_empty'])
    },
    created() {
+      if (this.categories_is_empty) {
+         this.getCategories()
+      }
       if (this.accounts_is_empty) {
          this.getAccounts().then(() => {
             if (!this.accounts_is_empty) {

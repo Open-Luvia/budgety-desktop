@@ -93,10 +93,7 @@ export default {
             user_id: rootState.user_id
          }
          const transaction_id = transaction.id
-         await TransactionsApi.updateTransaction(
-            transaction_id,
-            payload
-         ).catch(error => console.log(error))
+         await TransactionsApi.updateTransaction(transaction_id, payload)
       },
       setAccounts({ commit }, param) {
          var transactions_by_account = []
@@ -118,6 +115,13 @@ export default {
          return state.transactions_tree.find(
             item => item.account_id == account_id
          ).transactions
+      },
+      transactions_by_account_is_empty: state => account_id => {
+         return (
+            state.transactions_tree.find(
+               transaction_list => transaction_list.account_id == account_id
+            ).transactions.length == 0
+         )
       }
    }
 }

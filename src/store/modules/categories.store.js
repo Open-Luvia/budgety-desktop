@@ -72,7 +72,7 @@ export default {
          return fillParentCategoryWithChildren(category_tree, state.categories)
       },
       categories_is_empty(state) {
-         return state.categories == 0
+         return state.categories.length == 0
       },
       category_is_expense: state => id => {
          return (

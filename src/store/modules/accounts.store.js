@@ -52,7 +52,7 @@ export default {
          return state.accounts.map(account => account.id)
       },
       accounts_is_empty(state) {
-         return state.accounts == 0
+         return state.accounts.length == 0
       }
    }
 }

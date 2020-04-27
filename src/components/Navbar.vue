@@ -5,14 +5,14 @@
       </div>
       <div class="desktop-navbar" ref="desktop-navbar">
          <ul class="nav-links">
-            <li>
+            <!-- <li>
                <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
-            </li>
+            </li> -->
             <li>
                <router-link :to="{ name: 'accounts' }">Conti</router-link>
             </li>
-            <li>Report</li>
-            <li>Budget</li>
+            <!-- <li>Report</li>
+            <li>Budget</li> -->
          </ul>
          <ul class="settings">
             <router-link :to="{ name: 'settings' }">
