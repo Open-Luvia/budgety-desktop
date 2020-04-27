@@ -85,6 +85,7 @@ export default {
       },
       async updateTransaction({ rootState }, transaction) {
          const payload = {
+            id: transaction.id,
             description: transaction.description,
             date: transaction.date,
             account_id: transaction.account_id,
@@ -92,7 +93,10 @@ export default {
             user_id: rootState.user_id
          }
          const transaction_id = transaction.id
-         await TransactionsApi.updateTransaction(transaction_id, payload)
+         await TransactionsApi.updateTransaction(
+            transaction_id,
+            payload
+         ).catch(error => console.log(error))
       },
       setAccounts({ commit }, param) {
          var transactions_by_account = []

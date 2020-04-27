@@ -136,7 +136,8 @@ export default {
    },
    data() {
       return {
-         edited_transaction: {}
+         edited_transaction: {},
+         edited_amount: 0
       }
    },
    computed: {
@@ -166,14 +167,20 @@ export default {
       },
       submit() {
          if (this.is_expense == true) {
-            this.transaction.items.forEach(item => {
+            this.edited_transaction.items.forEach(item => {
                item.amount = -Math.abs(item.amount)
             })
          }
-         console.log(this.transaction)
-         console.log(this.edited_transaction)
-         // this.updateTransaction(this.transaction)
-         // this.$router.back()
+         this.transaction.description = this.edited_transaction.description
+         this.transaction.agent = this.edited_transaction.agent
+         this.transaction.date = this.edited_transaction.date
+         this.transaction.items = this.edited_transaction.items
+         this.transaction.items.forEach(item => {
+            this.edited_amount += item.amount
+         })
+         this.transaction.amount = this.edited_amount
+         this.updateTransaction(this.transaction)
+         this.$router.back()
       },
       changeType(selected_option) {
          if (selected_option === 0) {
@@ -184,7 +191,9 @@ export default {
       },
       updateDescription(description) {
          this.edited_transaction.description = description
-         this.edited_transaction.items[0].name = description
+         if (this.edited_transaction.items[0] == 'nome') {
+            this.edited_transaction.items[0].name = description
+         }
       }
    },
    created() {
