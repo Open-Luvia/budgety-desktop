@@ -38,20 +38,22 @@ export default {
             per_page: 20,
             user_id: rootState.user_id
          }
-         await TransactionsApi.getTransactionsByAccount(account_id, payload)
-            .then(response => {
-               const params = {
-                  data: response.data.data,
-                  account_id: account_id
-               }
-               commit('SET_TRANSACTIONS_BY_ACCOUNT', params)
-            })
-            .catch(error => {
-               console.log(
-                  'There was a problem fetching your transactions: ',
-                  error
-               )
-            })
+         await TransactionsApi.getTransactionsByAccount(
+            account_id,
+            payload
+         ).then(response => {
+            const params = {
+               data: response.data.data,
+               account_id: account_id
+            }
+            commit('SET_TRANSACTIONS_BY_ACCOUNT', params)
+         })
+         // .catch(error => {
+         //    console.log(
+         //       'There was a problem fetching your transactions: ',
+         //       error
+         //    )
+         // })
       },
       async newTransaction({ rootState }, transaction) {
          const payload = {
@@ -61,25 +63,25 @@ export default {
             user_id: rootState.user_id,
             items: transaction.items
          }
-         await TransactionsApi.createTransaction(payload).catch(error => {
-            console.log(
-               'There was a problem creating your transaction: ',
-               error
-            )
-         })
+         await TransactionsApi.createTransaction(payload)
+         // .catch(error => {
+         //    console.log(
+         //       'There was a problem creating your transaction: ',
+         //       error
+         //    )
+         // })
       },
       async deleteTransaction({ commit, dispatch, rootState }, transaction_id) {
          const payload = {
             user_id: rootState.user_id
          }
-         await TransactionsApi.deleteTransaction(transaction_id, payload).catch(
-            error => {
-               console.log(
-                  'There was a problem deleting your transaction',
-                  error
-               )
-            }
-         )
+         await TransactionsApi.deleteTransaction(transaction_id, payload)
+         // .catch(error => {
+         //       console.log(
+         //          'There was a problem deleting your transaction',
+         //          error
+         //       )
+         //       })
          await dispatch('accounts/getAccounts', null, { root: true })
          commit('DELETE_TRANSACTION', transaction_id)
       },

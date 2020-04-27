@@ -47,9 +47,9 @@ export default new Vuex.Store({
                commit('SET_USER_ID', response.data.user.id),
                   commit('SET_USER', response.data.user)
             })
-            .catch(error => {
-               console.log(error)
-            })
+            // .catch(error => {
+            //    console.log(error)
+            // })
       },
       async login({ commit }, credentials) {
          await AuthApi.login(credentials)
@@ -58,18 +58,18 @@ export default new Vuex.Store({
                commit('SET_USER_ID', response.data.user.id)
                commit('SET_USER', response.data.user)
             })
-            .catch(error => {
-               console.log(error)
-            })
+            // .catch(error => {
+            //    console.log(error)
+            // })
       },
       async logout({ commit }) {
          await AuthApi.logout()
             .then(() => {
                commit('CLEAR_LOCAL_STORAGE')
             })
-            .catch(error => {
-               console.log(error)
-            })
+            // .catch(error => {
+            //    console.log(error)
+            // })
       },
       getDataFromLocalStorage({ commit }) {
          commit('GET_TOKEN')
@@ -93,11 +93,11 @@ export default new Vuex.Store({
             .then(response => {
                commit('SET_USER', response.data)
             })
-            .catch(error => {
-               console.log(
-                  'There was a problem getting you user info: ' + error
-               )
-            })
+            // .catch(error => {
+            //    console.log(
+            //       'There was a problem getting you user info: ' + error
+            //    )
+            // })
       }
    },
    getters: {

@@ -24,11 +24,11 @@ export default {
                   })
                }
             })
-            .catch(error => {
-               console.log(
-                  'There was a problem fetching your accounts: ' + error.message
-               )
-            })
+            // .catch(error => {
+            //    console.log(
+            //       'There was a problem fetching your accounts: ' + error.message
+            //    )
+            // })
       },
       async newAccount({ dispatch, rootState }, account) {
          const payload = {
@@ -41,9 +41,9 @@ export default {
             .then(() => {
                dispatch('getAccounts')
             })
-            .catch(error => {
-               console.log('There was a problem creating your account: ', error)
-            })
+            // .catch(error => {
+            //    console.log('There was a problem creating your account: ', error)
+            // })
       }
    },
    getters: {

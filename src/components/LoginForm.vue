@@ -48,9 +48,9 @@ export default {
             .then(() => {
                this.$router.push({ name: 'accounts' })
             })
-            .catch(error => {
-               console.log(error)
-            })
+            // .catch(error => {
+            //    console.log(error)
+            // })
       }
    }
 }

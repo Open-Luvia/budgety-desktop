@@ -52,9 +52,10 @@ export default {
       signUp() {
          this.register(this.credentials).then(() => {
             this.$router.push({ name: 'dashboard' })
-         }).catch(error => {
-            console.log(error)
          })
+         // .catch(error => {
+         //    console.log(error)
+         // })
       }
    }
 }

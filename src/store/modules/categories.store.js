@@ -40,12 +40,12 @@ export default {
             .then(response => {
                commit('SET_CATEGORIES', response.data.categories)
             })
-            .catch(error => {
-               console.log(
-                  'There was a problem fetching your categories: ' +
-                     error.message
-               )
-            })
+            // .catch(error => {
+            //    console.log(
+            //       'There was a problem fetching your categories: ' +
+            //          error.message
+            //    )
+            // })
       }
    },
    getters: {
