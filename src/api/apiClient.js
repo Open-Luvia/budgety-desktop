@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store/store.js'
 
 const apiClient = axios.create({
-   baseURL: 'http://tdw-api.mooo.com/api',
+   baseURL: 'https://tdw-api.mooo.com/api',
    headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
