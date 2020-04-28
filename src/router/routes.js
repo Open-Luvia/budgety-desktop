@@ -13,7 +13,6 @@ import AccountsLoader from '@/pages/AccountsLoader.vue'
 import NewTransaction from '@/components/views/NewTransaction.vue'
 import NewAccount from '@/components/views/NewAccount.vue'
 import SettingsCategories from '@/components/views/SettingsCategories.vue'
-import NewCategory from '@/components/views/NewCategory.vue'
 import EditTransaction from '@/components/views/EditTransaction.vue'
 
 Vue.use(VueRouter)
@@ -49,14 +48,7 @@ const router = new VueRouter({
             {
                path: 'categories',
                name: 'settingsCategories',
-               component: SettingsCategories,
-               children: [
-                  {
-                     path: 'new',
-                     name: 'newCategory',
-                     component: NewCategory
-                  }
-               ]
+               component: SettingsCategories
             }
          ]
       },
@@ -88,10 +80,10 @@ const router = new VueRouter({
                path: 'transaction/:transaction_id/edit',
                name: 'editTransaction',
                component: EditTransaction,
-               props: (route) => ({
-                  transaction: null, 
+               props: route => ({
+                  transaction: null,
                   ...route.params
-              })
+               })
             },
             {
                path: ':id/transaction/new',

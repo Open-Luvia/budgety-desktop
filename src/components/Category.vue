@@ -29,7 +29,7 @@ export default {
    display: flex
    flex-direction: column
    margin:
-   padding: 0px 16px 24px 16px
+   padding: 0px
    .children
       align-items: flex-start
       display: flex

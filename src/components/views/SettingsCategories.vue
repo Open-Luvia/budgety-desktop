@@ -25,11 +25,27 @@
             />
          </div>
       </div>
-      <div class="add-category">
-         <router-link :to="{ name: 'newCategory' }">
-            <font-awesome-icon icon="plus-circle" />
-            <span>Nuova Categoria</span>
-         </router-link>
+      <div v-if="show_new_category_form" class="new-category">
+         <BaseInput placeholder="Nome" class="item" />
+         <BaseToggleSwitch :default_option="0" class="item" />
+         <font-awesome-icon
+            icon="times-circle"
+            @click="showNewCategoryForm"
+            :style="{ color: '#FF5B57' }"
+            size="xlg"
+            class="item"
+         />
+         <font-awesome-icon
+            icon="check-circle"
+            @click="showNewCategoryForm"
+            :style="{ color: '#44d7b6' }"
+            size="xlg"
+            class="item"
+         />
+      </div>
+      <div v-else class="add-category" @click="showNewCategoryForm">
+         <font-awesome-icon icon="plus-circle" />
+         <span>Nuova Categoria</span>
       </div>
       <router-view class="overlay" />
    </div>
@@ -43,8 +59,10 @@ export default {
    components: {
       Category
    },
-   methods: {
-      ...mapActions('categories', ['getCategories'])
+   data() {
+      return {
+         show_new_category_form: false
+      }
    },
    computed: {
       ...mapGetters('categories', [
@@ -52,6 +70,12 @@ export default {
          'income_category_tree',
          'categories_is_empty'
       ])
+   },
+   methods: {
+      ...mapActions('categories', ['getCategories']),
+      showNewCategoryForm() {
+         this.show_new_category_form = !this.show_new_category_form
+      }
    },
    created() {
       if (this.categories_is_empty) {
@@ -94,6 +118,15 @@ export default {
          flex-direction: column
          .subheader
             font-size: 22px
+   .new-category
+      padding: 10px 10px 10px 20px
+      width: inherit
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: space-between
+      .item
+         margin: 0px 20px 0px 0px
    .add-category
       width: inherit
       justify-content: center
