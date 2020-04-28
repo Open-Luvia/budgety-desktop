@@ -65,7 +65,7 @@ nav
     background: map-get($colors, 'navbar')
     box-sizing: border-box
     color: white
-    font-size: 24px
+    font-size: $header-font-size
     font-weight: 700
     height: $navbar-height
     list-style: none

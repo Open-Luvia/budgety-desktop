@@ -32,7 +32,7 @@ export default {
       background-color: map-get($colors, 'primary')
       color: white
       display: grid
-      font-size: 24px
+      font-size: $header-font-size
       font-weight: 500
       grid-template-columns: 200px auto 200px
       height: 2.8em

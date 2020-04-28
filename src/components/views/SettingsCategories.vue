@@ -1,23 +1,13 @@
 <template>
    <div class="settings-categories">
-      <div class="categories">
-         <div
-            class="category"
-            v-for="category in expense_category_tree"
-            :key="category.id"
-         >
-            {{ category.name }}
-            <div class="children" v-if="category.children.length != 0">
-               <div
-                  class="child-category"
-                  v-for="child in category.children"
-                  :key="child.id"
-               >
-                  {{ child.name }}
-               </div>
-            </div>
-         </div>
+      <div class="header">
+         Le tue categorie
       </div>
+      <Category
+         v-for="category in expense_category_tree"
+         :category="category"
+         :key="category.id"
+      />
       <div class="add-category">
          <router-link :to="{ name: 'newCategory' }">
             <font-awesome-icon icon="plus-circle" />
@@ -29,22 +19,32 @@
 </template>
 
 <script>
+import Category from '@/components/Category.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+   components: {
+      Category
+   },
    methods: {
       ...mapActions('categories', ['getCategories'])
    },
    computed: {
-      ...mapGetters('categories', ['expense_category_tree'])
+      ...mapGetters('categories', [
+         'expense_category_tree',
+         'categories_is_empty'
+      ])
    },
    created() {
-      this.getCategories()
+      if (this.categories_is_empty) {
+         this.getCategories()
+      }
    }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '@/assets/global.sass'
 .settings-categories
    align-items: flex-start
    display: flex
@@ -53,21 +53,13 @@ export default {
    height: 100%
    position: relative
    width: 100%
+   .header
+      font-size: $header-font-size
+      align-self: center
+      padding: 10px
+      font-weight: 700
    .categories
       margin: 32px
-      .category
-         align-items: flex-start
-         display: flex
-         flex-direction: column
-         margin:
-         padding: 0px 16px 24px 16px
-         .children
-            align-items: flex-start
-            display: flex
-            flex-direction: column
-            margin: 16px 0px 0px 32px
-            .child-category
-               margin: 0px 0px 16px 0px
    .add-category
       align-items: center
       cursor: pointer

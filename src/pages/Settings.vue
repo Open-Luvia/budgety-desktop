@@ -14,7 +14,9 @@
                >
             </div>
          </aside>
-         <router-view></router-view>
+         <div class="setting">
+            <router-view></router-view>
+         </div>
       </div>
    </div>
 </template>
@@ -39,7 +41,9 @@ export default {
    .sidebar
       background-color: white
       border-right: 1px solid black
-      width: 272px
+      width: $sidebar-width
       .sidebar-element
          color: black
+   .setting
+      width: calc(100vw - #{$sidebar-width})
 </style>
