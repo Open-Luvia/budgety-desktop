@@ -26,22 +26,36 @@
          </div>
       </div>
       <div v-if="show_new_category_form" class="new-category">
-         <BaseInput placeholder="Nome" class="item" />
-         <BaseToggleSwitch :default_option="0" class="item" />
-         <font-awesome-icon
-            icon="times-circle"
-            @click="showNewCategoryForm"
-            :style="{ color: '#FF5B57' }"
-            size="xlg"
+         <BaseInput
+            placeholder="Nome"
             class="item"
+            v-model="new_category.name"
          />
-         <font-awesome-icon
-            icon="check-circle"
-            @click="showNewCategoryForm"
-            :style="{ color: '#44d7b6' }"
-            size="xlg"
+         <BaseToggleSwitch
+            :default_option="0"
             class="item"
+            @selected="changeType"
          />
+         <div @click="showNewCategoryForm" class="item">
+            <BaseIcon
+               width="45"
+               height="45"
+               viewBox="0 0 512 512"
+               color="#FF5B57"
+            >
+               <IconTimesCircle />
+            </BaseIcon>
+         </div>
+         <div @click="submit" class="item">
+            <BaseIcon
+               width="45"
+               height="45"
+               viewBox="0 0 512 512"
+               color="#44D7B6"
+            >
+               <IconCheckCircle />
+            </BaseIcon>
+         </div>
       </div>
       <div v-else class="add-category" @click="showNewCategoryForm">
          <font-awesome-icon icon="plus-circle" />
@@ -52,16 +66,24 @@
 </template>
 
 <script>
+import IconTimesCircle from '@/assets/icons/IconTimesCircle.vue'
+import IconCheckCircle from '@/assets/icons/IconCheckCircle.vue'
 import Category from '@/components/Category.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
    components: {
-      Category
+      Category,
+      IconCheckCircle,
+      IconTimesCircle
    },
    data() {
       return {
-         show_new_category_form: false
+         show_new_category_form: false,
+         new_category: {
+            name: '',
+            is_expense: 1
+         }
       }
    },
    computed: {
@@ -72,9 +94,23 @@ export default {
       ])
    },
    methods: {
-      ...mapActions('categories', ['getCategories']),
+      ...mapActions('categories', ['getCategories', 'newCategory']),
       showNewCategoryForm() {
          this.show_new_category_form = !this.show_new_category_form
+      },
+      submit() {
+         this.newCategory(this.new_category).then(() => {
+            this.new_category.name = ''
+            this.new_category.is_expense = 1
+         })
+         this.showNewCategoryForm()
+      },
+      changeType(value) {
+         if (value == 0) {
+            this.new_category.is_expense = 1
+         } else {
+            this.new_category.is_expense = 0
+         }
       }
    },
    created() {
@@ -124,6 +160,7 @@ export default {
       display: flex
       flex-direction: row
       align-items: center
+      font-size: 18px
       justify-content: space-between
       .item
          margin: 0px 20px 0px 0px

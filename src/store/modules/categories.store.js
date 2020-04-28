@@ -36,16 +36,20 @@ export default {
          const payload = {
             user_id: rootState.user_id
          }
-         await CategoriesApi.getCategories(payload)
-            .then(response => {
-               commit('SET_CATEGORIES', response.data.categories)
-            })
-            // .catch(error => {
-            //    console.log(
-            //       'There was a problem fetching your categories: ' +
-            //          error.message
-            //    )
-            // })
+         await CategoriesApi.getCategories(payload).then(response => {
+            commit('SET_CATEGORIES', response.data.categories)
+         })
+      },
+      async newCategory({ dispatch, rootState }, category) {
+         const payload = {
+            user_id: rootState.user_id,
+            budget: 0,
+            is_expense: category.is_expense,
+            name: category.name
+         }
+         CategoriesApi.createCategory(payload).then(() => {
+            dispatch('getCategories')
+         })
       }
    },
    getters: {

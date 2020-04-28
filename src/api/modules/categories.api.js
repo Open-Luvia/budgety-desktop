@@ -4,5 +4,8 @@ export default {
    getCategories(payload) {
       // console.log('Getting categories...', payload)
       return apiClient.post('/categories', payload)
+   },
+   createCategory(payload) {
+      return apiClient.post('/categories/new', payload)
    }
 }
