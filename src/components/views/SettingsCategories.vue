@@ -37,22 +37,12 @@
             @selected="changeType"
          />
          <div @click="showNewCategoryForm" class="item">
-            <BaseIcon
-               width="45"
-               height="45"
-               viewBox="0 0 512 512"
-               color="#FF5B57"
-            >
+            <BaseIcon width="45" height="45" color="#FF5B57">
                <IconTimesCircle />
             </BaseIcon>
          </div>
          <div @click="submit" class="item">
-            <BaseIcon
-               width="45"
-               height="45"
-               viewBox="0 0 512 512"
-               color="#44D7B6"
-            >
+            <BaseIcon width="45" height="45" color="#44D7B6">
                <IconCheckCircle />
             </BaseIcon>
          </div>
@@ -139,17 +129,15 @@ export default {
       width: inherit
    .categories
       width: inherit
-      display: flex
-      flex-flow: row wrap
+      display: grid
+      grid-template-columns: 0.5fr 0.5fr
       justify-content: stretch
       .income
-         flex-grow: 1
          display: flex
          flex-direction: column
          .subheader
             font-size: 22px
       .expense
-         flex-grow: 1
          display: flex
          flex-direction: column
          .subheader
