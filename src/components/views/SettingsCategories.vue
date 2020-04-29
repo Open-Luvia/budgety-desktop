@@ -1,5 +1,31 @@
 <template>
    <div class="settings-categories">
+      <div v-if="show_new_category_form" class="new-category">
+         <BaseInput
+            placeholder="Nome"
+            class="item"
+            v-model="new_category.name"
+         />
+         <BaseToggleSwitch
+            :default_option="0"
+            class="item"
+            @selected="changeType"
+         />
+         <div @click="showNewCategoryForm" class="item">
+            <BaseIcon width="45" height="45" color="#FF5B57">
+               <IconTimesCircle />
+            </BaseIcon>
+         </div>
+         <div @click="submit" class="item">
+            <BaseIcon width="45" height="45" color="#44D7B6">
+               <IconCheckCircle />
+            </BaseIcon>
+         </div>
+      </div>
+      <div v-else class="add-category" @click="showNewCategoryForm">
+         <font-awesome-icon icon="plus-circle" />
+         <span>New Category</span>
+      </div>
       <div class="categories">
          <div class="category-type">
             <div class="card">
@@ -29,32 +55,6 @@
                />
             </div>
          </div>
-      </div>
-      <div v-if="show_new_category_form" class="new-category">
-         <BaseInput
-            placeholder="Nome"
-            class="item"
-            v-model="new_category.name"
-         />
-         <BaseToggleSwitch
-            :default_option="0"
-            class="item"
-            @selected="changeType"
-         />
-         <div @click="showNewCategoryForm" class="item">
-            <BaseIcon width="45" height="45" color="#FF5B57">
-               <IconTimesCircle />
-            </BaseIcon>
-         </div>
-         <div @click="submit" class="item">
-            <BaseIcon width="45" height="45" color="#44D7B6">
-               <IconCheckCircle />
-            </BaseIcon>
-         </div>
-      </div>
-      <div v-else class="add-category" @click="showNewCategoryForm">
-         <font-awesome-icon icon="plus-circle" />
-         <span>Nuova Categoria</span>
       </div>
       <router-view class="overlay" />
    </div>

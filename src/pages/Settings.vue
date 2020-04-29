@@ -6,7 +6,7 @@
             <div class="sidebar-elements">
                <div class="sidebar-element">
                   <router-link :to="{ name: 'settingsCategories' }">
-                     Categorie
+                     Categories
                   </router-link>
                </div>
                <BaseButton button_class="secondary" @click="logout">

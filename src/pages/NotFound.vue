@@ -5,7 +5,7 @@
       </BaseIcon>
       <div class="title">
          <h1>Ooops!</h1>
-         <h3>I tuoi soldi non sono qui</h3>
+         <h3>You will not find any money here</h3>
       </div>
    </div>
 </template>

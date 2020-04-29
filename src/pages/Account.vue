@@ -40,7 +40,7 @@
                         icon="plus-circle"
                         :style="{ color: 'white' }"
                      />
-                     <span>Aggiungi conto</span>
+                     <span>Add account</span>
                   </router-link>
                </div>
             </div>
@@ -57,7 +57,7 @@
                      icon="plus-circle"
                      :style="{ color: '#A7AEB7' }"
                   />
-                  <span>Nuova transazione</span>
+                  <span>New transaction</span>
                </router-link>
             </div>
             <div>

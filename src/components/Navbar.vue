@@ -9,7 +9,7 @@
                <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
             </li> -->
             <li>
-               <router-link :to="{ name: 'accounts' }">Conti</router-link>
+               <router-link :to="{ name: 'accounts' }">Accounts</router-link>
             </li>
             <!-- <li>Report</li>
             <li>Budget</li> -->

@@ -3,15 +3,14 @@
       <Navbar />
       <div class="body">
          <div class="no-accounts">
-            <h1>Sembra che qui non ci sia nulla</h1>
+            <h1>You have not an account</h1>
             <h4>
-               Per registrare qualsiasi spesa o entrata hai prima bisogno di
-               creare un conto
+               To enter any transaction you first need to create an account
             </h4>
          </div>
          <router-link :to="{ name: 'firstAccount' }">
             <BaseButton button_class="secondary">
-               Crea un conto
+               Create account
             </BaseButton>
          </router-link>
          <router-view class="overlay" />
