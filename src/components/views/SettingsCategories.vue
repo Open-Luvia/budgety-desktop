@@ -1,28 +1,33 @@
 <template>
    <div class="settings-categories">
-      <div class="title">
-         Le tue categorie
-      </div>
       <div class="categories">
-         <div class="expense">
-            <div class="subheader">
-               Expense
+         <div class="category-type">
+            <div class="card">
+               <div class="header">
+                  <span>
+                     Expense
+                  </span>
+               </div>
+               <Category
+                  v-for="category in expense_category_tree"
+                  :category="category"
+                  :key="category.id"
+               />
             </div>
-            <Category
-               v-for="category in expense_category_tree"
-               :category="category"
-               :key="category.id"
-            />
          </div>
-         <div class="income">
-            <div class="subheader">
-               Income
+         <div class="category-type">
+            <div class="card">
+               <div class="header">
+                  <span>
+                     Income
+                  </span>
+               </div>
+               <Category
+                  v-for="category in income_category_tree"
+                  :category="category"
+                  :key="category.id"
+               />
             </div>
-            <Category
-               v-for="category in income_category_tree"
-               :category="category"
-               :key="category.id"
-            />
          </div>
       </div>
       <div v-if="show_new_category_form" class="new-category">
@@ -121,27 +126,29 @@ export default {
    height: 100%
    position: relative
    width: 100%
-   .title
-      font-size: 26px
-      align-self: center
-      padding: 10px
-      font-weight: 700
-      width: inherit
+   padding: 10px 10px 10px 10px
    .categories
       width: inherit
       display: grid
       grid-template-columns: 0.5fr 0.5fr
       justify-content: stretch
-      .income
+      .category-type
          display: flex
          flex-direction: column
-         .subheader
-            font-size: 22px
-      .expense
-         display: flex
-         flex-direction: column
-         .subheader
-            font-size: 22px
+         .card
+            border: 0px solid grey
+            border-radius: 10px
+            margin: 10px 5px 10px 5px
+            .header
+               display: flex
+               align-items: center
+               justify-content: center
+               font-size: 24px
+               font-weight: 600
+               background-color: map-get($colors, 'sidebar')
+               color: white
+               border-radius: 10px
+               height: 2.5em
    .new-category
       padding: 10px 10px 10px 20px
       width: inherit
