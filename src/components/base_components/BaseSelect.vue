@@ -5,9 +5,9 @@
             placeholder
          }}</option>
          <option
-            v-for="option in options"
+            v-for="(option, index) in options"
             :value="option.id"
-            :key="option.id"
+            :key="index"
             >{{ option.name }}</option
          >
       </select>

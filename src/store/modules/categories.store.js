@@ -47,6 +47,9 @@ export default {
             is_expense: category.is_expense,
             name: category.name
          }
+         if (category.parent_id != null) {
+            payload['parent_id'] = category.parent_id
+         }
          CategoriesApi.createCategory(payload).then(() => {
             dispatch('getCategories')
          })
@@ -58,6 +61,16 @@ export default {
       },
       income_categories(state) {
          return state.categories.filter(category => category.is_expense == 0)
+      },
+      income_parent_categories(state) {
+         return state.categories
+            .filter(category => category.is_expense == 0)
+            .filter(category => category.parent_id == null)
+      },
+      expense_parent_categories(state) {
+         return state.categories
+            .filter(category => category.is_expense == 1)
+            .filter(category => category.parent_id == null)
       },
       expense_category_tree(state) {
          //riempie il category tree con categorie parent

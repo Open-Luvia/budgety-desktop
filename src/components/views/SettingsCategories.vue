@@ -1,26 +1,7 @@
 <template>
    <div class="settings-categories">
       <div v-if="show_new_category_form" class="new-category">
-         <BaseInput
-            placeholder="Nome"
-            class="item"
-            v-model="new_category.name"
-         />
-         <BaseToggleSwitch
-            :default_option="0"
-            class="item"
-            @selected="changeType"
-         />
-         <div @click="showNewCategoryForm" class="item">
-            <BaseIcon width="45" height="45" color="#FF5B57">
-               <IconTimesCircle />
-            </BaseIcon>
-         </div>
-         <div @click="submit" class="item">
-            <BaseIcon width="45" height="45" color="#44D7B6">
-               <IconCheckCircle />
-            </BaseIcon>
-         </div>
+         <NewCategoryForm @close="showNewCategoryForm" />
       </div>
       <div v-else class="add-category" @click="showNewCategoryForm">
          <font-awesome-icon icon="plus-circle" />
@@ -61,24 +42,18 @@
 </template>
 
 <script>
-import IconTimesCircle from '@/assets/icons/IconTimesCircle.vue'
-import IconCheckCircle from '@/assets/icons/IconCheckCircle.vue'
 import Category from '@/components/Category.vue'
+import NewCategoryForm from '@/components/NewCategoryForm.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
    components: {
-      Category,
-      IconCheckCircle,
-      IconTimesCircle
+      NewCategoryForm,
+      Category
    },
    data() {
       return {
-         show_new_category_form: false,
-         new_category: {
-            name: '',
-            is_expense: 1
-         }
+         show_new_category_form: false
       }
    },
    computed: {
@@ -92,20 +67,6 @@ export default {
       ...mapActions('categories', ['getCategories', 'newCategory']),
       showNewCategoryForm() {
          this.show_new_category_form = !this.show_new_category_form
-      },
-      submit() {
-         this.newCategory(this.new_category).then(() => {
-            this.new_category.name = ''
-            this.new_category.is_expense = 1
-         })
-         this.showNewCategoryForm()
-      },
-      changeType(value) {
-         if (value == 0) {
-            this.new_category.is_expense = 1
-         } else {
-            this.new_category.is_expense = 0
-         }
       }
    },
    created() {
@@ -150,15 +111,7 @@ export default {
                border-radius: 10px
                height: 2.5em
    .new-category
-      padding: 10px 10px 10px 20px
-      width: inherit
-      display: flex
-      flex-direction: row
-      align-items: center
-      font-size: 18px
-      justify-content: space-between
-      .item
-         margin: 0px 20px 0px 0px
+      width: 100%
    .add-category
       width: inherit
       justify-content: center
@@ -166,7 +119,7 @@ export default {
       cursor: pointer
       display: flex
       flex-direction: row
-      padding: 16px
+      padding: 0px 5px 0px 5px
       span
          margin: 0px 0px 0px 10px
 </style>
