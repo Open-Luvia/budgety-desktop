@@ -11,9 +11,11 @@
             <div class="button-text">New</div>
          </div>
       </div>
-      <div v-if="show_new_category_form" class="new-category">
-         <NewCategoryForm @close="showNewCategoryForm" />
-      </div>
+      <transition name="pop" mode="out-in">
+         <div v-if="show_new_category_form">
+            <NewCategoryForm @close="showNewCategoryForm" />
+         </div>
+      </transition>
       <div class="categories">
          <div class="category-type">
             <div class="card">
@@ -86,36 +88,37 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+
 .settings-categories
    align-items: flex-start
    display: flex
    flex-direction: column
    font-size: 22px
    height: 100%
+   padding: 10px 10px 10px 10px
    position: relative
    width: 100%
-   padding: 10px 10px 10px 10px
    .categories
-      width: calc(100% - 10px)
       display: grid
       grid-template-columns: 0.5fr 0.5fr
       justify-content: stretch
       margin: 0px 5px 0px 5px
+      width: calc(100% - 10px)
       .category-type
          display: flex
          flex-direction: column
          .card
-            border: 0px solid grey
             border-radius: 10px
+            border: 0px solid grey
             margin: 10px 5px 10px 5px
             .category-header
-               display: flex
                align-items: center
-               justify-content: center
+               border-radius: 10px
+               display: flex
                font-size: 24px
                font-weight: 600
-               border-radius: 10px
                height: 2.5em
+               justify-content: center
             .expense-header
                background-color: map-get($colors, "negative-transaction")
                color: white
@@ -123,27 +126,27 @@ export default {
                background-color: map-get($colors, "positive-transaction")
                color: white
    .header
-      width: calc(100% - 20px)
+      align-items: center
       background-color: map-get($colors, 'sidebar')
-      color: white
       border-radius: 10px
-      margin: 10px 10px 0px 10px
+      box-sizing: border-box
+      color: white
       display: flex
       flex-direction: row
-      align-items: center
-      justify-content: space-between
-      box-sizing: border-box
-      padding: 20px
       height: 2.5em
+      justify-content: space-between
+      margin: 10px 10px 0px 10px
+      padding: 20px
+      width: calc(100% - 20px)
       span
          font-size: 22px
          font-weight: 700
       .add-category
-         justify-content: center
          align-items: center
          cursor: pointer
          display: flex
          flex-direction: row
+         justify-content: center
          padding: 0px 5px 0px 5px
          .button-text
             margin: 0px 0px 0px 10px

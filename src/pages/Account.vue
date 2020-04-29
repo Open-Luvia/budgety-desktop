@@ -70,8 +70,8 @@
                   "
                   :account_id="parseInt(account_id)"
                />
+               <router-view class="overlay" />
             </div>
-            <router-view class="overlay" />
          </div>
       </div>
    </div>
@@ -111,6 +111,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+
 .modal
    background: black
 .body
