@@ -5,7 +5,7 @@
          v-if="new_category.is_expense"
          class="item"
          style="width: 300px;"
-         placeholder="Category"
+         placeholder="Parent"
          :options="this.expense_options"
          v-model.number="new_category.parent_id"
       />
@@ -13,7 +13,7 @@
          v-else
          class="item"
          style="width: 300px;"
-         placeholder="Category"
+         placeholder="Parent"
          :options="this.income_options"
          v-model.number="new_category.parent_id"
       />
@@ -86,13 +86,12 @@ export default {
       }
    },
    created() {
-      this.income_options = this.income_parent_categories.concat([
-         { name: 'None', id: null }
-      ])
-      this.expense_options = this.expense_parent_categories.concat({
-         name: 'None',
-         id: null
-      })
+      this.income_options = [{ name: 'None', id: null }].concat(
+         this.income_parent_categories
+      )
+      this.expense_options = [{ name: 'None', id: null }].concat(
+         this.expense_parent_categories
+      )
    }
 }
 </script>
