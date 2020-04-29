@@ -38,8 +38,7 @@ export default {
       isActive(route_name) {
          return this.$router.currentRoute.name == route_name
       }
-   },
-   created() {}
+   }
 }
 </script>
 

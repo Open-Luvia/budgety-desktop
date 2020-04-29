@@ -96,10 +96,11 @@ export default {
    width: 100%
    padding: 10px 10px 10px 10px
    .categories
-      width: inherit
+      width: calc(100% - 10px)
       display: grid
       grid-template-columns: 0.5fr 0.5fr
       justify-content: stretch
+      margin: 0px 5px 0px 5px
       .category-type
          display: flex
          flex-direction: column
@@ -122,11 +123,11 @@ export default {
                background-color: map-get($colors, "positive-transaction")
                color: white
    .header
-      width: calc(100% - 10px)
+      width: calc(100% - 20px)
       background-color: map-get($colors, 'sidebar')
       color: white
       border-radius: 10px
-      margin: 0px 5px 0px 5px
+      margin: 10px 10px 0px 10px
       display: flex
       flex-direction: row
       align-items: center

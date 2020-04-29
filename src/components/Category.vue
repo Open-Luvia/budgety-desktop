@@ -26,11 +26,18 @@
             v-for="child in category.children"
             :key="child.id"
          >
-            <BaseIcon height="18" width="18" style="transform: rotate(-90deg);">
+            <BaseIcon
+               height="18"
+               width="18"
+               style="transform: rotate(-90deg);"
+               color="#b5b5b5"
+            >
                <IconChervonCircleDown />
             </BaseIcon>
             <span>
                {{ child.name }}
+
+               
             </span>
          </div>
       </div>

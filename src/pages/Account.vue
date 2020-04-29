@@ -176,7 +176,7 @@ export default {
          padding: 10px 20px 10px 20px
          border-radius: 10px
          span
-            font-size: 24px
+            font-size: 22px
             font-weight: 700
             color: white
    .add-transaction
