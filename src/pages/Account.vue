@@ -46,19 +46,22 @@
             </div>
          </aside>
          <div class="transaction-list">
-            <div class="add-transaction">
-               <router-link
-                  :to="{
-                     name: 'newTransaction',
-                     params: { id: this.account_id }
-                  }"
-               >
-                  <font-awesome-icon
-                     icon="plus-circle"
-                     :style="{ color: '#A7AEB7' }"
-                  />
-                  <span>New transaction</span>
-               </router-link>
+            <div class="header">
+               <span>Transactions</span>
+               <div class="add-transaction">
+                  <router-link
+                     :to="{
+                        name: 'newTransaction',
+                        params: { id: this.account_id }
+                     }"
+                  >
+                     <font-awesome-icon
+                        icon="plus-circle"
+                        :style="{ color: '#A7AEB7' }"
+                     />
+                     <span>New</span>
+                  </router-link>
+               </div>
             </div>
             <div>
                <TransactionList
@@ -163,6 +166,19 @@ export default {
    .transaction-list
       position: relative
       width: calc(100vw - #{$sidebar-width})
+      .header
+         display: flex
+         flex-direction: row
+         align-items: center
+         justify-content: space-between
+         background-color: map-get($colors, "sidebar")
+         margin: 20px 20px 10px 20px
+         padding: 10px 20px 10px 20px
+         border-radius: 10px
+         span
+            font-size: 24px
+            font-weight: 700
+            color: white
    .add-transaction
       align-items: center
       color: map-get($colors, 'new-line')
@@ -172,7 +188,6 @@ export default {
       font-size: 22px
       font-weight: 600
       justify-content: flex-start
-      margin: 30px 30px 0px 30px
       span
          margin: 0px 0px 0px 10px
 </style>

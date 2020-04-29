@@ -4,7 +4,12 @@
       <div class="body">
          <aside class="sidebar">
             <div class="sidebar-elements">
-               <div class="sidebar-element">
+               <div
+                  :class="{
+                     'sidebar-element': true,
+                     'sidebar-element selected': isActive('settingsCategories')
+                  }"
+               >
                   <router-link :to="{ name: 'settingsCategories' }">
                      Categories
                   </router-link>
@@ -29,8 +34,12 @@ export default {
       Navbar
    },
    methods: {
-      ...mapActions(['logout'])
-   }
+      ...mapActions(['logout']),
+      isActive(route_name) {
+         return this.$router.currentRoute.name == route_name
+      }
+   },
+   created() {}
 }
 </script>
 
@@ -39,11 +48,16 @@ export default {
 .body
    display: flex
    .sidebar
-      background-color: white
-      border-right: 1px solid black
+      background-color: map-get($colors, 'sidebar')
+      border-right: 0px solid black
       width: $sidebar-width
       .sidebar-element
-         color: black
+         color: white
+         font-size: 24px
+         font-weight: 600
+      .selected
+         color: black !important
+         background-color: white !important
    .setting
       width: calc(100vw - #{$sidebar-width})
 </style>

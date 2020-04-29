@@ -1,16 +1,23 @@
 <template>
    <div class="settings-categories">
+      <div class="header">
+         <span>Your Categories</span>
+         <div
+            v-if="!show_new_category_form"
+            class="add-category"
+            @click="showNewCategoryForm"
+         >
+            <font-awesome-icon icon="plus-circle" />
+            <div class="button-text">New</div>
+         </div>
+      </div>
       <div v-if="show_new_category_form" class="new-category">
          <NewCategoryForm @close="showNewCategoryForm" />
-      </div>
-      <div v-else class="add-category" @click="showNewCategoryForm">
-         <font-awesome-icon icon="plus-circle" />
-         <span>New Category</span>
       </div>
       <div class="categories">
          <div class="category-type">
             <div class="card">
-               <div class="header">
+               <div class="category-header expense-header">
                   <span>
                      Expense
                   </span>
@@ -24,7 +31,7 @@
          </div>
          <div class="category-type">
             <div class="card">
-               <div class="header">
+               <div class="category-header income-header">
                   <span>
                      Income
                   </span>
@@ -100,26 +107,43 @@ export default {
             border: 0px solid grey
             border-radius: 10px
             margin: 10px 5px 10px 5px
-            .header
+            .category-header
                display: flex
                align-items: center
                justify-content: center
                font-size: 24px
                font-weight: 600
-               background-color: map-get($colors, 'sidebar')
-               color: white
                border-radius: 10px
                height: 2.5em
-   .new-category
-      width: 100%
-   .add-category
-      width: inherit
-      justify-content: center
-      align-items: center
-      cursor: pointer
+            .expense-header
+               background-color: map-get($colors, "negative-transaction")
+               color: white
+            .income-header
+               background-color: map-get($colors, "positive-transaction")
+               color: white
+   .header
+      width: calc(100% - 10px)
+      background-color: map-get($colors, 'sidebar')
+      color: white
+      border-radius: 10px
+      margin: 0px 5px 0px 5px
       display: flex
       flex-direction: row
-      padding: 0px 5px 0px 5px
+      align-items: center
+      justify-content: space-between
+      box-sizing: border-box
+      padding: 20px
+      height: 2.5em
       span
-         margin: 0px 0px 0px 10px
+         font-size: 22px
+         font-weight: 700
+      .add-category
+         justify-content: center
+         align-items: center
+         cursor: pointer
+         display: flex
+         flex-direction: row
+         padding: 0px 5px 0px 5px
+         .button-text
+            margin: 0px 0px 0px 10px
 </style>
