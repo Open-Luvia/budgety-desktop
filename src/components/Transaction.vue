@@ -38,21 +38,27 @@
             <span> {{ format(transaction.amount) }} € </span>
          </div>
       </div>
-      <div class="items" v-show="show_items">
-         <div v-for="item in transaction.items" :key="item.id" class="item">
-            <div class="item-info">
-               <div class="category">
-                  {{ categoryName(item.category_id) }}
+      <transition name="height-expansion">
+         <div
+            class="items"
+            v-show="show_items"
+            :style="{ height: this.items_height + 'px' }"
+         >
+            <div v-for="item in transaction.items" :key="item.id" class="item">
+               <div class="item-info">
+                  <div class="category">
+                     {{ categoryName(item.category_id) }}
+                  </div>
+                  <div class="name">
+                     {{ item.name }}
+                  </div>
                </div>
-               <div class="name">
-                  {{ item.name }}
+               <div :class="priceStyle(item.amount)">
+                  <span> {{ format(item.amount) }} € </span>
                </div>
-            </div>
-            <div :class="priceStyle(item.amount)">
-               <span> {{ format(item.amount) }} € </span>
             </div>
          </div>
-      </div>
+      </transition>
    </div>
 </template>
 
@@ -67,7 +73,8 @@ export default {
    data() {
       return {
          show_items: false,
-         show_edit: false
+         show_edit: false,
+         items_height: this.transaction.items.length * 36
       }
    },
    computed: {
@@ -143,6 +150,7 @@ export default {
    .items
       font-size: 20px
       margin: 0px 0px 0px 50px
+      overflow: hidden
       .item
          align-items: center
          display: flex
