@@ -86,7 +86,7 @@ $header-font-size: 24px
 
 .slide-fade-enter-active,
 .slide-fade-leave-active
-    transition: all 0.4s linear
+    transition: all 0.2s linear
 
 .slide-fade-leave-to
     transform: translateY(-10px)
@@ -95,11 +95,17 @@ $header-font-size: 24px
 
 .pop-enter-active,
 .pop-leave-active
-    transition: height 2s linear
+    transition: height 0.2s linear
     opacity: 1
 .pop-enter
     opacity: 0
-    height: 0px
 .pop-leave-to
     opacity: 0
-    height: 0px
+
+.height-expansion-enter-active,
+.height-expansion-leave-active
+    transition: all 0.2s linear
+.height-expansion-enter
+    height: 0px !important
+.height-expansion-leave-to
+    height: 0px !important

@@ -17,9 +17,10 @@
             <IconChervonCircleDown />
          </BaseIcon>
       </div>
-      <transition name="slide-fade" mode="out-in">
+      <transition name="height-expansion" mode="out-in">
          <div
             class="children"
+            :style="{ height: this.children_height + 'px' }"
             v-if="
                this.show_sub_categories && this.category.children.length != 0
             "
@@ -58,7 +59,8 @@ export default {
    },
    data() {
       return {
-         show_sub_categories: true
+         show_sub_categories: true,
+         children_height: parseInt(this.category.children.length) * 38
       }
    },
    methods: {
@@ -92,11 +94,9 @@ export default {
          transition: .4s linear all
       .dropdown
          transition: .4s linear all
-   .children.v-enter, .children.v-leave
-      height: 0px
    .children
-      overflow: hidden
       width: 100%
+      overflow: hidden
       .child-category
          align-items: center
          display: flex
