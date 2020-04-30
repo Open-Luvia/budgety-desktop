@@ -12,7 +12,7 @@
          </div>
       </div>
       <transition name="pop" mode="out-in">
-         <div v-if="show_new_category_form">
+         <div v-if="show_new_category_form" class="category-form">
             <NewCategoryForm @close="showNewCategoryForm" />
          </div>
       </transition>
@@ -150,4 +150,7 @@ export default {
          padding: 0px 5px 0px 5px
          .button-text
             margin: 0px 0px 0px 10px
+   .category-form
+      width: calc(100%)
+      margin: 10px 0px 0px 0px
 </style>
