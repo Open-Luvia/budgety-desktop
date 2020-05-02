@@ -1,21 +1,28 @@
 <template>
    <div class="category">
-      <div class="category-name" @click="showSubCategories">
-         <span>
+      <div class="category-name" @click.self="showSubCategories">
+         <div v-if="show_edit">
+            <BaseInput v-model="category.name" :placeholder="category.name" />
+         </div>
+         <span v-else>
             {{ this.category.name }}
          </span>
-         <BaseIcon
-            height="20"
-            width="20"
-            :class="{
-               'dropdown-reverse':
-                  this.category.children.length != 0 &&
-                  this.show_sub_categories,
-               dropdown: !this.show_sub_categories
-            }"
-         >
-            <IconChervonCircleDown />
-         </BaseIcon>
+         <div class="edit-options">
+            <font-awesome-icon icon="edit" v-if="show_edit" />
+            <font-awesome-icon icon="trash" v-if="show_edit" />
+            <BaseIcon
+               height="20"
+               width="20"
+               :class="{
+                  'dropdown-reverse':
+                     this.category.children.length != 0 &&
+                     this.show_sub_categories,
+                  dropdown: !this.show_sub_categories
+               }"
+            >
+               <IconChervonCircleDown />
+            </BaseIcon>
+         </div>
       </div>
       <transition name="height-expansion" mode="out-in">
          <div
@@ -30,17 +37,32 @@
                v-for="child in category.children"
                :key="child.id"
             >
-               <BaseIcon
-                  height="18"
-                  width="18"
-                  style="transform: rotate(-90deg);"
-                  color="#b5b5b5"
-               >
-                  <IconChervonCircleDown />
-               </BaseIcon>
-               <span>
-                  {{ child.name }}
-               </span>
+               <div class="child-name">
+                  <BaseIcon
+                     height="18"
+                     width="18"
+                     style="transform: rotate(-90deg);"
+                     color="#b5b5b5"
+                  >
+                     <IconChervonCircleDown />
+                  </BaseIcon>
+                  <div v-if="show_edit" style="height: 38px;">
+                     <BaseInput
+                        v-model="child.name"
+                        :placeholder="child.name"
+                     />
+                  </div>
+                  <span v-else>
+                     {{ child.name }}
+                  </span>
+               </div>
+               <div class="edit-options">
+                  <font-awesome-icon
+                     icon="trash"
+                     v-if="show_edit"
+                     color="#FF5B57"
+                  />
+               </div>
             </div>
          </div>
       </transition>
@@ -55,12 +77,13 @@ export default {
       IconChervonCircleDown
    },
    props: {
-      category: Object
+      category: Object,
+      show_edit: Boolean
    },
    data() {
       return {
          show_sub_categories: true,
-         children_height: parseInt(this.category.children.length) * 38
+         children_height: parseInt(this.category.children.length) * (38 + 5)
       }
    },
    methods: {
@@ -89,19 +112,29 @@ export default {
       display: flex
       justify-content: space-between
       width: 100%
-      .dropdown-reverse
-         transform: rotate(-180deg)
-         transition: .4s linear all
-      .dropdown
-         transition: .4s linear all
+      .edit-options
+         display: flex
+         align-items: center
+         .dropdown-reverse
+            transform: rotate(-180deg)
+            transition: .4s linear all
+         .dropdown
+            transition: .4s linear all
    .children
       width: 100%
       overflow: hidden
       .child-category
          align-items: center
          display: flex
-         justify-content: flex-start
+         justify-content: space-between
          padding: 5px 5px 0px 0px
-         span
-            margin: 0px 0px 0px 10px
+         .child-name
+            display: flex
+            align-items: center
+            justify-content: flex-start
+            span
+               margin: 0px 0px 0px 10px
+         .edit-options
+            display: flex
+            align-items: center
 </style>

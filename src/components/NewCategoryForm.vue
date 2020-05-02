@@ -98,14 +98,14 @@ export default {
 
 <style lang="sass" scoped>
 .new-category-form
-   width: 100%
+   align-items: center
    display: flex
    flex-direction: row
-   align-items: center
    font-size: 18px
    justify-content: space-between
    margin: 0
    padding: 0
+   width: 100%
    .item
       margin: 0px 10px 0px 10px
 </style>

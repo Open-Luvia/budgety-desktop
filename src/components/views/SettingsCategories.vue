@@ -2,13 +2,19 @@
    <div class="settings-categories">
       <div class="header">
          <span>Your Categories</span>
-         <div
-            v-if="!show_new_category_form"
-            class="add-category"
-            @click="showNewCategoryForm"
-         >
-            <font-awesome-icon icon="plus-circle" />
-            <div class="button-text">New</div>
+         <div class="buttons">
+            <div class="edit-categories" @click="showCategoryEdit">
+               <font-awesome-icon icon="edit" />
+               <div class="button-text">Edit</div>
+            </div>
+            <div
+               v-if="!show_new_category_form"
+               class="add-category"
+               @click="showNewCategoryForm"
+            >
+               <font-awesome-icon icon="plus-circle" />
+               <div class="button-text">New</div>
+            </div>
          </div>
       </div>
       <transition name="pop" mode="out-in">
@@ -25,6 +31,7 @@
                   </span>
                </div>
                <Category
+                  :show_edit="show_category_edit"
                   v-for="category in expense_category_tree"
                   :category="category"
                   :key="category.id"
@@ -39,6 +46,7 @@
                   </span>
                </div>
                <Category
+                  :showEdit="show_category_edit"
                   v-for="category in income_category_tree"
                   :category="category"
                   :key="category.id"
@@ -62,7 +70,8 @@ export default {
    },
    data() {
       return {
-         show_new_category_form: false
+         show_new_category_form: false,
+         show_category_edit: false
       }
    },
    computed: {
@@ -76,6 +85,9 @@ export default {
       ...mapActions('categories', ['getCategories', 'newCategory']),
       showNewCategoryForm() {
          this.show_new_category_form = !this.show_new_category_form
+      },
+      showCategoryEdit() {
+         this.show_category_edit = !this.show_category_edit
       }
    },
    created() {
@@ -141,16 +153,28 @@ export default {
       span
          font-size: 22px
          font-weight: 700
-      .add-category
-         align-items: center
-         cursor: pointer
+      .buttons
          display: flex
          flex-direction: row
-         justify-content: center
-         padding: 0px 5px 0px 5px
-         .button-text
-            margin: 0px 0px 0px 10px
+         .edit-categories
+            align-items: center
+            cursor: pointer
+            display: flex
+            flex-direction: row
+            justify-content: center
+            padding: 0px 15px 0px 15px
+            .button-text
+               margin: 0px 0px 0px 10px
+         .add-category
+            align-items: center
+            cursor: pointer
+            display: flex
+            flex-direction: row
+            justify-content: center
+            padding: 0px 15px 0px 15px
+            .button-text
+               margin: 0px 0px 0px 10px
    .category-form
-      width: calc(100%)
       margin: 10px 0px 0px 0px
+      width: calc(100%)
 </style>
