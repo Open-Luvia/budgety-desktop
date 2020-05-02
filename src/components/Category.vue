@@ -2,14 +2,22 @@
    <div class="category">
       <div class="category-name" @click.self="showSubCategories">
          <div v-if="show_edit">
-            <BaseInput v-model="category.name" :placeholder="category.name" />
+            <BaseInput
+               v-model="category.name"
+               :placeholder="category.name"
+               :custom_style="input_style"
+            />
          </div>
          <span v-else>
             {{ this.category.name }}
          </span>
          <div class="edit-options">
-            <font-awesome-icon icon="edit" v-if="show_edit" />
-            <font-awesome-icon icon="trash" v-if="show_edit" />
+            <font-awesome-icon
+               icon="trash"
+               v-if="show_edit"
+               color="#FF5B57"
+               style="margin: 0px 10px 0px 10px;"
+            />
             <BaseIcon
                height="20"
                width="20"
@@ -50,6 +58,7 @@
                      <BaseInput
                         v-model="child.name"
                         :placeholder="child.name"
+                        :custom_style="input_style"
                      />
                   </div>
                   <span v-else>
@@ -83,7 +92,13 @@ export default {
    data() {
       return {
          show_sub_categories: true,
-         children_height: parseInt(this.category.children.length) * (38 + 5)
+         children_height: parseInt(this.category.children.length) * (38 + 5),
+         input_style: {
+            height: '100%',
+            padding: '4px 16px 4px 16px',
+            margin: '0px 0px 0px 4px',
+            fontSize: '18px'
+         }
       }
    },
    methods: {

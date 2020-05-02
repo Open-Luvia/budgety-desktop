@@ -6,6 +6,7 @@
          :placeholder="placeholder"
          v-on="listeners"
          step="0.01"
+         :style="custom_style"
       />
    </div>
 </template>
@@ -16,7 +17,11 @@ export default {
    mixins: [formListener],
    props: {
       placeholder: String,
-      type: String
+      type: String,
+      custom_style: {
+         type: Object,
+         required: false
+      }
    }
 }
 </script>
