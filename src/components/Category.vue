@@ -42,8 +42,8 @@
          >
             <div
                class="child-category"
-               v-for="child in category.children"
-               :key="child.id"
+               v-for="(child, index) in category.children"
+               :key="index"
             >
                <div class="child-name">
                   <BaseIcon
@@ -70,6 +70,7 @@
                      icon="trash"
                      v-if="show_edit"
                      color="#FF5B57"
+                     @click="deleteChild(index)"
                   />
                </div>
             </div>
@@ -104,6 +105,10 @@ export default {
    methods: {
       showSubCategories() {
          this.show_sub_categories = !this.show_sub_categories
+      },
+      deleteChild(index) {
+         //TODO aggiornare la lista come cambia il numero di children
+         this.category.children.splice(index, 1)
       }
    }
 }

@@ -45,6 +45,7 @@
                      Income
                   </span>
                </div>
+               <!-- TODO: aggiungere edit per le categorie di entrata  -->
                <Category
                   :showEdit="show_category_edit"
                   v-for="category in income_category_tree"
