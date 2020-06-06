@@ -8,6 +8,11 @@ import store from './store/store'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
+/**
+ * VCalendar library
+ */
+import VCalendar from 'v-calendar'
+
 /*
  *  bootstrap-vue
  */
@@ -16,9 +21,16 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+/*
+ * DayJS
+ */
+import dayjs from 'dayjs'
+
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VCalendar)
+Vue.use(dayjs)
 
 /*
  *  fontawesome
