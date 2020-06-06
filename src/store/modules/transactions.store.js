@@ -58,7 +58,6 @@ export default {
             user_id: rootState.user_id,
             items: transaction.items
          }
-
          await TransactionsApi.createTransaction(payload)
       },
       async deleteTransaction (
