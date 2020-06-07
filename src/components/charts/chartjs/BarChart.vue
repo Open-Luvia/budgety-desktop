@@ -1,19 +1,22 @@
+<template>
+   <div class="bar-chart">
+      <v-chart :options="options" autoresize />
+   </div>
+</template>
+
 <script>
-import { Bar } from 'vue-chartjs'
-// import Chart from 'chart.js'
-
-// Chart.Tooltip.positioners.cursor = function (elements, coords) {
-//    return coords
-// }
-
 export default {
-   extends: Bar,
-   props: ['chartdata', 'options'],
-
-   mounted () {
-      this.renderChart(this.chartdata, this.options)
+   props: {
+      options: Object
    }
 }
 </script>
 
-<style></style>
+<style scoped lang="sass">
+.bar-chart
+   width: 100%
+   height: 100%
+.echarts
+   width: 100%
+   height: 100%
+</style>

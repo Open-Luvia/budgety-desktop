@@ -13,6 +13,15 @@ export default {
       SET_TRANSACTIONS_BY_ACCOUNT (state, params) {
          const account_id = params.account_id
          const data = params.data
+
+         data.map(
+            transaction =>
+               (transaction.date = dayjs(
+                  transaction.date,
+                  'YYYY-MM-DD HH:mm:ss'
+               ))
+         )
+
          state.transactions_tree.find(
             list => list.account_id == account_id
          ).transactions = data
@@ -53,7 +62,7 @@ export default {
       async newTransaction ({ rootState }, transaction) {
          const payload = {
             description: transaction.description,
-            date: dayjs(transaction.date).format('YYYY-MM-DD HH:mm:ss'),
+            date: transaction.date.format('YYYY-MM-DD HH:mm:ss'),
             account_id: transaction.account_id,
             user_id: rootState.user_id,
             items: transaction.items
@@ -77,7 +86,7 @@ export default {
          const payload = {
             id: transaction.id,
             description: transaction.description,
-            date: transaction.date,
+            date: dayjs(transaction.date).format('YYYY-MM-DD HH:mm:ss'),
             account_id: transaction.account_id,
             items: transaction.items,
             user_id: rootState.user_id

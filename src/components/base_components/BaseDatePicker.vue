@@ -3,7 +3,7 @@
       <v-date-picker
          :popover="{ placement: 'bottom', visibility: 'hover' }"
          :mode="mode"
-         v-model="date"
+         :value="date"
          @input="onInput"
          locale="it"
       >
@@ -20,11 +20,11 @@ import dayjs from 'dayjs'
 export default {
    props: {
       mode: String,
-      value: Date
+      value: Object
    },
    data () {
       return {
-         date: this.value
+         date: this.value.toDate()
       }
    },
    computed: {
@@ -32,9 +32,13 @@ export default {
          return dayjs(this.date).format('DD/MM/YYYY')
       }
    },
+   created () {
+      console.log(this.date)
+   },
    methods: {
       onInput (date) {
-         this.$emit('input', date)
+         this.date = date
+         this.$emit('input', dayjs(date))
       }
    }
 }

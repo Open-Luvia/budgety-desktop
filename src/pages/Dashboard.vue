@@ -3,7 +3,7 @@
       <Navbar />
       <div class="monthly-chart">
          <div v-for="month in monthly_data" :key="month.label">
-            <IncomeExpense :chartdata="month" :maxValue="maxValue" />
+            <IncomeExpense :chartdata="month" class="month-chart" />
          </div>
       </div>
    </div>
@@ -12,11 +12,26 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import IncomeExpense from '@/components/charts/IncomeExpense.vue'
+import { mapGetters } from 'vuex'
 
 export default {
    components: {
       IncomeExpense,
       Navbar
+   },
+   computed: {
+      ...mapGetters('transactions', [
+         'transactions_by_account',
+         'transactions_by_account_is_empty'
+      ]),
+      graphData () {
+         // var transactions = this.transactions_by_account(5)
+
+         return ''
+      }
+   },
+   created () {
+      console.log()
    },
    data () {
       return {
@@ -43,16 +58,6 @@ export default {
             }
          ]
       }
-   },
-   computed: {
-      maxValue () {
-         var max = -1
-         this.monthly_data.forEach(month => {
-            if (max < month.data[0]) max = month.data[0]
-            if (max < month.data[1]) max = month.data[1]
-         })
-         return max + max * 0.05
-      }
    }
 }
 </script>
@@ -63,7 +68,8 @@ export default {
    height: 100px
    width: 100%
    display: flex
-   .chart
-      height: 100%
-      width: 400px
+.month-chart
+   height: 150px
+   width: 40px
+   margin: 30px 5px
 </style>

@@ -11,7 +11,7 @@
                   @input="updateDescription"
                />
             </div>
-            <BaseDatePicker v-model="transaction.date" />
+            <BaseDatePicker :value="transaction.date" @input="assignDate"/>
             <div class="type">
                <BaseToggleSwitch :default_option="0" @selected="changeType" />
             </div>
@@ -83,6 +83,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ModalHeader from '@/components/ModalHeader.vue'
+import dayjs from 'dayjs'
 
 export default {
    components: {
@@ -95,7 +96,7 @@ export default {
       return {
          transaction: {
             description: null,
-            date: new Date(),
+            date: dayjs(new Date()),
             account_id: null,
             items: []
          },
@@ -146,12 +147,12 @@ export default {
             this.is_expense = false
          }
       },
-      updateDescription (description) {
+      updateDescription(description) {
          this.transaction.description = description
          this.transaction.items[0].name = description
       },
-      updateDate (date) {
-         console.log(date)
+      assignDate(date) {
+         this.transaction.date = date
       }
    },
    created () {

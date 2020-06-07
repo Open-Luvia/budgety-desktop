@@ -14,6 +14,7 @@
                   @input="updateDescription"
                />
             </div>
+            <BaseDatePicker :value="transaction.date" @input="assignDate" />
             <div class="type">
                <BaseToggleSwitch
                   :default_option="is_expense ? 0 : 1"
@@ -125,6 +126,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import ModalHeader from '@/components/ModalHeader.vue'
 import { amountFormatter } from '@/mixins/amountFormatter.mixin.js'
+// import dayjs from 'dayjs'
 
 export default {
    mixins: [amountFormatter],
@@ -134,7 +136,7 @@ export default {
    props: {
       transaction: null //received from router-link params
    },
-   data() {
+   data () {
       return {
          edited_transaction: {},
          edited_amount: 0
@@ -147,14 +149,14 @@ export default {
          'categories_is_empty',
          'category_is_expense'
       ]),
-      is_expense() {
+      is_expense () {
          return this.category_is_expense(this.transaction.items[0].category_id)
       }
    },
    methods: {
       ...mapActions('categories', ['getCategories']),
       ...mapActions('transactions', ['updateTransaction']),
-      addItem() {
+      addItem () {
          const item = {
             name: 'Nome',
             amount: null,
@@ -162,10 +164,10 @@ export default {
          }
          this.edited_transaction.items.push(item)
       },
-      deleteItem(index) {
+      deleteItem (index) {
          this.edited_transaction.items.splice(index, 1)
       },
-      submit() {
+      submit () {
          if (this.is_expense == true) {
             this.edited_transaction.items.forEach(item => {
                item.amount = -Math.abs(item.amount)
@@ -182,21 +184,24 @@ export default {
          this.updateTransaction(this.transaction)
          this.$router.back()
       },
-      changeType(selected_option) {
+      changeType (selected_option) {
          if (selected_option === 0) {
             this.is_expense = true
          } else {
             this.is_expense = false
          }
       },
-      updateDescription(description) {
+      updateDescription (description) {
          this.edited_transaction.description = description
          if (this.edited_transaction.items[0] == 'nome') {
             this.edited_transaction.items[0].name = description
          }
+      },
+      assignDate (date) {
+         this.edited_transaction.date = date
       }
    },
-   created() {
+   created () {
       if (this.categories_is_empty) {
          this.getCategories()
       }
@@ -215,18 +220,18 @@ export default {
    .body
       padding: 10px
       .transaction-info
-         display: flex
+         display: grid
+         width: 100%
          margin: 10px 10px 10px 10px
+         grid-template: "description datepicker type" auto / 0.6fr 0.2fr 0.2fr
+         column-gap: 10px
+         align-items: center
          .description
-            align-items: center
-            display: flex
-            flex-grow: 1
-            justify-content: stretch
+            grid-area: description
+         .datepicker
+            grid-area: datepicker
          .type
-            display: flex
-            flex-basis: auto
-            flex-grow: 0
-            margin: 0px 0px 0px 10px
+            grid-area: type
       .item-title
          display: flex
          font-size: 22px

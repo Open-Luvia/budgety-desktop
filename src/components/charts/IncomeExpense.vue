@@ -1,6 +1,9 @@
 <template>
    <div class="income-expense">
-      <BarChart :options="options" :chartdata="formatted_data" />
+      <div class="chart">
+         <BarChart :options="options" />
+      </div>
+      <div class="chart-label">{{ chartdata.label }}</div>
    </div>
 </template>
 
@@ -15,70 +18,64 @@ export default {
       chartdata: {
          type: Object,
          required: true
-      },
-      maxValue: Number
+      }
    },
    data () {
       return {
-         formatted_data: {
-            labels: [this.chartdata.label],
-            datasets: [
-               //In questo modo vengono prefissati lo stile di spesa ed entrata
+         options: {
+            grid: {
+               left: 0,
+               top: 0,
+               right: 0,
+               bottom: 0
+            },
+            xAxis: {
+               show: false,
+               type: 'category'
+            },
+            yAxis: {
+               show: false,
+               type: 'value'
+            },
+            series: [
                {
-                  label: 'Spesa',
-                  backgroundColor: '#FF5B57',
-                  barThickness: 8,
-                  data: [this.chartdata.data[0]]
+                  type: 'bar',
+                  name: 'Income',
+                  smooth: true,
+                  color: '#4FD889',
+                  data: [this.chartdata.data[0]], // DATA HERE
+                  barWidth: 8
                },
                {
-                  label: 'Entrata',
-                  backgroundColor: '#4FD889',
-                  barThickness: 8,
-                  data: [this.chartdata.data[1]]
+                  type: 'bar',
+                  name: 'Expence',
+                  smooth: true,
+                  data: [this.chartdata.data[1]], // DATA HERE
+                  color: '#FF5B57',
+                  barWidth: 8,
+                  barGap: 0.5
                }
             ]
          }
       }
    },
-   computed: {
-      options () {
-         return {
-            legend: {
-               display: false
-            },
-            scales: {
-               xAxes: [
-                  {
-                     gridLines: {
-                        display: false
-                     }
-                  }
-               ],
-               yAxes: [
-                  {
-                     gridLines: {
-                        display: false
-                     },
-                     ticks: {
-                        display: false,
-                        min: 0,
-                        max: this.maxValue
-                     }
-                  }
-               ]
-            },
-            tooltips: {
-               mode: 'index',
-               enabled: true,
-               intersect: true
-            }
-         }
-      }
+   created () {
+      console.log(this.chartdata)
    }
 }
 </script>
 
 <style lang="sass" scoped>
 .income-expense
-   width: 50px
+   height: 100%
+   width: 100%
+   display: grid
+   grid-template: "chart" 0.8fr "laber" 0.2fr / 100%
+   justify-items: stretch
+   align-items: stretch
+
+.chart-label
+   text-transform: uppercase
+   font-size: 12px
+   align-self: center
 </style>
