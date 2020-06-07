@@ -32,9 +32,6 @@ export default {
          return dayjs(this.date).format('DD/MM/YYYY')
       }
    },
-   created () {
-      console.log(this.date)
-   },
    methods: {
       onInput (date) {
          this.date = date

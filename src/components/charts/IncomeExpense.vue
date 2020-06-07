@@ -1,24 +1,20 @@
 <template>
    <div class="income-expense">
       <div class="chart">
-         <BarChart :options="options" />
+         <v-chart :options="options" autoresize />
       </div>
       <div class="chart-label">{{ chartdata.label }}</div>
    </div>
 </template>
 
 <script>
-import BarChart from '@/components/charts/chartjs/BarChart.vue'
-
 export default {
-   components: {
-      BarChart
-   },
    props: {
       chartdata: {
          type: Object,
          required: true
-      }
+      },
+      max: Number
    },
    data () {
       return {
@@ -34,6 +30,8 @@ export default {
                type: 'category'
             },
             yAxis: {
+               min: 0,
+               max: this.max,
                show: false,
                type: 'value'
             },
@@ -48,7 +46,7 @@ export default {
                },
                {
                   type: 'bar',
-                  name: 'Expence',
+                  name: 'Expense',
                   smooth: true,
                   data: [this.chartdata.data[1]], // DATA HERE
                   color: '#FF5B57',
@@ -58,14 +56,18 @@ export default {
             ]
          }
       }
-   },
-   created () {
-      console.log(this.chartdata)
    }
 }
 </script>
 
 <style lang="sass" scoped>
+/**
+ * MUST INCLUDE FOR ECHART
+ */
+.echarts
+   width: 100%
+   height: 100%
+
 .income-expense
    height: 100%
    width: 100%

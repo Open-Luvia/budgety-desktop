@@ -3,6 +3,17 @@ import AccountsApi from '@/api/modules/accounts.api.js'
 export default {
    namespaced: true,
    state: {
+      /*
+         List of account in the form of:
+         account: {
+            account_type: String
+            account_id: Number
+            amount: Number 
+            initial_balance: Number
+            name: String
+            parent_id: Number
+         }
+      */
       accounts: []
    },
    mutations: {
