@@ -1,4 +1,4 @@
-function maxValue (report_data) {
+function maxValue(report_data) {
    var max = -1
    report_data.forEach(data => {
       max = Math.max(max, ...data.data)
@@ -14,16 +14,21 @@ export default {
          by_month: [],
          by_week: [],
          by_year: []
+      },
+      expense_by_category: {
+         last_week: [],
+         last_month: [],
+         last_year: []
       }
    },
    getters: {},
    mutations: {
-      SET_INCOME_EXPENSE_BY_MONTH (state, report) {
+      SET_INCOME_EXPENSE_BY_MONTH(state, report) {
          state.income_expense.by_month = report
       }
    },
    actions: {
-      generateReportByMonth ({ commit, rootState, rootGetters }) {
+      generateReportByMonth({ commit, rootState, rootGetters }) {
          var data = []
          rootState.accounts.accounts.forEach(account => {
             var transactions_by_account =

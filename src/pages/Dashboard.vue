@@ -36,20 +36,32 @@
             </div>
          </div>
       </div>
+      <div class="category-data">
+         <div class="category-expense">
+            <ExpenseByCategory />
+         </div>
+         <div class="category-income">
+            <IncomeByCategory />
+         </div>
+      </div>
    </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
 import IncomeExpense from '@/components/charts/IncomeExpense.vue'
+import ExpenseByCategory from '@/components/charts/ExpenseByCategory.vue'
+import IncomeByCategory from '@/components/charts/IncomeByCategory.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
    components: {
       IncomeExpense,
+      ExpenseByCategory,
+      IncomeByCategory,
       Navbar
    },
-   data () {
+   data() {
       return {
          active_month: -1,
          active_month_data: null
@@ -65,14 +77,14 @@ export default {
    methods: {
       ...mapActions('reports', ['generateReportByMonth']),
 
-      changeActiveMonth (month) {
+      changeActiveMonth(month) {
          this.active_month = month
          this.active_month_data = this.income_expense.by_month.report.find(
             obj => obj.label === this.active_month
          )
       }
    },
-   created () {
+   created() {
       this.generateReportByMonth()
       this.changeActiveMonth(this.income_expense.by_month.report[0].label)
    }
@@ -148,4 +160,8 @@ export default {
 
 .active-chart
    background-color: #e5e5e5 // SAME COLOR
+
+.category-data
+   display: grid
+   grid: "expense income" auto / 0.5fr 0.5fr
 </style>
