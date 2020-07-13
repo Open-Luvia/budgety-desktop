@@ -38,10 +38,12 @@
       </div>
       <div class="category-data">
          <div class="category-expense">
-            <ExpenseByCategory />
+            <TransactionsByCategory
+               :chartdata="expense_by_category.last_year"
+            />
          </div>
          <div class="category-income">
-            <IncomeByCategory />
+            <TransactionsByCategory :chartdata="income_by_category.last_year" />
          </div>
       </div>
    </div>
@@ -50,15 +52,13 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import IncomeExpense from '@/components/charts/IncomeExpense.vue'
-import ExpenseByCategory from '@/components/charts/ExpenseByCategory.vue'
-import IncomeByCategory from '@/components/charts/IncomeByCategory.vue'
+import TransactionsByCategory from '@/components/charts/TransactionsByCategory.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
    components: {
       IncomeExpense,
-      ExpenseByCategory,
-      IncomeByCategory,
+      TransactionsByCategory,
       Navbar
    },
    data() {
@@ -72,10 +72,18 @@ export default {
          'transactions_by_account',
          'transactions_by_account_is_empty'
       ]),
-      ...mapState('reports', ['income_expense'])
+      ...mapState('reports', [
+         'income_expense',
+         'expense_by_category',
+         'income_by_category'
+      ])
    },
    methods: {
-      ...mapActions('reports', ['generateReportByMonth']),
+      ...mapActions('reports', [
+         'generateReportByMonth',
+         'generateExpenseReportByCategory',
+         'generateIncomeReportByCategory'
+      ]),
 
       changeActiveMonth(month) {
          this.active_month = month
@@ -86,6 +94,8 @@ export default {
    },
    created() {
       this.generateReportByMonth()
+      this.generateExpenseReportByCategory()
+      this.generateIncomeReportByCategory()
       this.changeActiveMonth(this.income_expense.by_month.report[0].label)
    }
 }
@@ -163,5 +173,5 @@ export default {
 
 .category-data
    display: grid
-   grid: "expense income" auto / 0.5fr 0.5fr
+   grid: "expense income" 400px / 50% 50%
 </style>
