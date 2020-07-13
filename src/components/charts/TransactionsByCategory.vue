@@ -1,5 +1,5 @@
 <template>
-   <div class="expense-by-category">
+   <div class="transactions-by-category">
       <div class="chart">
          <v-chart :options="options" autoresize />
       </div>
@@ -68,7 +68,7 @@ export default {
 .echarts
    width: 100%
    height: 100%
-.expense-by-category
+.transactions-by-category
    width: 100%
    height: 100%
 .chart

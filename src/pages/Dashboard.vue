@@ -38,11 +38,13 @@
       </div>
       <div class="category-data">
          <div class="category-expense">
+            <span class="title">Spese per categoria</span>
             <TransactionsByCategory
                :chartdata="expense_by_category.last_year"
             />
          </div>
          <div class="category-income">
+            <span class="title">Entrate per categoria</span>
             <TransactionsByCategory :chartdata="income_by_category.last_year" />
          </div>
       </div>
@@ -174,4 +176,10 @@ export default {
 .category-data
    display: grid
    grid: "expense income" 400px / 50% 50%
+   padding: 10px 0px 10px 0px
+.title
+   font-size: 22px
+   font-weight: 700
+   padding: 20px 0px 0px 0px
+   grid-area: title
 </style>
