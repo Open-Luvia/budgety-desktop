@@ -95,6 +95,9 @@ export default {
          return (
             state.categories.find(category => category.id == id).is_expense == 1
          )
+      },
+      category_name_by_id: state => id => {
+         return state.categories.find(category => category.id == id)
       }
    }
 }
