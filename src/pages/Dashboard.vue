@@ -37,15 +37,27 @@
          </div>
       </div>
       <div class="category-data">
-         <div class="category-expense">
+         <div class="expense">
             <span class="title">Spese per categoria</span>
             <TransactionsByCategory
+               class="pie"
+               :chartdata="expense_by_category.last_year"
+            />
+            <TransactionsByCategoryBar
+               class="bar"
                :chartdata="expense_by_category.last_year"
             />
          </div>
-         <div class="category-income">
+         <div class="income">
             <span class="title">Entrate per categoria</span>
-            <TransactionsByCategory :chartdata="income_by_category.last_year" />
+            <TransactionsByCategory
+               class="pie"
+               :chartdata="income_by_category.last_year"
+            />
+            <TransactionsByCategoryBar
+               class="bar"
+               :chartdata="income_by_category.last_year"
+            />
          </div>
       </div>
    </div>
@@ -55,12 +67,14 @@
 import Navbar from '../components/Navbar.vue'
 import IncomeExpense from '@/components/charts/IncomeExpense.vue'
 import TransactionsByCategory from '@/components/charts/TransactionsByCategory.vue'
+import TransactionsByCategoryBar from '@/components/charts/TransactionsByCategoryBar.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
    components: {
       IncomeExpense,
       TransactionsByCategory,
+      TransactionsByCategoryBar,
       Navbar
    },
    data() {
@@ -175,11 +189,28 @@ export default {
 
 .category-data
    display: grid
-   grid: "expense income" 400px / 50% 50%
+   grid: "expense income" 800px / 50% 50%
    padding: 10px 0px 10px 0px
-.title
-   font-size: 22px
-   font-weight: 700
-   padding: 20px 0px 0px 0px
-   grid-area: title
+   >.expense
+      display: grid
+      grid: "title" 30px "pie" 400px "bar" 400px/ 100%
+      >.title
+         font-size: 22px
+         font-weight: 700
+         grid-area: title
+      >.pie
+         grid-area: pie
+      >.bar
+         grid-area: bar
+   >.income
+      display: grid
+      grid: "title" 30px "pie" 400px "bar" 400px/ 100%
+      >.title
+         font-size: 22px
+         font-weight: 700
+         grid-area: title
+      >.pie
+         grid-area: pie
+      >.bar
+         grid-area: bar
 </style>
