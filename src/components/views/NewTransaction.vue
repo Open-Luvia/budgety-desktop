@@ -11,6 +11,7 @@
                   @input="updateDescription"
                />
             </div>
+            <BaseDatePicker :value="transaction.date" @input="assignDate"/>
             <div class="type">
                <BaseToggleSwitch :default_option="0" @selected="changeType" />
             </div>
@@ -82,6 +83,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ModalHeader from '@/components/ModalHeader.vue'
+import dayjs from 'dayjs'
 
 export default {
    components: {
@@ -90,11 +92,11 @@ export default {
    props: {
       id: null //account_id received from router-link params
    },
-   data() {
+   data () {
       return {
          transaction: {
             description: null,
-            date: '2019-10-06 17:30:13',
+            date: dayjs(new Date()),
             account_id: null,
             items: []
          },
@@ -115,7 +117,7 @@ export default {
          'newTransaction',
          'getTransactionsByAccount'
       ]),
-      addItem() {
+      addItem () {
          const item = {
             name: 'Nome',
             amount: null,
@@ -123,10 +125,10 @@ export default {
          }
          this.transaction.items.push(item)
       },
-      deleteItem(index) {
+      deleteItem (index) {
          this.transaction.items.splice(index, 1)
       },
-      submit() {
+      submit () {
          if (this.is_expense == true) {
             this.transaction.items.forEach(item => {
                item.amount = -Math.abs(item.amount)
@@ -138,7 +140,7 @@ export default {
          })
          this.$router.back()
       },
-      changeType(selected_option) {
+      changeType (selected_option) {
          if (selected_option === 0) {
             this.is_expense = true
          } else {
@@ -148,9 +150,12 @@ export default {
       updateDescription(description) {
          this.transaction.description = description
          this.transaction.items[0].name = description
+      },
+      assignDate(date) {
+         this.transaction.date = date
       }
    },
-   created() {
+   created () {
       this.transaction.account_id = parseInt(this.id)
       this.addItem()
       if (this.categories_is_empty) {
@@ -169,18 +174,18 @@ export default {
    width: 100%
    .body
       .transaction-info
-         display: flex
+         display: grid
+         width: 100%
          margin: 10px 10px 10px 10px
+         grid-template: "description datepicker type" auto / 0.6fr 0.2fr 0.2fr
+         column-gap: 10px
+         align-items: center
          .description
-            align-items: center
-            display: flex
-            flex-grow: 1
-            justify-content: stretch
+            grid-area: description
+         .datepicker
+            grid-area: datepicker
          .type
-            display: flex
-            flex-basis: auto
-            flex-grow: 0
-            margin: 0px 0px 0px 10px
+            grid-area: type
       .item-title
          display: flex
          font-size: 22px

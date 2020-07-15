@@ -9,7 +9,7 @@
       <div class="transaction-info">
          <div class="info">
             <div class="date">
-               {{ transaction.date }}
+               {{ transaction.date.format('DD/MM/YYYY') }}
             </div>
             <div class="note">
                {{ transaction.description }}

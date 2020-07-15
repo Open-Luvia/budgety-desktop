@@ -1,4 +1,5 @@
 import TransactionsApi from '@/api/modules/transactions.api.js'
+import dayjs from 'dayjs'
 
 export default {
    namespaced: true,
@@ -12,6 +13,15 @@ export default {
       SET_TRANSACTIONS_BY_ACCOUNT(state, params) {
          const account_id = params.account_id
          const data = params.data
+
+         data.map(
+            transaction =>
+               (transaction.date = dayjs(
+                  transaction.date,
+                  'YYYY-MM-DD HH:mm:ss'
+               ))
+         )
+
          state.transactions_tree.find(
             list => list.account_id == account_id
          ).transactions = data
@@ -48,40 +58,24 @@ export default {
             }
             commit('SET_TRANSACTIONS_BY_ACCOUNT', params)
          })
-         // .catch(error => {
-         //    console.log(
-         //       'There was a problem fetching your transactions: ',
-         //       error
-         //    )
-         // })
       },
       async newTransaction({ rootState }, transaction) {
          const payload = {
             description: transaction.description,
-            date: transaction.date,
+            date: transaction.date.format('YYYY-MM-DD HH:mm:ss'),
             account_id: transaction.account_id,
             user_id: rootState.user_id,
             items: transaction.items
          }
          await TransactionsApi.createTransaction(payload)
-         // .catch(error => {
-         //    console.log(
-         //       'There was a problem creating your transaction: ',
-         //       error
-         //    )
-         // })
       },
       async deleteTransaction({ commit, dispatch, rootState }, transaction_id) {
          const payload = {
             user_id: rootState.user_id
          }
+
          await TransactionsApi.deleteTransaction(transaction_id, payload)
-         // .catch(error => {
-         //       console.log(
-         //          'There was a problem deleting your transaction',
-         //          error
-         //       )
-         //       })
+
          await dispatch('accounts/getAccounts', null, { root: true })
          commit('DELETE_TRANSACTION', transaction_id)
       },
@@ -89,7 +83,7 @@ export default {
          const payload = {
             id: transaction.id,
             description: transaction.description,
-            date: transaction.date,
+            date: dayjs(transaction.date).format('YYYY-MM-DD HH:mm:ss'),
             account_id: transaction.account_id,
             items: transaction.items,
             user_id: rootState.user_id
@@ -124,6 +118,15 @@ export default {
                transaction_list => transaction_list.account_id == account_id
             ).transactions.length == 0
          )
+      },
+      transactions_list(state) {
+         let transactions_list = []
+         state.transactions_tree.forEach(transaction_by_account => {
+            transaction_by_account.transactions.forEach(transaction => {
+               transactions_list.push(transaction)
+            })
+         })
+         return transactions_list
       }
    }
 }

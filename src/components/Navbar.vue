@@ -5,9 +5,9 @@
       </div>
       <div class="desktop-navbar" ref="desktop-navbar">
          <ul class="nav-links">
-            <!-- <li>
+            <li>
                <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
-            </li> -->
+            </li>
             <li>
                <router-link :to="{ name: 'accounts' }">Accounts</router-link>
             </li>
@@ -25,13 +25,13 @@
 
 <script>
 export default {
-   data() {
+   data () {
       return {
          icon: 'bars'
       }
    },
    methods: {
-      toggleNavbar() {
+      toggleNavbar () {
          const nav = this.$refs['desktop-navbar'].classList
          if (nav.contains('open')) {
             //chiusura
