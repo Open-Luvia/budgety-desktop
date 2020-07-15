@@ -1,65 +1,73 @@
 <template>
-   <div class="settings-categories">
-      <div class="header">
-         <span>Your Categories</span>
-         <div class="buttons">
-            <div class="edit-categories" @click="showCategoryEdit">
-               <font-awesome-icon icon="edit" />
-               <div class="button-text">Edit</div>
-            </div>
-            <div
-               v-if="!show_new_category_form"
-               class="add-category"
-               @click="showNewCategoryForm"
-            >
-               <font-awesome-icon icon="plus-circle" />
-               <div class="button-text">New</div>
+   <div class="fullscreen">
+      <Navbar />
+      <div class="body">
+         <div class="setting">
+            <div class="settings-categories">
+               <div class="header">
+                  <span>Your Categories</span>
+                  <div class="buttons">
+                     <div class="edit-categories" @click="showCategoryEdit">
+                        <font-awesome-icon icon="edit" />
+                        <div class="button-text">Edit</div>
+                     </div>
+                     <div
+                        v-if="!show_new_category_form"
+                        class="add-category"
+                        @click="showNewCategoryForm"
+                     >
+                        <font-awesome-icon icon="plus-circle" />
+                        <div class="button-text">New</div>
+                     </div>
+                  </div>
+               </div>
+               <transition name="pop" mode="out-in">
+                  <div v-if="show_new_category_form" class="category-form">
+                     <NewCategoryForm @close="showNewCategoryForm" />
+                  </div>
+               </transition>
+               <div class="categories">
+                  <div class="category-type">
+                     <div class="card">
+                        <div class="category-header expense-header">
+                           <span>
+                              Expense
+                           </span>
+                        </div>
+                        <Category
+                           :show_edit="show_category_edit"
+                           v-for="category in expense_category_tree"
+                           :category="category"
+                           :key="category.id"
+                        />
+                     </div>
+                  </div>
+                  <div class="category-type">
+                     <div class="card">
+                        <div class="category-header income-header">
+                           <span>
+                              Income
+                           </span>
+                        </div>
+                        <!-- TODO: aggiungere edit per le categorie di entrata  -->
+                        <Category
+                           :showEdit="show_category_edit"
+                           v-for="category in income_category_tree"
+                           :category="category"
+                           :key="category.id"
+                        />
+                     </div>
+                  </div>
+               </div>
+               <router-view class="overlay" />
             </div>
          </div>
       </div>
-      <transition name="pop" mode="out-in">
-         <div v-if="show_new_category_form" class="category-form">
-            <NewCategoryForm @close="showNewCategoryForm" />
-         </div>
-      </transition>
-      <div class="categories">
-         <div class="category-type">
-            <div class="card">
-               <div class="category-header expense-header">
-                  <span>
-                     Expense
-                  </span>
-               </div>
-               <Category
-                  :show_edit="show_category_edit"
-                  v-for="category in expense_category_tree"
-                  :category="category"
-                  :key="category.id"
-               />
-            </div>
-         </div>
-         <div class="category-type">
-            <div class="card">
-               <div class="category-header income-header">
-                  <span>
-                     Income
-                  </span>
-               </div>
-               <!-- TODO: aggiungere edit per le categorie di entrata  -->
-               <Category
-                  :showEdit="show_category_edit"
-                  v-for="category in income_category_tree"
-                  :category="category"
-                  :key="category.id"
-               />
-            </div>
-         </div>
-      </div>
-      <router-view class="overlay" />
    </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue'
 import Category from '@/components/Category.vue'
 import NewCategoryForm from '@/components/NewCategoryForm.vue'
 import { mapActions, mapGetters } from 'vuex'
@@ -67,9 +75,10 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
    components: {
       NewCategoryForm,
-      Category
+      Category,
+      Navbar
    },
-   data() {
+   data () {
       return {
          show_new_category_form: false,
          show_category_edit: false
@@ -84,14 +93,14 @@ export default {
    },
    methods: {
       ...mapActions('categories', ['getCategories', 'newCategory']),
-      showNewCategoryForm() {
+      showNewCategoryForm () {
          this.show_new_category_form = !this.show_new_category_form
       },
-      showCategoryEdit() {
+      showCategoryEdit () {
          this.show_category_edit = !this.show_category_edit
       }
    },
-   created() {
+   created () {
       if (this.categories_is_empty) {
          this.getCategories()
       }

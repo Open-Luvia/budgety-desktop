@@ -7,13 +7,12 @@ import Register from '@/pages/Register.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Account from '@/pages/Account.vue'
-import Settings from '@/pages/Settings.vue'
+import SettingsCategories from '@/pages/SettingsCategories.vue'
 
 import AccountsLoader from '@/pages/AccountsLoader.vue'
 
 import NewTransaction from '@/components/views/NewTransaction.vue'
 import NewAccount from '@/components/views/NewAccount.vue'
-import SettingsCategories from '@/components/views/SettingsCategories.vue'
 import EditTransaction from '@/components/views/EditTransaction.vue'
 
 Vue.use(VueRouter)
@@ -46,17 +45,10 @@ const router = new VueRouter({
          component: NotFound
       },
       {
-         path: '/settings',
-         name: 'settings',
-         component: Settings,
-         meta: { requireAuth: true },
-         children: [
-            {
-               path: 'categories',
-               name: 'settingsCategories',
-               component: SettingsCategories
-            }
-         ]
+         path: '/categories',
+         name: 'categories',
+         component: SettingsCategories,
+         meta: { requireAuth: true }
       },
       {
          path: '/dashboard',

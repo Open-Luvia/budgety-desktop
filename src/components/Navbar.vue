@@ -11,19 +11,25 @@
             <li>
                <router-link :to="{ name: 'accounts' }">Accounts</router-link>
             </li>
-            <!-- <li>Report</li>
-            <li>Budget</li> -->
+            <li>Reports</li>
+            <li>
+               <router-link :to="{ name: 'categories' }">
+                  Categories
+               </router-link>
+            </li>
          </ul>
          <ul class="settings">
-            <router-link :to="{ name: 'settings' }">
-               <font-awesome-icon icon="sliders-h" />
-            </router-link>
+            <BaseButton button_class="secondary" @click="logout">
+               Logout
+            </BaseButton>
          </ul>
       </div>
    </nav>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
    data () {
       return {
@@ -31,6 +37,7 @@ export default {
       }
    },
    methods: {
+      ...mapActions(['logout']),
       toggleNavbar () {
          const nav = this.$refs['desktop-navbar'].classList
          if (nav.contains('open')) {
