@@ -4,7 +4,9 @@
          <nav id="navbar">
             <div id="logo"> <img /> Budgety </div>
             <div>
-               <div class="button-on-black">Accedi</div>
+               <router-link to="login" class="button-on-black">
+                  Accedi
+               </router-link>
             </div>
          </nav>
 
@@ -16,7 +18,9 @@
                Visualizza i tuoi soldi a 360 gradi. Guarda tutti i tuoi account
                in un solo posto. Utilizza una tecnologia di cui puoi fidarti.
             </div>
-            <div class="button-on-black">Inizia adesso</div>
+            <router-link to="login" class="button-on-black">
+               Inizia adesso
+            </router-link>
          </div>
       </div>
 
