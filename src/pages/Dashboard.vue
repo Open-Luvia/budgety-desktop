@@ -5,18 +5,27 @@
       <div class="monthly-data">
          <div class="monthly-chart">
             <div
-               v-for="month in income_expense.by_month.report"
-               :key="month.label"
-               @click="changeActiveMonth(month.label)"
+               class="year-data"
+               v-for="year in income_expense.by_month.report"
+               :key="year.label"
             >
-               <IncomeExpense
-                  :class="{
-                     'active-chart': month.label == active_month,
-                     'month-chart': true
-                  }"
-                  :max="income_expense.by_month.max_value"
-                  :chartdata="month"
-               />
+               <div class="year-descriptor">{{ year.label }}</div>
+               <div
+                  v-for="month in year.data"
+                  :key="month.label"
+                  @click="changeActiveMonth(year.label, month.label)"
+               >
+                  <IncomeExpense
+                     :class="{
+                        'active-chart':
+                           month.label == active_month &&
+                           year.label == active_year,
+                        'month-chart': true
+                     }"
+                     :max="income_expense.by_month.max_value"
+                     :chartdata="month"
+                  />
+               </div>
             </div>
          </div>
          <div class="monthly-stat" v-if="active_month_data">
@@ -36,27 +45,28 @@
             </div>
          </div>
       </div>
+
       <div class="category-data">
-         <div class="expense">
+         <div class="expense" v-if="active_month_expense_data">
             <span class="title">Spese per categoria</span>
             <TransactionsByCategory
                class="pie"
-               :chartdata="expense_by_category.last_year"
+               :chartdata="active_month_expense_data.data"
             />
             <TransactionsByCategoryBar
                class="bar"
-               :chartdata="expense_by_category.last_year"
+               :chartdata="active_month_expense_data.data"
             />
          </div>
-         <div class="income">
+         <div class="income" v-if="active_month_income_data">
             <span class="title">Entrate per categoria</span>
             <TransactionsByCategory
                class="pie"
-               :chartdata="income_by_category.last_year"
+               :chartdata="active_month_income_data.data"
             />
             <TransactionsByCategoryBar
                class="bar"
-               :chartdata="income_by_category.last_year"
+               :chartdata="active_month_income_data.data"
             />
          </div>
       </div>
@@ -77,10 +87,14 @@ export default {
       TransactionsByCategoryBar,
       Navbar
    },
-   data() {
+   data () {
       return {
+         active_year: -1,
          active_month: -1,
-         active_month_data: null
+         active_year_data: null,
+         active_month_data: null,
+         active_month_expense_data: null,
+         active_month_income_data: null
       }
    },
    computed: {
@@ -97,22 +111,38 @@ export default {
    methods: {
       ...mapActions('reports', [
          'generateReportByMonth',
-         'generateExpenseReportByCategory',
-         'generateIncomeReportByCategory'
+         'generateIncomeOrExpenseReportByMonth'
       ]),
 
-      changeActiveMonth(month) {
+      changeActiveMonth (year, month) {
+         this.active_year = year
          this.active_month = month
-         this.active_month_data = this.income_expense.by_month.report.find(
+
+         this.active_year_data = this.income_expense.by_month.report.find(
+            obj => obj.label === this.active_year
+         )
+
+         this.active_month_data = this.active_year_data.data.find(
             obj => obj.label === this.active_month
          )
+         this.active_month_expense_data = this.expense_by_category.by_month
+            .find(obj => obj.label === this.active_year)
+            .data.find(obj => obj.label === this.active_month)
+
+         this.active_month_income_data = this.income_by_category.by_month
+            .find(obj => obj.label === this.active_year)
+            .data.find(obj => obj.label === this.active_month)
       }
    },
-   created() {
+   created () {
       this.generateReportByMonth()
-      this.generateExpenseReportByCategory()
-      this.generateIncomeReportByCategory()
-      this.changeActiveMonth(this.income_expense.by_month.report[0].label)
+      this.generateIncomeOrExpenseReportByMonth(true)
+      this.generateIncomeOrExpenseReportByMonth(false)
+
+      this.changeActiveMonth(
+         this.income_expense.by_month.report[0].label,
+         this.income_expense.by_month.report[0].data[0].label
+      )
    }
 }
 </script>
@@ -125,11 +155,24 @@ export default {
    grid-template: "monthly-chart" "monthly-stat"
    justify-items: stretch
    align-items: stretch
+   margin-bottom: 40px
 
 .monthly-chart
    width: 100%
    display: flex
    margin-left: 30px
+
+.year-data
+   display: flex
+   margin-right: 40px
+   position: relative
+
+.year-descriptor
+   position: absolute
+   width: 36px
+   left: calc(50% - 18px)
+   top: 10px
+   font-weight: bold
 
 .monthly-stat
    background-color: #e5e5e5 // SAME COLOR
@@ -182,18 +225,18 @@ export default {
    padding-left: 5px
    padding-right: 5px
    padding-bottom: 10px
-   padding-top: 20px
+   padding-top: 50px
 
 .active-chart
    background-color: #e5e5e5 // SAME COLOR
 
 .category-data
    display: grid
-   grid: "expense income" 800px / 50% 50%
+   grid: "expense income" auto / 50% 50%
    padding: 10px 0px 10px 0px
    >.expense
       display: grid
-      grid: "title" 30px "pie" 400px "bar" 400px/ 100%
+      grid: "title" 30px "pie" 300px "bar" 300px/ 100%
       >.title
          font-size: 22px
          font-weight: 700
@@ -202,9 +245,11 @@ export default {
          grid-area: pie
       >.bar
          grid-area: bar
+         justify-self: top
+         padding: 0 120px
    >.income
       display: grid
-      grid: "title" 30px "pie" 400px "bar" 400px/ 100%
+      grid: "title" 30px "pie" 300px "bar" 300px/ 100%
       >.title
          font-size: 22px
          font-weight: 700
@@ -213,4 +258,6 @@ export default {
          grid-area: pie
       >.bar
          grid-area: bar
+         justify-self: top
+         padding: 0 120px
 </style>

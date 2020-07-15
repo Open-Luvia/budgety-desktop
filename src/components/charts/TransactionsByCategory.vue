@@ -14,50 +14,57 @@ export default {
          required: true
       }
    },
-   data() {
-      return {
-         options: null
+   computed: {
+      options () {
+         return {
+            tooltip: {
+               trigger: 'item',
+               formatter: '{b}: {c} ({d}%)'
+            },
+            grid: {
+               left: 0,
+               top: 0,
+               right: 0,
+               bottom: 0
+            },
+            series: [
+               {
+                  type: 'pie',
+                  radius: ['30%', '70%'],
+                  avoidLabelOverlap: false,
+                  emphasis: {
+                     label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                     }
+                  },
+                  labelLine: {
+                     show: false
+                  },
+                  data: this.chartdata
+               }
+            ],
+            color: [
+               '#56ED96',
+               '#ffd447',
+               '#5497A7',
+               '#292f36',
+               '#87ff65',
+               '#81f499',
+               '#a2d729',
+               '#50858b',
+               '#0a0908',
+               '#caf7e2',
+               '#aceb98'
+            ]
+         }
       }
    },
-   created() {
-      this.options = {
-         tooltip: {
-            trigger: 'item',
-            formatter: '{b}: {c} ({d}%)'
-         },
-         series: [
-            {
-               type: 'pie',
-               radius: ['30%', '70%'],
-               avoidLabelOverlap: false,
-               emphasis: {
-                  label: {
-                     show: true,
-                     fontSize: '18',
-                     fontWeight: 'bold'
-                  }
-               },
-               labelLine: {
-                  show: false
-               },
-               data: JSON.parse(JSON.stringify(this.chartdata))
-            }
-         ],
-         color: [
-            '#56ED96',
-            '#ffd447',
-            '#5497A7',
-            '#292f36',
-            '#87ff65',
-            '#81f499',
-            '#a2d729',
-            '#50858b',
-            '#0a0908',
-            '#caf7e2',
-            '#aceb98'
-         ]
-      }
-   }
+   data () {
+      return {}
+   },
+   created () {}
 }
 </script>
 
