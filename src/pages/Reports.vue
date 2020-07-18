@@ -34,7 +34,12 @@
                      color: networthPercentage < 0 ? '#FF5B57' : '#4FD889'
                   }"
                >
-                  {{ networthAmount }} € ({{ networthPercentage > 0 ? '+' : ''
+                  {{
+                     networthAmount.toLocaleString('it-IT', {
+                        minimumFractionDigits: 2
+                     })
+                  }}
+                  € ({{ networthPercentage > 0 ? '+' : ''
                   }}{{ networthPercentage }}%)
                </div>
             </div>

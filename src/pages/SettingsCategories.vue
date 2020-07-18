@@ -163,7 +163,7 @@ export default {
 
 
 .categories-container
-   width: 45%
+   width: calc(50% - 48px)
    background: white
    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)

@@ -77,7 +77,6 @@ export default {
             }
          })
 
-         console.log(pastdate.format('YYYY - MM - DD'))
          pastdate = pastdate.add(period.len, 'day')
 
          var pastweek = 0
