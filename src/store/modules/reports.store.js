@@ -1,3 +1,5 @@
+// import dayjs from 'dayjs'
+
 export default {
    namespaced: true,
    state: {
@@ -18,10 +20,18 @@ export default {
          by_month: [],
          last_month: [],
          last_year: []
-      }
+      },
+      networth: {},
+      cashflow: {}
    },
    getters: {},
    mutations: {
+      SET_NETWORTH (state, report) {
+         state.networth = report
+      },
+      SET_CASHFLOW (state, report) {
+         state.cashflow = report
+      },
       SET_INCOME_EXPENSE_BY_MONTH (state, report) {
          state.income_expense.by_month = report
       },
@@ -39,6 +49,97 @@ export default {
       }
    },
    actions: {
+      generateAdvanceReports ({ commit, rootGetters }, period) {
+         var pastdate = period.start
+
+         var data = {
+            dates: [pastdate.format('DD/MM/YYYY')],
+            networth: [0],
+            incomes: [0],
+            expenses: [0],
+            cashflow: [0]
+         }
+         var transactions = rootGetters['transactions/transactions_list']
+         var accounts = rootGetters['accounts/account_list']
+
+         accounts.forEach(account => {
+            data.networth[0] += account.initial_balance
+         })
+
+         transactions.forEach(transaction => {
+            if (
+               transaction.date.format('YYYYMMDD') <=
+               pastdate.format('YYYYMMDD')
+            ) {
+               data.networth[0] =
+                  Math.floor((data.networth[0] + transaction.amount) * 100) /
+                  100
+
+               // if (transaction.amount > 0) {
+               //    data.incomes[0] += transaction.amount
+               // } else {
+               //    data.expenses[0] -= transaction.amount
+               // }
+            }
+         })
+
+         console.log(pastdate.format('YYYY - MM - DD'))
+         pastdate = pastdate.add(period.len, 'day')
+
+         var pastweek = 0
+         for (
+            var i = period.len;
+            pastdate.format('YYYYMMDD') < period.end.format('YYYYMMDD');
+            i++
+         ) {
+            var week = Math.floor(i / period.len)
+
+            data.dates[week] = pastdate.format('DD/MM/YYYY')
+            if (week != pastweek) {
+               data.networth[week] = data.networth[week - 1]
+               data.incomes[week] = data.incomes[week - 1]
+               data.expenses[week] = data.expenses[week - 1]
+               data.cashflow[week] = 0
+               pastweek = week
+            }
+
+            transactions.forEach(transaction => {
+               if (
+                  transaction.date.format('YYYYMMDD') ===
+                  pastdate.format('YYYYMMDD')
+               ) {
+                  data.networth[week] =
+                     Math.floor(
+                        (data.networth[week] + transaction.amount) * 100
+                     ) / 100
+                  data.cashflow[week] =
+                     Math.floor(
+                        (data.cashflow[week] + transaction.amount) * 100
+                     ) / 100
+
+                  // if (transaction.amount > 0) {
+                  //    data.incomes[week] += transaction.amount
+                  // } else {
+                  //    data.expenses[week] -= transaction.amount
+                  // }
+               }
+            })
+
+            pastdate = pastdate.add(1, 'day')
+         }
+
+         commit('SET_CASHFLOW', {
+            dates: data.dates,
+            values: data.cashflow
+         })
+         commit('SET_NETWORTH', {
+            dates: data.dates,
+            values: data.networth,
+            incomes: data.incomes,
+            expenses: data.expenses
+         })
+      },
+
       generateReportByMonth ({ commit, rootGetters }) {
          var data = []
          var max_value = -1
@@ -94,7 +195,7 @@ export default {
 
          data.forEach(year_data => {
             year_data.data.sort(function (a, b) {
-               return a.month_num - b.month_num
+               return b.month_num - a.month_num
             })
          })
 

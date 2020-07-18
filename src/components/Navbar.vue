@@ -4,33 +4,50 @@
          <font-awesome-icon :icon="icon" />
       </div>
       <div class="desktop-navbar" ref="desktop-navbar">
-         <ul class="nav-links">
-            <li>
-               <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
-            </li>
-            <li>
-               <router-link :to="{ name: 'accounts' }">Accounts</router-link>
-            </li>
-            <li>Reports</li>
-            <li>
-               <router-link :to="{ name: 'categories' }">
-                  Categories
-               </router-link>
-            </li>
-         </ul>
+         <div class="left-navbar">
+            <div id="logo">
+               <img src="/logo.png" />
+            </div>
+            <ul class="nav-links">
+               <li>
+                  <router-link :to="{ name: 'dashboard' }"
+                     >Dashboard</router-link
+                  >
+               </li>
+               <li>
+                  <router-link :to="{ name: 'accounts' }">Accounts</router-link>
+               </li>
+               <li>
+                  <router-link :to="{ name: 'reports' }">
+                     Reports
+                  </router-link>
+               </li>
+               <li>
+                  <router-link :to="{ name: 'categories' }">
+                     Categories
+                  </router-link>
+               </li>
+            </ul>
+         </div>
          <ul class="settings">
-            <BaseButton button_class="secondary" @click="logout">
-               Logout
-            </BaseButton>
+            <div id="logout" @click="logout">
+               <BaseIcon width="24" height="24" color="#44D7B6">
+                  <IconLogout />
+               </BaseIcon>
+            </div>
          </ul>
       </div>
    </nav>
 </template>
 
 <script>
+import IconLogout from '@/assets/icons/IconLogout'
 import { mapActions } from 'vuex'
 
 export default {
+   components: {
+      IconLogout
+   },
    data () {
       return {
          icon: 'bars'
@@ -63,89 +80,101 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
 @import '../assets/global.sass'
+#logo
+   height: 45px
+   align-self: center
+   margin-right: 16px
+
+   img
+      max-height: 100%
+      max-width: 100%
+
+#logout
+   cursor: pointer
+
+.left-navbar
+   display: flex
 
 nav
-    position: relative
-    z-index: 999
-    background: map-get($colors, 'navbar')
-    box-sizing: border-box
-    color: white
-    font-size: $header-font-size
-    font-weight: 700
-    height: $navbar-height
-    list-style: none
-    padding: 0px 0px
-    text-decoration: none
-    width: 100vw
-    .hamburger
-        display: none
-    .desktop-navbar
-        display: flex
-        height: 100%
-        justify-content: space-between
-        padding: 0px 16px
-        color: inherit
-        .settings
-            align-items: center
-            display: flex
-            height: 100%
-            justify-content: flex-end
-            list-style: none
-            margin: 0px
+   position: relative
+   z-index: 999
+   background: map-get($colors, 'navbar')
+   box-sizing: border-box
+   color: white
+   font-size: $header-font-size
+   font-weight: 700
+   height: $navbar-height
+   list-style: none
+   padding: 0px 0px
+   text-decoration: none
+   width: 100vw
+   .hamburger
+      display: none
+   .desktop-navbar
+      display: flex
+      height: 100%
+      justify-content: space-between
+      padding: 0px 32px
+      color: inherit
+      .settings
+         align-items: center
+         display: flex
+         height: 100%
+         justify-content: flex-end
+         list-style: none
+         margin: 0px
+         text-decoration: none
+      .nav-links
+         color: inherit
+         align-items: center
+         display: flex
+         height: 100%
+         justify-content: flex-start
+         list-style: none
+         margin: 0px
+         padding: 0px 0px
+         text-decoration: none
+         li
             padding: 0px 16px
-            text-decoration: none
-        .nav-links
-            color: inherit
-            align-items: center
-            display: flex
-            height: 100%
-            justify-content: flex-start
-            list-style: none
-            margin: 0px
-            padding: 0px 0px
-            text-decoration: none
-            li
-                padding: 0px 16px
 
 @media (max-width: 600px)
-    nav
-        .hamburger
-            align-items: center
-            cursor: pointer
-            display: flex
-            height: 100%
-            justify-content: flex-end
-            padding: 0px 24px
-        .desktop-navbar
-            background: inherit
-            display: flex
+   nav
+      .hamburger
+         align-items: center
+         cursor: pointer
+         display: flex
+         height: 100%
+         justify-content: flex-end
+         padding: 0px 24px
+      .desktop-navbar
+         background: inherit
+         display: flex
+         flex-direction: column
+         height: 0px
+         transition: height 0.4s linear
+         //mantain the structure of the navigation element
+         .nav-links
             flex-direction: column
-            height: 0px
-            transition: height 0.4s linear
-            //mantain the structure of the navigation element
-            .nav-links
-                flex-direction: column
-                li
-                    padding: 32px 0px
-            .settings
-                flex-direction: column
-                padding: 32px 0px
-        .closed
-            //remove navigation elements from the DOM after the animation
-            display: none
-        .open
-            background: map-get($colors, 'navbar')
-            display: flex
+            li
+               padding: 32px 0px
+         .settings
             flex-direction: column
-            height: calc(100vh - #{$navbar-height})
-            transition: height 0.4s linear
-            .nav-links
-                flex-direction: column
-                li
-                    padding: 32px 0px
-            .settings
-                flex-direction: column
-                padding: 32px 0px
+            padding: 32px 0px
+      .closed
+         //remove navigation elements from the DOM after the animation
+         display: none
+      .open
+         background: map-get($colors, 'navbar')
+         display: flex
+         flex-direction: column
+         height: calc(100vh - #{$navbar-height})
+         transition: height 0.4s linear
+         .nav-links
+            flex-direction: column
+            li
+               padding: 32px 0px
+         .settings
+            flex-direction: column
+            padding: 32px 0px
 </style>

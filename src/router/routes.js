@@ -7,6 +7,7 @@ import Register from '@/pages/Register.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Account from '@/pages/Account.vue'
+import Reports from '@/pages/Reports.vue'
 import SettingsCategories from '@/pages/SettingsCategories.vue'
 
 import AccountsLoader from '@/pages/AccountsLoader.vue'
@@ -48,6 +49,12 @@ const router = new VueRouter({
          path: '/categories',
          name: 'categories',
          component: SettingsCategories,
+         meta: { requireAuth: true }
+      },
+      {
+         path: '/reports',
+         name: 'reports',
+         component: Reports,
          meta: { requireAuth: true }
       },
       {
