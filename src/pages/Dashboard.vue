@@ -51,7 +51,7 @@
             class="graph-container income"
             v-if="
                active_month_income_data &&
-                  active_month_income_data.data.length != 0
+               active_month_income_data.data.length != 0
             "
          >
             <h3 class="title">Entrate per categoria</h3>
@@ -70,7 +70,7 @@
             class="graph-container expense"
             v-if="
                active_month_expense_data &&
-                  active_month_expense_data.data.length != 0
+               active_month_expense_data.data.length != 0
             "
          >
             <h3 class="title">Spese per categoria</h3>
@@ -103,7 +103,7 @@ export default {
       TransactionsByCategoryBar,
       Navbar
    },
-   data () {
+   data() {
       return {
          active_year: -1,
          active_month: -1,
@@ -116,7 +116,8 @@ export default {
    computed: {
       ...mapGetters('transactions', [
          'transactions_by_account',
-         'transactions_by_account_is_empty'
+         'transactions_by_account_is_empty',
+         'transactions_list'
       ]),
       ...mapState('reports', [
          'income_expense',
@@ -124,13 +125,27 @@ export default {
          'income_by_category'
       ])
    },
+   watch: {
+      transactions_list() {
+         this.generateReports()
+      }
+   },
    methods: {
       ...mapActions('reports', [
          'generateReportByMonth',
          'generateIncomeOrExpenseReportByMonth'
       ]),
+      async generateReports() {
+         await this.generateReportByMonth()
+         await this.generateIncomeOrExpenseReportByMonth(true)
+         await this.generateIncomeOrExpenseReportByMonth(false)
 
-      changeActiveMonth (year, month) {
+         this.changeActiveMonth(
+            this.income_expense.by_month.report[0].label,
+            this.income_expense.by_month.report[0].data[0].label
+         )
+      },
+      changeActiveMonth(year, month) {
          this.active_year = year
          this.active_month = month
 
@@ -159,15 +174,8 @@ export default {
          })
       }
    },
-   created () {
-      this.generateReportByMonth()
-      this.generateIncomeOrExpenseReportByMonth(true)
-      this.generateIncomeOrExpenseReportByMonth(false)
-
-      this.changeActiveMonth(
-         this.income_expense.by_month.report[0].label,
-         this.income_expense.by_month.report[0].data[0].label
-      )
+   created() {
+      this.generateReports()
    }
 }
 </script>
