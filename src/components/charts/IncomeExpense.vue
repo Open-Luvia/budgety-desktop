@@ -16,9 +16,9 @@ export default {
       },
       max: Number
    },
-   data () {
-      return {
-         options: {
+   computed: {
+      options() {
+         return {
             grid: {
                left: 0,
                top: 0,

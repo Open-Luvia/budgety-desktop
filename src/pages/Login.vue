@@ -17,7 +17,7 @@ export default {
    },
    created() {
       if (this.logged_in) {
-         this.$router.push({ name: 'accounts' })
+         this.$router.push({ name: 'dashboard' })
       }
    }
 }
