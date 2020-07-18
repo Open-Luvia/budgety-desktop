@@ -140,10 +140,14 @@ export default {
          await this.generateIncomeOrExpenseReportByMonth(true)
          await this.generateIncomeOrExpenseReportByMonth(false)
 
-         this.changeActiveMonth(
-            this.income_expense.by_month.report[0].label,
-            this.income_expense.by_month.report[0].data[0].label
-         )
+         try {
+            this.changeActiveMonth(
+               this.income_expense.by_month.report[0].label,
+               this.income_expense.by_month.report[0].data[0].label
+            )
+         } catch {
+            null
+         }
       },
       changeActiveMonth(year, month) {
          this.active_year = year
