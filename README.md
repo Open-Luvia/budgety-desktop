@@ -1,4 +1,4 @@
-# Monely (WIP)
+# Budgety (WIP)
 
 A personal finance app written in VueJS
 
@@ -9,4 +9,3 @@ Tested only on the latest verion of Chrome. Currently deployed on [netlify](http
 **username:** demo@gmail.com
 
 **password:** password
-

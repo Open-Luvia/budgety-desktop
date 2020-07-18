@@ -15,12 +15,6 @@ export default {
          return {
             legend: { show: true },
             tooltip: { show: true },
-            // grid: {
-            //    left: '4%',
-            //    top: '5%',
-            //    right: '4%',
-            //    bottom: '5%'
-            // },
             xAxis: {
                type: 'category',
                data: this.chartdata.dates,
@@ -30,22 +24,6 @@ export default {
                type: 'value'
             },
             series: [
-               // {
-               //    name: 'Incomes',
-               //    data: this.chartdata.incomes,
-               //    type: 'line',
-               //    smooth: false,
-               //    areaStyle: {},
-               //    color: '#7CEA9C'
-               // },
-               // {
-               //    name: 'Expenses',
-               //    data: this.chartdata.expenses,
-               //    type: 'line',
-               //    smooth: false,
-               //    areaStyle: {},
-               //    color: '#ff715b'
-               // },
                {
                   name: 'Net Worth',
                   data: this.chartdata.values,

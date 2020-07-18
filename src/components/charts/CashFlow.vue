@@ -15,15 +15,10 @@ export default {
          return {
             legend: { show: true },
             tooltip: { show: true },
-            // grid: {
-            //    left: 0,
-            //    top: 0,
-            //    right: 0,
-            //    bottom: 0
-            // },
             xAxis: {
                type: 'category',
-               data: this.chartdata.dates
+               data: this.chartdata.dates,
+               boundaryGap: false
             },
             yAxis: {
                type: 'value'

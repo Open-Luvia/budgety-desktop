@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 export default {
    namespaced: true,
@@ -49,8 +49,8 @@ export default {
       }
    },
    actions: {
-      generateAdvanceReports ({ commit, rootGetters }) {
-         var pastdate = dayjs().subtract(28 * 12, 'day')
+      generateAdvanceReports ({ commit, rootGetters }, period) {
+         var pastdate = period.start
 
          var data = {
             dates: [pastdate.format('DD/MM/YYYY')],
@@ -71,7 +71,9 @@ export default {
                transaction.date.format('YYYYMMDD') <=
                pastdate.format('YYYYMMDD')
             ) {
-               data.networth[0] += transaction.amount
+               data.networth[0] =
+                  Math.floor((data.networth[0] + transaction.amount) * 100) /
+                  100
 
                // if (transaction.amount > 0) {
                //    data.incomes[0] += transaction.amount
@@ -82,11 +84,15 @@ export default {
          })
 
          console.log(pastdate.format('YYYY - MM - DD'))
-         pastdate = pastdate.add(14, 'day')
+         pastdate = pastdate.add(period.len, 'day')
 
          var pastweek = 0
-         for (var i = 14; i < 28 * 12; i++) {
-            var week = Math.floor(i / 14)
+         for (
+            var i = period.len;
+            pastdate.format('YYYYMMDD') < period.end.format('YYYYMMDD');
+            i++
+         ) {
+            var week = Math.floor(i / period.len)
 
             data.dates[week] = pastdate.format('DD/MM/YYYY')
             if (week != pastweek) {
@@ -102,14 +108,20 @@ export default {
                   transaction.date.format('YYYYMMDD') ===
                   pastdate.format('YYYYMMDD')
                ) {
-                  data.networth[week] += transaction.amount
-                  data.cashflow[week] += transaction.amount
+                  data.networth[week] =
+                     Math.floor(
+                        (data.networth[week] + transaction.amount) * 100
+                     ) / 100
+                  data.cashflow[week] =
+                     Math.floor(
+                        (data.cashflow[week] + transaction.amount) * 100
+                     ) / 100
 
-                  if (transaction.amount > 0) {
-                     data.incomes[week] += transaction.amount
-                  } else {
-                     data.expenses[week] -= transaction.amount
-                  }
+                  // if (transaction.amount > 0) {
+                  //    data.incomes[week] += transaction.amount
+                  // } else {
+                  //    data.expenses[week] -= transaction.amount
+                  // }
                }
             })
 

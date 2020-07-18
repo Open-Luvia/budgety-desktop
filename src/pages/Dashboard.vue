@@ -259,37 +259,6 @@ export default {
    background-color: #232A33 // SAME COLOR
    color: white
 
-// .category-data
-//    display: grid
-//    grid: "expense income" auto / 50% 50%
-//    padding: 10px 0px 10px 0px
-//    >.expense
-//       display: grid
-//       grid: "title" 30px "pie" 300px "bar" 300px/ 100%
-//       >.title
-//          font-size: 22px
-//          font-weight: 700
-//          grid-area: title
-//       >.pie
-//          grid-area: pie
-//       >.bar
-//          grid-area: bar
-//          justify-self: top
-//          padding: 0 120px
-//    >.income
-//       display: grid
-//       grid: "title" 30px "pie" 300px "bar" 300px/ 100%
-//       >.title
-//          font-size: 22px
-//          font-weight: 700
-//          grid-area: title
-//       >.pie
-//          grid-area: pie
-//       >.bar
-//          grid-area: bar
-//          justify-self: top
-//          padding: 0 120px
-
 .category-data
    display: flex
    justify-content: space-evenly
@@ -316,5 +285,5 @@ export default {
       margin: 0
 
    .graph
-      height: 50vh
+      height: 35vh
 </style>
