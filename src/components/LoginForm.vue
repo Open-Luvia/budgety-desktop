@@ -44,13 +44,12 @@ export default {
    methods: {
       ...mapActions(['login']),
       signIn() {
-         this.login(this.credentials)
-            .then(() => {
-               this.$router.push({ name: 'accounts' })
-            })
-            // .catch(error => {
-            //    console.log(error)
-            // })
+         this.login(this.credentials).then(() => {
+            this.$router.push({ name: 'dashboard' })
+         })
+         // .catch(error => {
+         //    console.log(error)
+         // })
       }
    }
 }

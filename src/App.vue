@@ -26,6 +26,12 @@ export default {
    watch: {
       async transactions_tree() {
          await this.initialDataFetch()
+      },
+      logged_in(newVal) {
+         if (newVal) {
+            this.getCategories()
+            this.getAccounts()
+         }
       }
    },
    computed: {
