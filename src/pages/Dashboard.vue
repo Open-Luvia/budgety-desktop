@@ -48,26 +48,6 @@
 
       <div class="category-data">
          <div
-            class="graph-container expense"
-            v-if="
-               active_month_expense_data &&
-                  active_month_expense_data.data.length != 0
-            "
-         >
-            <h3 class="title">Spese per categoria</h3>
-            <div class="graph">
-               <TransactionsByCategory
-                  class="pie"
-                  :chartdata="active_month_expense_data.data"
-               />
-            </div>
-            <TransactionsByCategoryBar
-               class="bar"
-               :chartdata="active_month_expense_data.data"
-            />
-         </div>
-
-         <div
             class="graph-container income"
             v-if="
                active_month_income_data &&
@@ -84,6 +64,25 @@
             <TransactionsByCategoryBar
                class="bar"
                :chartdata="active_month_income_data.data"
+            />
+         </div>
+         <div
+            class="graph-container expense"
+            v-if="
+               active_month_expense_data &&
+                  active_month_expense_data.data.length != 0
+            "
+         >
+            <h3 class="title">Spese per categoria</h3>
+            <div class="graph">
+               <TransactionsByCategory
+                  class="pie"
+                  :chartdata="active_month_expense_data.data"
+               />
+            </div>
+            <TransactionsByCategoryBar
+               class="bar"
+               :chartdata="active_month_expense_data.data"
             />
          </div>
       </div>
@@ -275,6 +274,7 @@ export default {
    -moz-border-radius: 16px
    border-radius: 16px
    height: min-content
+   overflow: hidden
 
    .title
       border-bottom: 2px solid #eee

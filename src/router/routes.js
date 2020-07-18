@@ -6,6 +6,7 @@ import Login from '@/pages/Login.vue'
 import Register from '@/pages/Register.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Dashboard from '@/pages/Dashboard.vue'
+import Budget from '@/pages/Budget.vue'
 import Account from '@/pages/Account.vue'
 import Reports from '@/pages/Reports.vue'
 import SettingsCategories from '@/pages/SettingsCategories.vue'
@@ -55,6 +56,12 @@ const router = new VueRouter({
          path: '/reports',
          name: 'reports',
          component: Reports,
+         meta: { requireAuth: true }
+      },
+      {
+         path: '/budget',
+         name: 'budget',
+         component: Budget,
          meta: { requireAuth: true }
       },
       {

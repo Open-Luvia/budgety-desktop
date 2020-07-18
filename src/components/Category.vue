@@ -1,77 +1,43 @@
 <template>
    <div class="category">
-      <div class="category-name" @click.self="showSubCategories">
-         <div v-if="show_edit">
-            <BaseInput
-               v-model="category.name"
-               :placeholder="category.name"
-               :custom_style="input_style"
-            />
+      <div class="category-name">
+         <div class="title">
+            <input type="checkbox" /> {{ category.name }}
          </div>
-         <span v-else>
-            {{ this.category.name }}
-         </span>
+
          <div class="edit-options">
-            <font-awesome-icon
-               icon="trash"
-               v-if="show_edit"
-               color="#FF5B57"
-               style="margin: 0px 10px 0px 10px;"
-            />
-            <BaseIcon
-               height="20"
-               width="20"
-               :class="{
-                  'dropdown-reverse':
-                     this.category.children.length != 0 &&
-                     this.show_sub_categories,
-                  dropdown: !this.show_sub_categories
-               }"
+            <div
+               class="dropdown-button"
+               v-if="category.children.length != 0"
+               @click="showSubCategories"
             >
-               <IconChervonCircleDown />
-            </BaseIcon>
+               <BaseIcon
+                  height="20"
+                  width="20"
+                  :class="{
+                     'dropdown-reverse':
+                        category.children.length != 0 && show_sub_categories,
+                     dropdown: !show_sub_categories
+                  }"
+               >
+                  <IconChervonCircleDown /> </BaseIcon
+            ></div>
          </div>
       </div>
+
       <transition name="height-expansion" mode="out-in">
          <div
             class="children"
-            :style="{ height: this.children_height + 'px' }"
-            v-if="
-               this.show_sub_categories && this.category.children.length != 0
-            "
+            :style="{ height: children_height + 'px' }"
+            v-if="show_sub_categories && category.children.length != 0"
          >
             <div
                class="child-category"
                v-for="(child, index) in category.children"
                :key="index"
             >
-               <div class="child-name">
-                  <BaseIcon
-                     height="18"
-                     width="18"
-                     style="transform: rotate(-90deg);"
-                     color="#b5b5b5"
-                  >
-                     <IconChervonCircleDown />
-                  </BaseIcon>
-                  <div v-if="show_edit" style="height: 38px;">
-                     <BaseInput
-                        v-model="child.name"
-                        :placeholder="child.name"
-                        :custom_style="input_style"
-                     />
-                  </div>
-                  <span v-else>
-                     {{ child.name }}
-                  </span>
-               </div>
-               <div class="edit-options">
-                  <font-awesome-icon
-                     icon="trash"
-                     v-if="show_edit"
-                     color="#FF5B57"
-                     @click="deleteChild(index)"
-                  />
+               <div class="title">
+                  <input type="checkbox" /> {{ child.name }}
                </div>
             </div>
          </div>
@@ -87,74 +53,74 @@ export default {
       IconChervonCircleDown
    },
    props: {
-      category: Object,
-      show_edit: Boolean
+      category: Object
    },
-   data() {
+   data () {
       return {
          show_sub_categories: true,
-         children_height: parseInt(this.category.children.length) * (38 + 5),
-         input_style: {
-            height: '100%',
-            padding: '4px 16px 4px 16px',
-            margin: '0px 0px 0px 4px',
-            fontSize: '18px'
-         }
+         children_height: parseInt(this.category.children.length) * 45,
+
+         colors: [
+            '#56ED96',
+            '#ffd447',
+            '#5497A7',
+            '#292f36',
+            '#87ff65',
+            '#81f499',
+            '#a2d729',
+            '#50858b',
+            '#0a0908',
+            '#caf7e2',
+            '#aceb98'
+         ]
       }
    },
    methods: {
-      showSubCategories() {
+      showSubCategories () {
          this.show_sub_categories = !this.show_sub_categories
-      },
-      deleteChild(index) {
-         //TODO aggiornare la lista come cambia il numero di children
-         this.category.children.splice(index, 1)
       }
    }
 }
 </script>
 
 <style lang="sass" scoped>
-.category
-   align-items: flex-start
-   border-color: grey
-   border-radius: 0px
-   border-style: solid
-   border-width: 0px 0px 1px 0px
-   cursor: pointer
+.category-name
+   position: relative
    display: flex
-   flex-direction: column
-   margin: 0px 10px 0px 10px
-   padding: 10px
-   width: calc(100% - 20px)
-   .category-name
-      align-items: center
-      display: flex
-      justify-content: space-between
-      width: 100%
-      .edit-options
-         display: flex
-         align-items: center
-         .dropdown-reverse
-            transform: rotate(-180deg)
-            transition: .4s linear all
-         .dropdown
-            transition: .4s linear all
-   .children
-      width: 100%
-      overflow: hidden
-      .child-category
-         align-items: center
-         display: flex
-         justify-content: space-between
-         padding: 5px 5px 0px 0px
-         .child-name
-            display: flex
-            align-items: center
-            justify-content: flex-start
-            span
-               margin: 0px 0px 0px 10px
-         .edit-options
-            display: flex
-            align-items: center
+   justify-content: space-between
+   padding: 12px 16px
+   font-size: 16px
+   background: white
+   font-weight: 600
+   border-bottom: 1px solid #ccc
+
+   .color-indicator
+      position: absolute
+      top: 0
+      left: 0
+      content: ' '
+      width: 10px
+      height: 100%
+
+   .dropdown-button
+      cursor: pointer
+
+.children
+   overflow: hidden
+   text-align: left
+   border-bottom: 1px solid #ccc
+
+   .child-category
+      border-bottom: 1px solid #eee
+      padding: 10px 36px
+
+      &:last-child
+         border: 0
+
+
+.dropdown-reverse
+   transform: rotate(-180deg)
+   transition: .4s linear all
+.dropdown
+   transition: .4s linear all
 </style>

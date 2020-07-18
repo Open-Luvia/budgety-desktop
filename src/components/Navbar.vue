@@ -15,7 +15,12 @@
                   >
                </li>
                <li>
-                  <router-link :to="{ name: 'accounts' }">Accounts</router-link>
+                  <router-link :to="{ name: 'accounts' }">Conti</router-link>
+               </li>
+               <li>
+                  <router-link :to="{ name: 'budget' }">
+                     Budget
+                  </router-link>
                </li>
                <li>
                   <router-link :to="{ name: 'reports' }">
@@ -24,18 +29,16 @@
                </li>
                <li>
                   <router-link :to="{ name: 'categories' }">
-                     Categories
+                     Categorie
                   </router-link>
                </li>
             </ul>
          </div>
-         <ul class="settings">
-            <div id="logout" @click="logout">
-               <BaseIcon width="24" height="24" color="#44D7B6">
-                  <IconLogout />
-               </BaseIcon>
-            </div>
-         </ul>
+         <div id="logout" @click="logout">
+            <BaseIcon width="24" height="24" color="#44D7B6">
+               <IconLogout />
+            </BaseIcon>
+         </div>
       </div>
    </nav>
 </template>
@@ -92,6 +95,7 @@ export default {
 
 #logout
    cursor: pointer
+   align-self: center
 
 .left-navbar
    display: flex
@@ -108,23 +112,17 @@ nav
    list-style: none
    padding: 0px 0px
    text-decoration: none
-   width: 100vw
+
    .hamburger
       display: none
+
    .desktop-navbar
       display: flex
       height: 100%
       justify-content: space-between
       padding: 0px 32px
       color: inherit
-      .settings
-         align-items: center
-         display: flex
-         height: 100%
-         justify-content: flex-end
-         list-style: none
-         margin: 0px
-         text-decoration: none
+
       .nav-links
          color: inherit
          align-items: center

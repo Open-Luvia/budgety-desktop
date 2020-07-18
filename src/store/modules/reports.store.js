@@ -74,12 +74,6 @@ export default {
                data.networth[0] =
                   Math.floor((data.networth[0] + transaction.amount) * 100) /
                   100
-
-               // if (transaction.amount > 0) {
-               //    data.incomes[0] += transaction.amount
-               // } else {
-               //    data.expenses[0] -= transaction.amount
-               // }
             }
          })
 
@@ -116,12 +110,6 @@ export default {
                      Math.floor(
                         (data.cashflow[week] + transaction.amount) * 100
                      ) / 100
-
-                  // if (transaction.amount > 0) {
-                  //    data.incomes[week] += transaction.amount
-                  // } else {
-                  //    data.expenses[week] -= transaction.amount
-                  // }
                }
             })
 
