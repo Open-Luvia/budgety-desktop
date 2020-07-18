@@ -11,7 +11,11 @@
             <li>
                <router-link :to="{ name: 'accounts' }">Accounts</router-link>
             </li>
-            <li>Reports</li>
+            <li>
+               <router-link :to="{ name: 'reports' }">
+                  Reports
+               </router-link>
+            </li>
             <li>
                <router-link :to="{ name: 'categories' }">
                   Categories

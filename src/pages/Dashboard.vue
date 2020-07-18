@@ -1,5 +1,5 @@
 <template>
-   <div class="fullscreen">
+   <div class="dashboard-container">
       <Navbar />
 
       <div class="monthly-data">
@@ -47,23 +47,40 @@
       </div>
 
       <div class="category-data">
-         <div class="expense" v-if="active_month_expense_data">
-            <span class="title">Spese per categoria</span>
-            <TransactionsByCategory
-               class="pie"
-               :chartdata="active_month_expense_data.data"
-            />
+         <div
+            class="graph-container expense"
+            v-if="
+               active_month_expense_data &&
+                  active_month_expense_data.data.length != 0
+            "
+         >
+            <h3 class="title">Spese per categoria</h3>
+            <div class="graph">
+               <TransactionsByCategory
+                  class="pie"
+                  :chartdata="active_month_expense_data.data"
+               />
+            </div>
             <TransactionsByCategoryBar
                class="bar"
                :chartdata="active_month_expense_data.data"
             />
          </div>
-         <div class="income" v-if="active_month_income_data">
-            <span class="title">Entrate per categoria</span>
-            <TransactionsByCategory
-               class="pie"
-               :chartdata="active_month_income_data.data"
-            />
+
+         <div
+            class="graph-container income"
+            v-if="
+               active_month_income_data &&
+                  active_month_income_data.data.length != 0
+            "
+         >
+            <h3 class="title">Entrate per categoria</h3>
+            <div class="graph">
+               <TransactionsByCategory
+                  class="pie"
+                  :chartdata="active_month_income_data.data"
+               />
+            </div>
             <TransactionsByCategoryBar
                class="bar"
                :chartdata="active_month_income_data.data"
@@ -125,13 +142,22 @@ export default {
          this.active_month_data = this.active_year_data.data.find(
             obj => obj.label === this.active_month
          )
+
          this.active_month_expense_data = this.expense_by_category.by_month
             .find(obj => obj.label === this.active_year)
             .data.find(obj => obj.label === this.active_month)
 
+         this.active_month_expense_data.data.sort(function (a, b) {
+            return b.value - a.value
+         })
+
          this.active_month_income_data = this.income_by_category.by_month
             .find(obj => obj.label === this.active_year)
             .data.find(obj => obj.label === this.active_month)
+
+         this.active_month_income_data.data.sort(function (a, b) {
+            return b.value - a.value
+         })
       }
    },
    created () {
@@ -149,6 +175,8 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+.dashboard-container
+   background: #fafafa
 
 .monthly-data
    display: grid
@@ -160,7 +188,7 @@ export default {
 .monthly-chart
    width: 100%
    display: flex
-   margin-left: 30px
+   padding-left: 30px
 
 .year-data
    display: flex
@@ -175,7 +203,7 @@ export default {
    font-weight: bold
 
 .monthly-stat
-   background-color: #e5e5e5 // SAME COLOR
+   background-color: #232A33 // SAME COLOR
    display: flex
    padding: 0px 30px
 
@@ -185,7 +213,7 @@ export default {
    display: flex
    box-sizing: border-box
    justify-content: space-between
-   border-left: 2px solid #444
+   border-left: 2px solid white
    padding: 12px 24px
    margin: 24px 64px
 
@@ -193,7 +221,7 @@ export default {
       margin-left: 0
 
    h4, div
-      color: #444
+      color: white
 
    h4
       margin: 0
@@ -228,36 +256,65 @@ export default {
    padding-top: 50px
 
 .active-chart
-   background-color: #e5e5e5 // SAME COLOR
+   background-color: #232A33 // SAME COLOR
+   color: white
+
+// .category-data
+//    display: grid
+//    grid: "expense income" auto / 50% 50%
+//    padding: 10px 0px 10px 0px
+//    >.expense
+//       display: grid
+//       grid: "title" 30px "pie" 300px "bar" 300px/ 100%
+//       >.title
+//          font-size: 22px
+//          font-weight: 700
+//          grid-area: title
+//       >.pie
+//          grid-area: pie
+//       >.bar
+//          grid-area: bar
+//          justify-self: top
+//          padding: 0 120px
+//    >.income
+//       display: grid
+//       grid: "title" 30px "pie" 300px "bar" 300px/ 100%
+//       >.title
+//          font-size: 22px
+//          font-weight: 700
+//          grid-area: title
+//       >.pie
+//          grid-area: pie
+//       >.bar
+//          grid-area: bar
+//          justify-self: top
+//          padding: 0 120px
 
 .category-data
-   display: grid
-   grid: "expense income" auto / 50% 50%
-   padding: 10px 0px 10px 0px
-   >.expense
-      display: grid
-      grid: "title" 30px "pie" 300px "bar" 300px/ 100%
-      >.title
-         font-size: 22px
-         font-weight: 700
-         grid-area: title
-      >.pie
-         grid-area: pie
-      >.bar
-         grid-area: bar
-         justify-self: top
-         padding: 0 120px
-   >.income
-      display: grid
-      grid: "title" 30px "pie" 300px "bar" 300px/ 100%
-      >.title
-         font-size: 22px
-         font-weight: 700
-         grid-area: title
-      >.pie
-         grid-area: pie
-      >.bar
-         grid-area: bar
-         justify-self: top
-         padding: 0 120px
+   display: flex
+   justify-content: space-evenly
+   padding-bottom: 100px
+
+.graph-container
+   width: 45%
+   background: white
+   border-bottom: 2px solid #eee
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+   -webkit-border-radius: 16px
+   -moz-border-radius: 16px
+   border-radius: 16px
+   height: min-content
+
+   .title
+      border-bottom: 2px solid #eee
+      text-align: left
+      padding-left: 20px
+      padding-top: 15px
+      padding-bottom: 15px
+      margin: 0
+
+   .graph
+      height: 50vh
 </style>
