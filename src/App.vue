@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
    name: 'app',
    methods: {
@@ -15,12 +15,25 @@ export default {
          'getUserInfo'
       ]),
       ...mapActions('accounts', ['getAccounts']),
-      ...mapActions('categories', ['getCategories'])
+      ...mapActions('categories', ['getCategories']),
+      ...mapActions('transactions', ['getTransactionsByAccount']),
+      async initialDataFetch() {
+         this.accounts.forEach(async account => {
+            await this.getTransactionsByAccount(account.id)
+         })
+      }
+   },
+   watch: {
+      async transactions_tree() {
+         await this.initialDataFetch()
+      }
    },
    computed: {
-      ...mapGetters(['logged_in'])
+      ...mapGetters(['logged_in']),
+      ...mapState('transactions', ['transactions_tree']),
+      ...mapState('accounts', ['accounts'])
    },
-   created() {
+   async created() {
       if (localStorage.getItem('access_token') != null) {
          if (this.checkTokenValidity()) {
             this.getDataFromLocalStorage()
