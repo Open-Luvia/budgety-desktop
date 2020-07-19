@@ -122,7 +122,9 @@ export default {
          this.show_edit = !this.show_edit
       },
       categoryName (id) {
-         return this.categories.find(category => category.id == id).name
+         let cat = this.categories.find(category => category.id == id)
+         if (cat) return cat.name
+         else return 'Non categorizzato'
       }
    }
 }

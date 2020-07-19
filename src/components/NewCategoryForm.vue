@@ -5,7 +5,7 @@
          v-if="new_category.is_expense"
          class="item"
          style="width: 300px;"
-         placeholder="Parent"
+         placeholder="Cat. Padre"
          :options="this.expense_options"
          v-model.number="new_category.parent_id"
       />
@@ -13,7 +13,7 @@
          v-else
          class="item"
          style="width: 300px;"
-         placeholder="Parent"
+         placeholder="Cat. Padre"
          :options="this.income_options"
          v-model.number="new_category.parent_id"
       />
@@ -22,11 +22,6 @@
          class="item"
          @selected="changeType"
       />
-      <div @click="close" class="item">
-         <BaseIcon width="35" height="35" color="#FF5B57">
-            <IconTimesCircle />
-         </BaseIcon>
-      </div>
       <div @click="submit" class="item">
          <BaseIcon width="35" height="35" color="#44D7B6">
             <IconCheckCircle />
@@ -36,16 +31,14 @@
 </template>
 
 <script>
-import IconTimesCircle from '@/assets/icons/IconTimesCircle.vue'
 import IconCheckCircle from '@/assets/icons/IconCheckCircle.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
    components: {
-      IconCheckCircle,
-      IconTimesCircle
+      IconCheckCircle
    },
-   data() {
+   data () {
       return {
          income_options: [],
          expense_options: [],
@@ -64,14 +57,14 @@ export default {
    },
    methods: {
       ...mapActions('categories', ['newCategory']),
-      changeType(value) {
+      changeType (value) {
          if (value == 0) {
             this.new_category.is_expense = 1
          } else {
             this.new_category.is_expense = 0
          }
       },
-      submit() {
+      submit () {
          if (this.new_category.parent_id === '') {
             this.new_category.parent_id = null
          }
@@ -81,15 +74,15 @@ export default {
          })
          this.close('close')
       },
-      close() {
+      close () {
          this.$emit('close')
       }
    },
-   created() {
-      this.income_options = [{ name: 'None', id: null }].concat(
+   created () {
+      this.income_options = [{ name: 'Nessuna', id: null }].concat(
          this.income_parent_categories
       )
-      this.expense_options = [{ name: 'None', id: null }].concat(
+      this.expense_options = [{ name: 'Nessuna', id: null }].concat(
          this.expense_parent_categories
       )
    }

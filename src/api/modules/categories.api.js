@@ -10,5 +10,8 @@ export default {
    },
    updateCategory (payload) {
       return apiClient.post('/categories/' + payload.id + '/update', payload)
+   },
+   deleteCategory (payload) {
+      return apiClient.delete('/categories/' + payload.id, { data: payload })
    }
 }

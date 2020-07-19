@@ -8,11 +8,11 @@
                   <div class="text"> Le tue categorie </div>
                   <div class="params">
                      <div
-                        class="params-button edit-categories"
-                        @click="showCategoryEdit"
+                        class="params-button delete-categories"
+                        @click="deleteCategories"
                      >
-                        <font-awesome-icon icon="edit" />
-                        <div class="button-text">Edit</div>
+                        <font-awesome-icon icon="trash" />
+                        <div class="button-text">Elimina selezionate</div>
                      </div>
                   </div>
                </div>
@@ -20,7 +20,7 @@
                <div class="new-category-container">
                   <h3 class="title">Aggiungi una categoria</h3>
                   <div class="category-form">
-                     <NewCategoryForm @close="showNewCategoryForm" />
+                     <NewCategoryForm />
                   </div>
                </div>
 
@@ -28,20 +28,20 @@
                   <div class="categories-container">
                      <h3 class="title title-income">Categorie di entrata</h3>
                      <Category
-                        :showEdit="show_category_edit"
                         v-for="category in income_category_tree"
                         :category="category"
                         :key="category.id"
+                        @input="mergeToDelete(category.id, $event)"
                      />
                   </div>
 
                   <div class="categories-container">
                      <h3 class="title title-expense">Categorie di Spesa</h3>
                      <Category
-                        :show_edit="show_category_edit"
                         v-for="category in expense_category_tree"
                         :category="category"
                         :key="category.id"
+                        @input="mergeToDelete(category.id, $event)"
                      />
                   </div>
                </div>
@@ -68,8 +68,7 @@ export default {
    },
    data () {
       return {
-         show_new_category_form: false,
-         show_category_edit: false
+         to_delete: new Map()
       }
    },
    computed: {
@@ -80,12 +79,18 @@ export default {
       ])
    },
    methods: {
-      ...mapActions('categories', ['getCategories', 'newCategory']),
-      showNewCategoryForm () {
-         this.show_new_category_form = !this.show_new_category_form
+      ...mapActions('categories', [
+         'getCategories',
+         'newCategory',
+         'deleteCategory'
+      ]),
+      deleteCategories () {
+         this.to_delete.forEach(element =>
+            element.forEach(to_delete_id => this.deleteCategory(to_delete_id))
+         )
       },
-      showCategoryEdit () {
-         this.show_category_edit = !this.show_category_edit
+      mergeToDelete (cat_id, val) {
+         this.to_delete.set(cat_id, val)
       }
    },
    created () {

@@ -2,7 +2,13 @@
    <div class="category">
       <div class="category-name">
          <div class="title">
-            <input type="checkbox" /> {{ category.name }}
+            <input
+               type="checkbox"
+               v-model="parent_checked"
+               v-if="category.name !== 'Non categorizzato'"
+               @input="addToDelete(-1, $event.target.checked)"
+            />
+            {{ category.name }}
          </div>
 
          <div class="edit-options">
@@ -37,7 +43,13 @@
                :key="index"
             >
                <div class="title">
-                  <input type="checkbox" /> {{ child.name }}
+                  <input
+                     type="checkbox"
+                     @input="addToDelete(index, $event.target.checked)"
+                     :checked="parent_checked"
+                     :disabled="parent_checked"
+                  />
+                  {{ child.name }}
                </div>
             </div>
          </div>
@@ -57,25 +69,29 @@ export default {
    },
    data () {
       return {
+         parent_checked: false,
          show_sub_categories: true,
          children_height: parseInt(this.category.children.length) * 45,
-
-         colors: [
-            '#56ED96',
-            '#ffd447',
-            '#5497A7',
-            '#292f36',
-            '#87ff65',
-            '#81f499',
-            '#a2d729',
-            '#50858b',
-            '#0a0908',
-            '#caf7e2',
-            '#aceb98'
-         ]
+         to_delete: []
       }
    },
    methods: {
+      addToDelete (index, checked) {
+         var cat_id = this.category.id
+         if (index === -1) {
+            this.to_delete = []
+         } else {
+            cat_id = this.category.children[index].id
+         }
+
+         if (checked) {
+            this.to_delete.push(cat_id)
+         } else {
+            this.to_delete.splice(this.to_delete.indexOf(cat_id), 1)
+         }
+
+         this.$emit('input', this.to_delete)
+      },
       showSubCategories () {
          this.show_sub_categories = !this.show_sub_categories
       }

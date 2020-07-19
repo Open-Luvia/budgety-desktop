@@ -5,8 +5,23 @@
          <aside class="sidebar">
             <div class="sidebar-elements">
                <div>
-                  <div class="account-total">
-                     Totale conti: 23123
+                  <div class="sidebar-element" style="cursor:initial">
+                     <div class="container">
+                        <div class="account-name">Totale conti:</div>
+                        <div
+                           :class="{
+                              amount: true,
+                              positive: totalAmount > 0,
+                              negative: totalAmount < 0
+                           }"
+                        >
+                           {{
+                              totalAmount.toLocaleString('it-IT', {
+                                 minimumFractionDigits: 2
+                              })
+                           }}
+                        </div>
+                     </div>
                   </div>
                   <div
                      :class="{
@@ -50,7 +65,7 @@
             </div>
          </aside>
          <div class="transactions-wrapper">
-            <div class="title">
+            <div class="title" v-if="this.showTransactions">
                <div class="text">Transazioni</div>
                <router-link
                   class="icon-button add-transaction"
@@ -99,6 +114,11 @@ export default {
       ...mapGetters('transactions', ['transactions_by_account']),
       transaction_list () {
          return this.transactions_by_account(this.account_id)
+      },
+      totalAmount () {
+         var sum = 0
+         this.accounts.forEach(acc => (sum += acc.amount))
+         return sum
       }
    },
    created () {
@@ -151,25 +171,25 @@ export default {
                padding: 0 16px
                width: 100%
 
-               .amount
-                  font-size: 18px
-                  font-weight: bolder
-                  padding: 0 6px
-                  border-radius: 8px
-                  text-align: right
+            .amount
+               font-size: 18px
+               font-weight: bolder
+               padding: 0 6px
+               border-radius: 8px
+               text-align: right
 
-                  &::after
-                     content: '€'
-                     font-size: 14px
+               &::after
+                  content: '€'
+                  font-size: 14px
 
 
-               .positive
-                  color: map-get($colors, 'positive-transaction')
-                  // background: #e4f2ef
+            .positive
+               color: map-get($colors, 'positive-transaction')
+               // background: #e4f2ef
 
-               .negative
-                  color: map-get($colors, 'negative-transaction')
-                  // background: #fae7e6
+            .negative
+               color: map-get($colors, 'negative-transaction')
+               // background: #fae7e6
 
          .active
             font-weight: 700
@@ -180,12 +200,6 @@ export default {
                background: #e4f2ef
             .negative
                background: #fae7e6
-
-      .account-total
-         background: #343B44
-         color: white
-         padding: 10px 32px
-         font-size: 20px
 
 .transactions-wrapper
    position: relative

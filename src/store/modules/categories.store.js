@@ -40,6 +40,17 @@ export default {
             commit('SET_CATEGORIES', response.data.categories)
          })
       },
+
+      async deleteCategory ({ rootState }, category_id) {
+         const payload = {
+            id: category_id,
+            user_id: rootState.user_id
+         }
+
+         await CategoriesApi.deleteCategory(payload)
+         window.location.reload()
+      },
+
       async newCategory ({ dispatch, rootState }, category) {
          const payload = {
             user_id: rootState.user_id,

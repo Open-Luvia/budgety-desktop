@@ -45,7 +45,7 @@ export default {
    actions: {
       async getTransactionsByAccount ({ commit, rootState }, account_id) {
          const payload = {
-            per_page: 20,
+            per_page: 1000,
             user_id: rootState.user_id
          }
          await TransactionsApi.getTransactionsByAccount(
@@ -56,6 +56,15 @@ export default {
                data: response.data.data,
                account_id: account_id
             }
+
+            params.data.forEach(transaction =>
+               transaction.items.map(item => {
+                  if (!item.category_id) {
+                     item.category_id = item.amount < 0 ? 1 : 2
+                  }
+                  return item
+               })
+            )
             commit('SET_TRANSACTIONS_BY_ACCOUNT', params)
          })
       },
