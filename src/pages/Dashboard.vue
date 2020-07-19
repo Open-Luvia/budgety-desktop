@@ -31,16 +31,26 @@
          <div class="monthly-stat" v-if="active_month_data">
             <div class="monthly-stat-card stat-card-green">
                <h4>Entrate</h4>
-               <div>{{ active_month_data.data[0] }}</div>
+               <div>{{
+                  active_month_data.data[0].toLocaleString('it-IT', {
+                     minimumFractionDigits: 2
+                  })
+               }}</div>
             </div>
             <div class="monthly-stat-card stat-card-red">
                <h4>Uscite</h4>
-               <div>{{ active_month_data.data[1] }}</div>
+               <div>{{
+                  active_month_data.data[1].toLocaleString('it-IT', {
+                     minimumFractionDigits: 2
+                  })
+               }}</div>
             </div>
             <div class="monthly-stat-card">
                <h4>Totale</h4>
                <div>{{
-                  active_month_data.data[0] - active_month_data.data[1]
+                  (
+                     active_month_data.data[0] - active_month_data.data[1]
+                  ).toLocaleString('it-IT', { minimumFractionDigits: 2 })
                }}</div>
             </div>
          </div>
@@ -51,7 +61,7 @@
             class="graph-container income"
             v-if="
                active_month_income_data &&
-               active_month_income_data.data.length != 0
+                  active_month_income_data.data.length != 0
             "
          >
             <h3 class="title">Entrate per categoria</h3>
@@ -70,7 +80,7 @@
             class="graph-container expense"
             v-if="
                active_month_expense_data &&
-               active_month_expense_data.data.length != 0
+                  active_month_expense_data.data.length != 0
             "
          >
             <h3 class="title">Spese per categoria</h3>
@@ -103,7 +113,7 @@ export default {
       TransactionsByCategoryBar,
       Navbar
    },
-   data() {
+   data () {
       return {
          active_year: -1,
          active_month: -1,
@@ -126,7 +136,7 @@ export default {
       ])
    },
    watch: {
-      transactions_list() {
+      transactions_list () {
          this.generateReports()
       }
    },
@@ -135,7 +145,7 @@ export default {
          'generateReportByMonth',
          'generateIncomeOrExpenseReportByMonth'
       ]),
-      async generateReports() {
+      async generateReports () {
          await this.generateReportByMonth()
          await this.generateIncomeOrExpenseReportByMonth(true)
          await this.generateIncomeOrExpenseReportByMonth(false)
@@ -149,7 +159,7 @@ export default {
             null
          }
       },
-      changeActiveMonth(year, month) {
+      changeActiveMonth (year, month) {
          this.active_year = year
          this.active_month = month
 
@@ -178,7 +188,7 @@ export default {
          })
       }
    },
-   created() {
+   created () {
       this.generateReports()
    }
 }
@@ -200,6 +210,7 @@ export default {
    width: 100%
    display: flex
    padding-left: 30px
+   cursor: pointer
 
 .year-data
    display: flex

@@ -7,7 +7,14 @@
                :style="{ background: colors[index % colors.length] }"
             ></div>
             <div class="title">{{ category.name }}</div>
-            <div class="amount">{{ category.value }} €</div>
+            <div class="amount"
+               >{{
+                  category.value.toLocaleString('it-IT', {
+                     minimumFractionDigits: 2
+                  })
+               }}
+               €</div
+            >
          </div>
          <div class="percentage">
             <div
