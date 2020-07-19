@@ -97,7 +97,7 @@
             <div class="button-on-white">Inizia adesso</div>
          </div>
          <div class="image">
-            <img src="http://www.luvia.it/images/luvia/kuumo-radius.png" />
+            <img :src="accounts_screen" />
          </div>
       </div>
 
@@ -109,10 +109,13 @@
 
 <script>
 import DashboardScreen from '@/assets/images/dashboard-screenshot.png'
+import AccountScreen from '@/assets/images/accounts-screenshot.png'
+
 export default {
    data() {
       return {
-         dashboard_screen: DashboardScreen
+         dashboard_screen: DashboardScreen,
+         accounts_screen: AccountScreen
       }
    }
 }
