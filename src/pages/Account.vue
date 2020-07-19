@@ -24,7 +24,7 @@
                         }"
                         class="container"
                      >
-                        {{ account.name }}
+                        <div class="account-name">{{ account.name }}</div>
                         <div
                            :class="{
                               amount: true,
@@ -125,6 +125,7 @@ export default {
       width: $sidebar-width
 
       .sidebar-elements
+         width: $sidebar-width
          display: flex
          flex-direction: column
          height: 100%
@@ -133,10 +134,13 @@ export default {
          .sidebar-element
             color: white
             cursor: pointer
-            font-size: 21px
+            font-size: 20px
             font-weight: 500
             height: 3.2em
             width: 100%
+
+            .account-name
+               margin-right: 30px
 
             .container
                align-items: center
@@ -144,30 +148,38 @@ export default {
                flex-direction: row
                height: 100%
                justify-content: space-between
-               padding: 0px 30px 0px 30px
+               padding: 0 16px
                width: 100%
 
                .amount
-                  border-radius: 5px
-                  color: white
                   font-size: 18px
-                  padding: 6px 12px
-                  // min-width: 130px
+                  font-weight: bolder
+                  padding: 0 6px
+                  border-radius: 8px
                   text-align: right
 
                   &::after
                      content: '€'
                      font-size: 14px
 
+
                .positive
-                  background-color: map-get($colors, 'positive-transaction')
+                  color: map-get($colors, 'positive-transaction')
+                  // background: #e4f2ef
+
                .negative
-                  background-color: map-get($colors, 'negative-transaction')
+                  color: map-get($colors, 'negative-transaction')
+                  // background: #fae7e6
 
          .active
             font-weight: 700
             background-color: #fafafa
             color: #222
+
+            .positive
+               background: #e4f2ef
+            .negative
+               background: #fae7e6
 
       .account-total
          background: #343B44
@@ -176,18 +188,23 @@ export default {
          font-size: 20px
 
 .transactions-wrapper
+   position: relative
+   width: 100%
+   overflow-y: scroll
+   height: calc(100vh - 64px)
+
    .title
       display: flex
       align-items: center
       justify-content: space-between
       margin: 0 32px
       margin-top: 32px
-      margin-bottom: 12px
+      margin-bottom: 14px
       font-weight: bold
 
       .text,.icon-button
          color: #333
-         font-size: 18px
+         font-size: 20px
 
       .icon-button
          display: flex
@@ -197,8 +214,9 @@ export default {
 
 
 .transaction-list
-   width: calc(100vw - 384px)
+   width: calc(100% - 64px)
    margin: 0 32px
+   margin-bottom: 32px
    background: white
    border-bottom: 2px solid #eee
    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
@@ -209,52 +227,4 @@ export default {
    border-radius: 16px
    height: min-content
    overflow: hidden
-
-//    .title
-//       display: flex
-//       align-items: center
-//       justify-content: space-between
-//       border-bottom: 2px solid #eee
-//       text-align: left
-//       padding-left: 20px
-//       padding-top: 15px
-//       padding-bottom: 15px
-//       margin: 0
-
-//    .icon-button
-//       display: flex
-//       align-items: center
-
-   // .transaction-list
-   //    position: relative
-   //    // margin-left: $sidebar-width
-   //    width: calc(100vw - #{$sidebar-width})
-   //    max-height: calc(100vh - 64px)
-   //    overflow-y: scroll
-
-   //    .header
-   //       display: flex
-   //       align-items: center
-   //       justify-content: space-between
-
-   //       // background-color: map-get($colors, "sidebar")
-   //       // margin: 20px 20px 10px 20px
-   //       // padding: 10px 20px 10px 20px
-   //       // border-radius: 10px
-   //       padding: 10px 32px
-
-   //       .text
-   //          font-size: 20px
-   //          // color: white
-
-   // .add-transaction
-   //    align-items: center
-   //    // color: white
-   //    cursor: pointer
-   //    display: flex
-   //    font-size: 20px
-
-   //    .text
-   //       margin-left: 10px
-   //       // color: white
 </style>
