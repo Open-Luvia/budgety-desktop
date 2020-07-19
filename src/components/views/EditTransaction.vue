@@ -2,6 +2,7 @@
    <div class="new-transaction">
       <ModalHeader
          back_to="account"
+         style="border-radius: 16px 16px 0 0"
          :params="{ account_id: this.edited_transaction.account_id }"
       >
          Modifica Transazione
@@ -225,7 +226,7 @@ export default {
    -webkit-border-radius: 16px
    -moz-border-radius: 16px
    border-radius: 16px
-   overflow: hidden
+   // overflow: hidden
 
    .body
       padding: 16px

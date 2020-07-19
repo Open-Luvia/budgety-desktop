@@ -22,7 +22,7 @@
          class="item"
          @selected="changeType"
       />
-      <div @click="submit" class="item">
+      <div @click="submit" class="item" style="cursor: pointer">
          <BaseIcon width="35" height="35" color="#44D7B6">
             <IconCheckCircle />
          </BaseIcon>
@@ -79,11 +79,18 @@ export default {
       }
    },
    created () {
-      this.income_options = [{ name: 'Nessuna', id: null }].concat(
-         this.income_parent_categories
-      )
+      let income_cats = [].concat(this.income_parent_categories)
+      let to_remove = income_cats.findIndex(a => a.name === 'Non categorizzato')
+      console.log(to_remove)
+      if (to_remove !== -1) income_cats.splice(to_remove, 1)
+
+      let expense_cats = [].concat(this.expense_parent_categories)
+      to_remove = expense_cats.findIndex(a => a.name === 'Non categorizzato')
+      if (to_remove !== -1) expense_cats.splice(to_remove, 1)
+
+      this.income_options = [{ name: 'Nessuna', id: null }].concat(income_cats)
       this.expense_options = [{ name: 'Nessuna', id: null }].concat(
-         this.expense_parent_categories
+         expense_cats
       )
    }
 }

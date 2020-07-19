@@ -1,6 +1,10 @@
 <template>
    <div class="new-transaction">
-      <ModalHeader back_to="account" :params="{ account_id: this.id }">
+      <ModalHeader
+         back_to="account"
+         :params="{ account_id: this.id }"
+         style="border-radius: 16px 16px 0 0"
+      >
          Nuova Transazione
       </ModalHeader>
       <div class="body">
@@ -180,7 +184,7 @@ export default {
    -webkit-border-radius: 16px
    -moz-border-radius: 16px
    border-radius: 16px
-   overflow: hidden
+   // overflow: hidden
 
    .body
       padding: 16px

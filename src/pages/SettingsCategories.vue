@@ -129,6 +129,7 @@ export default {
          display: flex
          align-self: center
          margin-left: 24px
+         cursor: pointer
          *
             align-self: center
 
