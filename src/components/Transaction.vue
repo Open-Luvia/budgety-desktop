@@ -2,59 +2,80 @@
    <div
       class="transaction"
       @click="showItems"
+      v-if="this.transaction != null"
       @mouseover="showEdit"
       @mouseout="showEdit"
-      v-if="this.transaction != null"
    >
-      <div class="transaction-info">
-         <div class="info">
-            <div class="date">
-               {{ transaction.date.format('DD/MM/YYYY') }}
-            </div>
+      <div class="color-indicator" v-show="show_edit"></div>
+      <div class="main-info">
+         <div class="transaction-info">
             <div class="note">
                {{ transaction.description }}
             </div>
+            <div class="date">
+               {{ transaction.date.format('DD MMM') }}
+            </div>
          </div>
-         <div class="edit-buttons" v-show="show_edit">
-            <router-link
-               :to="{
-                  name: 'editTransaction',
-                  params: {
-                     transaction_id: transaction.id,
-                     transaction: this.transaction
-                  }
-               }"
-            >
-               <font-awesome-icon icon="edit" class="edit-button" size="lg" />
-            </router-link>
-            <font-awesome-icon
-               icon="trash"
-               class="delete-button"
-               size="lg"
+         <div style="display:flex">
+            <div class="action-button" v-show="show_edit">
+               <router-link
+                  :to="{
+                     name: 'editTransaction',
+                     params: {
+                        transaction_id: transaction.id,
+                        transaction: this.transaction
+                     }
+                  }"
+               >
+                  Modifica
+               </router-link>
+            </div>
+            <div
+               class="action-button"
+               v-show="show_edit"
                @click="deleteTransaction(transaction.id)"
-            />
-         </div>
-         <div :class="priceStyle(transaction.amount)">
-            <span> {{ format(transaction.amount) }} € </span>
+            >
+               Elimina
+            </div>
+            <div :class="priceStyle(transaction.amount)">
+               {{
+                  transaction.amount.toLocaleString('it-IT', {
+                     minimumFractionDigits: 2
+                  })
+               }}
+            </div>
          </div>
       </div>
+
       <transition name="height-expansion">
          <div
-            class="items"
+            :class="{
+               'items-info': true,
+               'transaction-open': show_items
+            }"
             v-show="show_items"
             :style="{ height: this.items_height + 'px' }"
          >
+            <div class="item-header">
+               <div class="hmedium">Nome</div>
+               <div class="hmedium">Categoria</div>
+               <div class="hsmall">Prezzo</div>
+            </div>
             <div v-for="item in transaction.items" :key="item.id" class="item">
-               <div class="item-info">
-                  <div class="category">
-                     {{ categoryName(item.category_id) }}
-                  </div>
-                  <div class="name">
-                     {{ item.name }}
-                  </div>
+               <div class="hmedium name">
+                  {{ item.name }}
                </div>
-               <div :class="priceStyle(item.amount)">
-                  <span> {{ format(item.amount) }} € </span>
+               <div class="hmedium category">
+                  {{ categoryName(item.category_id) }}
+               </div>
+               <div :class="priceStyle(item.amount) + ' hsmall'">
+                  <span>
+                     {{
+                        item.amount.toLocaleString('it-IT', {
+                           minimumFractionDigits: 2
+                        })
+                     }}</span
+                  >
                </div>
             </div>
          </div>
@@ -70,38 +91,40 @@ export default {
    props: {
       transaction: Object
    },
-   data() {
+   data () {
       return {
          show_items: false,
          show_edit: false,
-         items_height: this.transaction.items.length * 36
+         items_height: this.transaction.items.length * 35 + 28 + 8
       }
    },
    computed: {
       ...mapState('categories', ['categories']),
-      is_amount_negative() {
+      is_amount_negative () {
          return this.transaction.amount < 0
       }
    },
    methods: {
       ...mapActions('transactions', ['deleteTransaction']),
-      priceStyle(amount) {
-         var result = 'amount'
+      priceStyle (amount) {
+         var result = 'transaction-amount'
          if (amount < 0) {
-            result += ' negative'
+            result += ' amount-negative'
          } else {
-            result += ' positive'
+            result += ' amount-positive'
          }
          return result
       },
-      showItems() {
+      showItems () {
          this.show_items = !this.show_items
       },
-      showEdit() {
+      showEdit () {
          this.show_edit = !this.show_edit
       },
-      categoryName(id) {
-         return this.categories.find(category => category.id == id).name
+      categoryName (id) {
+         let cat = this.categories.find(category => category.id == id)
+         if (cat) return cat.name
+         else return 'Non categorizzato'
       }
    }
 }
@@ -110,92 +133,101 @@ export default {
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
 .transaction
-   border-bottom: 1px solid black
    box-sizing: border-box
-   display: flex
-   flex-direction: column
-   font-weight: 500
-   margin: 0px 30px 0px 30px
+   position: relative
+
+   .main-info
+      border-bottom: 1px solid #eee
+      display: flex
+      align-items: center
+      width: 100%
+      padding: 12px 24px
+
+   .color-indicator
+      position: absolute
+      top: 0
+      left: 0
+      content: ' '
+      width: 10px
+      height: 100%
+      background: #44D7B6
+
+   .action-button
+      cursor: pointer
+      font-size: 18px
+      padding: 0 6px
+      border-radius: 8px
+      background: #efefef
+      margin-right: 10px
+
+   .transaction-amount
+      font-size: 18px
+      font-weight: bolder
+      padding: 0 6px
+      border-radius: 8px
+
+      &::after
+         content: '€'
+         font-size: 14px
+
+   .amount-positive
+      color: map-get($colors, 'positive-transaction')
+      background: #e4f2ef
+
+   .amount-negative
+      color: map-get($colors, 'negative-transaction')
+      background: #fae7e6
+
    .transaction-info
-      align-items: center
-      display: flex
-      flex-direction: row
-      font-size: 20px
-      .info
-         display: flex
-         width: calc( 100% - 120px )
-         .date
-            align-items: center
-            display: flex
-            flex-basis: content
-            justify-content: flex-start
-         .note
-            align-items: center
-            display: flex
-            justify-content: flex-start
-            margin: 0px 50px 0px 50px
-      .amount
-         align-items: center
-         border-radius: 12px
-         color: white
-         display: flex
-         height: 2em
-         justify-content: center
-         margin: 6px 0px 6px 0px
-         width: 120px
-      .negative
-         background-color: map-get($colors, "negative-transaction")
-      .positive
-         background-color: map-get($colors, "positive-transaction")
-   .items
-      font-size: 20px
-      margin: 0px 0px 0px 50px
-      overflow: hidden
-      .item
-         align-items: center
-         display: flex
+      flex-grow: 1
+      text-align: left
+      padding:
+
+      .note
+         color: #555
          font-size: 18px
-         height: 2em
-         justify-content: space-between
+         font-weight: 600
+
+      .date
+         font-size: 16px
+         font-weight: 500
+
+   .transaction-open
+      background: #fafafa
+
+   .items-info
+      box-sizing: border-box
+      width: 100%
+      border-bottom: 1px solid #eee
+      text-align: left
+      overflow: hidden
+      >*
          width: 100%
-         .item-info
-            display: flex
-            .category
-               align-items: center
-               display: flex
-               justify-content: flex-start
-               width: 135px
-            .name
-               align-items: center
-               display: flex
-               justify-content: flex-start
-               margin: 0px 50px 0px 50px
-         .amount
-            align-items: center
-            border-radius: 9px
-            color: white
-            display: flex
-            height: 1.5em
-            justify-content: center
-            margin: 6px 0px 6px 0px
-            width: 120px
-         .negative
-            background-color: map-get($colors, "negative-transaction")
-         .positive
-            background-color: map-get($colors, "positive-transaction")
-   .edit-buttons
-      align-items: center
-      display: flex
-      justify-content: flex-end
-      margin: 0px 15px 0px 0px
-      .delete-button
-         color: #232A33
-         margin: 0px 10px 0px 0px
-         &:hover
-            color: #0091FF
-      .edit-button
-         color: #232A33
-         margin: 0px 10px 0px 0px
-         &:hover
-            color: #0091FF
+
+      .item-header
+         display: flex
+         padding: 8px 26px 0 36px
+         .hsmall, .hmedium
+            font-weight: bolder
+
+      .hsmall, .hmedium
+         width: 40%
+      .hsmall
+         width: 20%
+         text-align: right
+         padding: 0
+
+      .item
+         display: flex
+         padding: 4px 26px 4px 36px
+         justify-content: space-between
+
+         .transaction-amount
+            font-weight: initial
+
+         .amount-positive
+            background: transparent
+
+         .amount-negative
+            background: transparent
 </style>

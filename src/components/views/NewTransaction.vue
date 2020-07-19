@@ -1,6 +1,10 @@
 <template>
    <div class="new-transaction">
-      <ModalHeader back_to="account" :params="{ account_id: this.id }">
+      <ModalHeader
+         back_to="account"
+         :params="{ account_id: this.id }"
+         style="border-radius: 16px 16px 0 0"
+      >
          Nuova Transazione
       </ModalHeader>
       <div class="body">
@@ -11,7 +15,7 @@
                   @input="updateDescription"
                />
             </div>
-            <BaseDatePicker :value="transaction.date" @input="assignDate"/>
+            <BaseDatePicker :value="transaction.date" @input="assignDate" />
             <div class="type">
                <BaseToggleSwitch :default_option="0" @selected="changeType" />
             </div>
@@ -147,11 +151,11 @@ export default {
             this.is_expense = false
          }
       },
-      updateDescription(description) {
+      updateDescription (description) {
          this.transaction.description = description
          this.transaction.items[0].name = description
       },
-      assignDate(date) {
+      assignDate (date) {
          this.transaction.date = date
       }
    },
@@ -169,15 +173,27 @@ export default {
 @import '@/assets/global.sass'
 
 .new-transaction
-   background: white;
-   height: 100%
-   width: 100%
+   width: calc( 100% - 64px )
+   height: min-content
+   margin: 0 32px
+   margin-top: 32px
+   background: white
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+   -webkit-border-radius: 16px
+   -moz-border-radius: 16px
+   border-radius: 16px
+   // overflow: hidden
+
    .body
+      padding: 16px
+
       .transaction-info
          display: grid
-         width: 100%
+         width: calc(100% - 52px)
          margin: 10px 10px 10px 10px
-         grid-template: "description datepicker type" auto / 0.6fr 0.2fr 0.2fr
+         grid-template: "description datepicker type" auto / 60% 20% 20%
          column-gap: 10px
          align-items: center
          .description

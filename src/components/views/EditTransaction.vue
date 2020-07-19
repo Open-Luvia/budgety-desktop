@@ -2,6 +2,7 @@
    <div class="new-transaction">
       <ModalHeader
          back_to="account"
+         style="border-radius: 16px 16px 0 0"
          :params="{ account_id: this.edited_transaction.account_id }"
       >
          Modifica Transazione
@@ -214,16 +215,26 @@ export default {
 @import '@/assets/global.sass'
 
 .new-transaction
-   background: white;
-   height: 100%
-   width: 100%
+   width: calc( 100% - 64px )
+   height: min-content
+   margin: 0 32px
+   margin-top: 32px
+   background: white
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+   -webkit-border-radius: 16px
+   -moz-border-radius: 16px
+   border-radius: 16px
+   // overflow: hidden
+
    .body
-      padding: 10px
+      padding: 16px
       .transaction-info
          display: grid
-         width: 100%
+         width: calc(100% - 52px)
          margin: 10px 10px 10px 10px
-         grid-template: "description datepicker type" auto / 0.6fr 0.2fr 0.2fr
+         grid-template: "description datepicker type" auto / 60% 20% 20%
          column-gap: 10px
          align-items: center
          .description

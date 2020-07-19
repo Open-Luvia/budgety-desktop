@@ -1,10 +1,28 @@
 <template>
-   <div class="fullscreen">
+   <div>
       <Navbar />
       <div class="body">
          <aside class="sidebar">
             <div class="sidebar-elements">
                <div>
+                  <div class="sidebar-element" style="cursor:initial">
+                     <div class="container">
+                        <div class="account-name">Totale conti:</div>
+                        <div
+                           :class="{
+                              amount: true,
+                              positive: totalAmount > 0,
+                              negative: totalAmount < 0
+                           }"
+                        >
+                           {{
+                              totalAmount.toLocaleString('it-IT', {
+                                 minimumFractionDigits: 2
+                              })
+                           }}
+                        </div>
+                     </div>
+                  </div>
                   <div
                      :class="{
                         'sidebar-element': true,
@@ -21,7 +39,7 @@
                         }"
                         class="container"
                      >
-                        {{ account.name }}
+                        <div class="account-name">{{ account.name }}</div>
                         <div
                            :class="{
                               amount: true,
@@ -29,49 +47,45 @@
                               negative: account.amount < 0
                            }"
                         >
-                           {{ format(account.amount) }}
+                           {{
+                              account.amount.toLocaleString('it-IT', {
+                                 minimumFractionDigits: 2
+                              })
+                           }}
                         </div>
                      </router-link>
                   </div>
                </div>
                <div class="add-account">
                   <router-link :to="{ name: 'newAccount' }">
-                     <font-awesome-icon
-                        icon="plus-circle"
-                        :style="{ color: 'white' }"
-                     />
-                     <span>Add account</span>
+                     <font-awesome-icon icon="plus" />
+                     <span>Aggiungi conto</span>
                   </router-link>
                </div>
             </div>
          </aside>
-         <div class="transaction-list">
-            <div class="header">
-               <span>Transactions</span>
-               <div class="add-transaction">
-                  <router-link
-                     :to="{
-                        name: 'newTransaction',
-                        params: { id: this.account_id }
-                     }"
-                  >
-                     <font-awesome-icon
-                        icon="plus-circle"
-                        :style="{ color: '#A7AEB7' }"
-                     />
-                     <span>New</span>
-                  </router-link>
-               </div>
+         <div class="transactions-wrapper">
+            <div class="title" v-if="this.showTransactions">
+               <div class="text">Transazioni</div>
+               <router-link
+                  class="icon-button add-transaction"
+                  :to="{
+                     name: 'newTransaction',
+                     params: { id: this.account_id }
+                  }"
+               >
+                  <font-awesome-icon icon="plus" />
+                  <div class="text">Aggiungi</div>
+               </router-link>
             </div>
-            <div>
-               <TransactionList
-                  v-if="
-                     !this.transactions_tree_is_empty && this.showTransactions
-                  "
-                  :account_id="parseInt(account_id)"
+            <div class="transaction-list" v-if="this.showTransactions">
+               <Transaction
+                  v-for="transaction in transaction_list"
+                  :transaction="transaction"
+                  :key="transaction.id"
                />
-               <router-view class="overlay" />
             </div>
+            <router-view class="overlay" />
          </div>
       </div>
    </div>
@@ -79,29 +93,35 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import TransactionList from '../components/TransactionList.vue'
+import Transaction from '@/components/Transaction.vue'
 import { mapGetters, mapState } from 'vuex'
-import { amountFormatter } from '@/mixins/amountFormatter.mixin.js'
 
 export default {
-   mixins: [amountFormatter],
    components: {
       Navbar,
-      TransactionList
+      Transaction
    },
    props: {
       account_id: null //passato dal router
    },
-   data() {
+   data () {
       return {
          showTransactions: true
       }
    },
    computed: {
       ...mapState('accounts', ['accounts']),
-      ...mapGetters('transactions', ['transactions_tree_is_empty'])
+      ...mapGetters('transactions', ['transactions_by_account']),
+      transaction_list () {
+         return this.transactions_by_account(this.account_id)
+      },
+      totalAmount () {
+         var sum = 0
+         this.accounts.forEach(acc => (sum += acc.amount))
+         return sum
+      }
    },
-   created() {
+   created () {
       if (this.$router.currentRoute.name != 'account') {
          this.showTransactions = false
       }
@@ -114,81 +134,111 @@ export default {
 
 .modal
    background: black
+
 .body
    display: flex
+   background: #fafafa
+
    .sidebar
       background: map-get($colors, 'sidebar')
-      height: 100%
+      height: calc(100vh - 64px)
       width: $sidebar-width
+
       .sidebar-elements
+         width: $sidebar-width
          display: flex
          flex-direction: column
          height: 100%
          justify-content: space-between
+
          .sidebar-element
             color: white
             cursor: pointer
-            font-size: 21px
+            font-size: 20px
             font-weight: 500
             height: 3.2em
             width: 100%
+
+            .account-name
+               margin-right: 30px
+
             .container
                align-items: center
                display: flex
                flex-direction: row
                height: 100%
                justify-content: space-between
-               padding: 0px 30px 0px 30px
+               padding: 0 16px
                width: 100%
-               .amount
-                  border-radius: 5px
-                  color: white
-                  font-weight: 700
-                  padding: 3px
-                  width: 100px
-               .positive
-                  background-color: map-get($colors, 'positive-transaction')
-               .negative
-                  background-color: map-get($colors, 'negative-transaction')
+
+            .amount
+               font-size: 18px
+               font-weight: bolder
+               padding: 0 6px
+               border-radius: 8px
+               text-align: right
+
+               &::after
+                  content: '€'
+                  font-size: 14px
+
+
+            .positive
+               color: map-get($colors, 'positive-transaction')
+               // background: #e4f2ef
+
+            .negative
+               color: map-get($colors, 'negative-transaction')
+               // background: #fae7e6
+
          .active
-            background-color: white !important
-            color: black !important
-            font-weight: 700 !important
-         .add-account
-            align-items: center
-            color: white
-            cursor: pointer
-            display: flex
-            flex-direction: row
-            justify-content: center
-            padding: 16px
-            span
-               margin: 0px 0px 0px 10px
-   .transaction-list
-      position: relative
-      width: calc(100vw - #{$sidebar-width})
-      .header
-         display: flex
-         flex-direction: row
-         align-items: center
-         justify-content: space-between
-         background-color: map-get($colors, "sidebar")
-         margin: 20px 20px 10px 20px
-         padding: 10px 20px 10px 20px
-         border-radius: 10px
-         span
-            font-size: 22px
             font-weight: 700
-            color: white
-   .add-transaction
-      align-items: center
-      color: map-get($colors, 'new-line')
-      cursor: pointer
+            background-color: #fafafa
+            color: #222
+
+            .positive
+               background: #e4f2ef
+            .negative
+               background: #fae7e6
+
+.transactions-wrapper
+   position: relative
+   width: 100%
+   overflow-y: scroll
+   height: calc(100vh - 64px)
+
+   .title
       display: flex
-      flex-direction: row
-      font-size: 22px
-      font-weight: 600
-      justify-content: flex-start
-      span
-         margin: 0px 0px 0px 10px
+      align-items: center
+      justify-content: space-between
+      margin: 0 32px
+      margin-top: 32px
+      margin-bottom: 14px
+      font-weight: bold
+
+      .text,.icon-button
+         color: #333
+         font-size: 20px
+
+      .icon-button
+         display: flex
+         align-items: center
+         .text
+            margin-left: 10px
+
+
+.transaction-list
+   width: calc(100% - 64px)
+   margin: 0 32px
+   margin-bottom: 32px
+   background: white
+   border-bottom: 2px solid #eee
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+   -webkit-border-radius: 16px
+   -moz-border-radius: 16px
+   border-radius: 16px
+   height: min-content
+   overflow: hidden
 </style>

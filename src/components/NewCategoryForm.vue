@@ -5,7 +5,7 @@
          v-if="new_category.is_expense"
          class="item"
          style="width: 300px;"
-         placeholder="Parent"
+         placeholder="Cat. Padre"
          :options="this.expense_options"
          v-model.number="new_category.parent_id"
       />
@@ -13,7 +13,7 @@
          v-else
          class="item"
          style="width: 300px;"
-         placeholder="Parent"
+         placeholder="Cat. Padre"
          :options="this.income_options"
          v-model.number="new_category.parent_id"
       />
@@ -22,12 +22,7 @@
          class="item"
          @selected="changeType"
       />
-      <div @click="close" class="item">
-         <BaseIcon width="35" height="35" color="#FF5B57">
-            <IconTimesCircle />
-         </BaseIcon>
-      </div>
-      <div @click="submit" class="item">
+      <div @click="submit" class="item" style="cursor: pointer">
          <BaseIcon width="35" height="35" color="#44D7B6">
             <IconCheckCircle />
          </BaseIcon>
@@ -36,16 +31,14 @@
 </template>
 
 <script>
-import IconTimesCircle from '@/assets/icons/IconTimesCircle.vue'
 import IconCheckCircle from '@/assets/icons/IconCheckCircle.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
    components: {
-      IconCheckCircle,
-      IconTimesCircle
+      IconCheckCircle
    },
-   data() {
+   data () {
       return {
          income_options: [],
          expense_options: [],
@@ -64,14 +57,14 @@ export default {
    },
    methods: {
       ...mapActions('categories', ['newCategory']),
-      changeType(value) {
+      changeType (value) {
          if (value == 0) {
             this.new_category.is_expense = 1
          } else {
             this.new_category.is_expense = 0
          }
       },
-      submit() {
+      submit () {
          if (this.new_category.parent_id === '') {
             this.new_category.parent_id = null
          }
@@ -81,16 +74,23 @@ export default {
          })
          this.close('close')
       },
-      close() {
+      close () {
          this.$emit('close')
       }
    },
-   created() {
-      this.income_options = [{ name: 'None', id: null }].concat(
-         this.income_parent_categories
-      )
-      this.expense_options = [{ name: 'None', id: null }].concat(
-         this.expense_parent_categories
+   created () {
+      let income_cats = [].concat(this.income_parent_categories)
+      let to_remove = income_cats.findIndex(a => a.name === 'Non categorizzato')
+      console.log(to_remove)
+      if (to_remove !== -1) income_cats.splice(to_remove, 1)
+
+      let expense_cats = [].concat(this.expense_parent_categories)
+      to_remove = expense_cats.findIndex(a => a.name === 'Non categorizzato')
+      if (to_remove !== -1) expense_cats.splice(to_remove, 1)
+
+      this.income_options = [{ name: 'Nessuna', id: null }].concat(income_cats)
+      this.expense_options = [{ name: 'Nessuna', id: null }].concat(
+         expense_cats
       )
    }
 }

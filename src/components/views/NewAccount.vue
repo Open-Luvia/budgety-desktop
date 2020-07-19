@@ -1,6 +1,6 @@
 <template>
    <div class="new-transaction">
-      <ModalHeader back_to="accounts">
+      <ModalHeader back_to="accounts" style="border-radius: 16px 16px 0 0">
          Nuovo Account
       </ModalHeader>
       <div class="body">
@@ -42,7 +42,7 @@ export default {
    components: {
       ModalHeader
    },
-   data() {
+   data () {
       return {
          account_types: [
             {
@@ -62,7 +62,7 @@ export default {
    },
    methods: {
       ...mapActions('accounts', ['newAccount']),
-      submit() {
+      submit () {
          this.newAccount(this.account)
          this.$router.back()
       }
@@ -72,11 +72,23 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/global.sass'
+
 .new-transaction
-   background: white;
-   height: 100%
-   width: 100%
+   width: calc( 100% - 64px )
+   height: min-content
+   margin: 0 32px
+   margin-top: 32px
+   background: white
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1)
+   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1)
+   -webkit-border-radius: 16px
+   -moz-border-radius: 16px
+   border-radius: 16px
+   // overflow: hidden
+
    .body
+      padding: 16px
       .form
          column-gap: 10px
          display: grid

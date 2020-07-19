@@ -16,9 +16,9 @@ export default {
       },
       max: Number
    },
-   data () {
-      return {
-         options: {
+   computed: {
+      options () {
+         return {
             grid: {
                left: 0,
                top: 0,
@@ -75,6 +75,8 @@ export default {
    grid-template: "chart" 0.8fr "laber" 0.2fr / 100%
    justify-items: stretch
    align-items: stretch
+   *
+      cursor: pointer
 
 .chart-label
    text-transform: uppercase
