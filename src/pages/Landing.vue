@@ -12,7 +12,7 @@
 
          <div id="splash-card">
             <div class="title">
-               <h2>Fai chiarezza sui tuoi soldi</h2>
+               <h2>Le tue finanze, in modo chiaro</h2>
             </div>
             <div class="text">
                Visualizza i tuoi soldi a 360 gradi. Guarda tutti i tuoi account
@@ -26,12 +26,13 @@
 
       <div class="myrow" id="three-cards">
          <div class="landing-card">
-            <div class="title">Lorem ipsum dolorem </div>
+            <div class="title">Budget</div>
             <hr />
             <div class="body">
-               Lorem ipsum dolor at em et Lorem ipsum dolor at em et Lorem ipsum
-               dolor at em et Lorem ipsum dolor at em et Lorem ipsum dolor at em
-               et
+               Un buon sistema di budget è alla base di qualsiasi piano
+               finanziario per il futuro. Budgety ti permette facilmente di
+               impostare dei limiti alle tue categorie di spesa, e di
+               controllare quanto del tuo budget è ancora disponibile.
             </div>
          </div>
 
@@ -40,19 +41,21 @@
             <hr />
             <div class="body">
                Mantieni una traccia delle tue spese e metti da parte per il
-               futuro. Il nostro tool di per la gestione del denaro puo'
-               aiutarti a raggiungere i tuoi obiettivi giorno per giorno
+               futuro. Il nostro tool per la gestione del denaro può aiutarti a
+               raggiungere i tuoi obiettivi giorno per giorno.
             </div>
          </div>
 
          <div class="landing-card">
-            <div class="title">Sicurezza</div>
+            <div class="title">Responsabilità</div>
             <hr />
             <div class="body">
-               Una delle nostre priorita' e' tenere i tuoi dati finanziari al
-               sicuro. Utilizziamo multipli livelli di sicurezza in ogni
-               componente del nostro sistema per tenere le tue informazione
-               sempre al sicuro e private.
+               La nostra schermata di report mostra in modo intuitivo le
+               fluttuazioni del tuo patrimonio totale e del tuo flusso di cassa
+               così potrai accorgerti subito di periodi con spese eccessive.
+               Potrai poi decidere se le tue abitudini finanziarie sono da
+               rivedere, nell'ottica di una gestione più responsabile del tuo
+               denaro.
             </div>
          </div>
       </div>
@@ -60,8 +63,8 @@
       <div class="myrow" id="slider">
          <div class="row-title">
             <h2
-               >Non hai mai visto cosi <br />
-               tuoi soldi</h2
+               >Le tue finanze non sono mai <br />
+               state così chiare</h2
             >
          </div>
          <div class="slider-option">
@@ -70,7 +73,7 @@
             />
             <h3 class="title">Dashboard comprensiva</h3>
             <div class="text">
-               Osserva con una sola occhiata dove stai distribuendo il tuo
+               Osserva in modo semplice e chiaro dove stai distribuendo il tuo
                denaro. Puoi anche fare meglio e visualizzare le tue entrate e le
                uscite mese per mese cosi da poter pianificare i tuoi
                investimenti per il futuro
@@ -85,8 +88,10 @@
             </div>
             <hr />
             <div class="text">
-               Guarda una vista real-time e traccia e gestisci facilmente la tua
-               completa vita finanziaria con il nostro pannello multi-account
+               Il nostro pannello multi-account ti permette di visualizzare le
+               spese e le entrate che hai su ogni conto che decidi di tracciare.
+               Hai a portata d'occhio le tue ultime transazioni, quanto denaro
+               hai su ogni conto, e quanto denaro hai in totale.
             </div>
 
             <div class="button-on-black">Inizia adesso</div>
