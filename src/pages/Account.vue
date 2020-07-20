@@ -7,7 +7,7 @@
                <div>
                   <div class="sidebar-element" style="cursor:initial">
                      <div class="container">
-                        <div class="account-name">Totale conti:</div>
+                        <div class="account-name"><b>Totale conti:</b></div>
                         <div
                            :class="{
                               amount: true,

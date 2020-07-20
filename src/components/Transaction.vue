@@ -13,7 +13,7 @@
                {{ transaction.description }}
             </div>
             <div class="date">
-               {{ transaction.date.format('DD MMM') }}
+               {{ transaction.date.format('DD MMM YYYY') }}
             </div>
          </div>
          <div style="display:flex">

@@ -1,11 +1,18 @@
-# Budgety (WIP)
+# Budgety
 
-A personal finance app written in VueJS
+Un'app per la gestione delle finanze personali scritta in VueJS.
+Per l'installazione e l'esecuzione in locale è necessario aver installato [NPM](https://www.npmjs.com/get-npm)
 
-Tested only on the latest verion of Chrome. Currently deployed on [netlify](https://wonderful-hodgkin-3ba881.netlify.app/)
+Per l'esecuzione è necessario anche avviare il backend. Una volta avviato il backend controllare su quale porta il server sta ascoltando e modificare il `baseURL` nel file `/src/api/apiClient.js`
 
-#### Demo Credentials
+Per installare le dipendenze del progetto
 
-**username:** demo@gmail.com
+```
+npm install
+```
 
-**password:** password
+Per eseguire l'applicazione
+
+```
+npm run serve
+```

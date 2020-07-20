@@ -61,9 +61,9 @@ export default {
          if (category.parent_id != null) {
             payload['parent_id'] = category.parent_id
          }
-         CategoriesApi.createCategory(payload).then(() => {
-            dispatch('getCategories')
-         })
+         await CategoriesApi.createCategory(payload)
+         await dispatch('getCategories')
+         window.location.reload()
       },
 
       async updateBudget ({ dispatch, getters, rootState }, budget) {

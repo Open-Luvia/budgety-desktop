@@ -64,15 +64,11 @@ export default {
             this.new_category.is_expense = 0
          }
       },
-      submit () {
+      async submit () {
          if (this.new_category.parent_id === '') {
             this.new_category.parent_id = null
          }
-         this.newCategory(this.new_category).then(() => {
-            this.new_category.name = ''
-            this.new_category.is_expense = 1
-         })
-         this.close('close')
+         this.newCategory(this.new_category)
       },
       close () {
          this.$emit('close')
