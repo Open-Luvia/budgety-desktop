@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store/store.js'
 
 const apiClient = axios.create({
-   baseURL: 'https://tdw-api.mooo.com/api',
+   baseURL: 'http://localhost:8080/', //da modificare in base al server di backend
    headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
