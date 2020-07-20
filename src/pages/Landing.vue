@@ -94,7 +94,9 @@
                hai su ogni conto, e quanto denaro hai in totale.
             </div>
 
-            <div class="button-on-white">Inizia adesso</div>
+            <router-link to="login" class="button-on-white"
+               >Inizia adesso</router-link
+            >
          </div>
          <div class="image">
             <img :src="accounts_screen" />
@@ -112,7 +114,7 @@ import DashboardScreen from '@/assets/images/dashboard-screenshot.png'
 import AccountScreen from '@/assets/images/accounts-screenshot.png'
 
 export default {
-   data() {
+   data () {
       return {
          dashboard_screen: DashboardScreen,
          accounts_screen: AccountScreen
