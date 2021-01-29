@@ -1,18 +1,29 @@
 # Budgety
 
-Un'app per la gestione delle finanze personali scritta in VueJS.
-Per l'installazione e l'esecuzione in locale è necessario aver installato [NPM](https://www.npmjs.com/get-npm)
+This is the frontend for a fullstack personal finance app, written in VueJS 2.3
+Since the backend is not deployed anymore, this project doesn't have a live demo.
 
-Per l'esecuzione è necessario anche avviare il backend. Una volta avviato il backend controllare su quale porta il server sta ascoltando e nel caso in cui sia diversa dall 80, modificare il `baseURL` nel file `/src/api/apiClient.js`
+## Features
+![](./readme/Landing.gif)
+![](./readme/Login.gif)
+![](./readme/Dashboard.gif)
+![](./readme/Accounts.gif)
+![](./readme/Transactions.gif)
+![](./readme/Budget.gif)
+![](./readme/Reports.gif)
+![](./readme/Categories.gif)
+## Installation
+To install and execute the project, [NPM](https://www.npmjs.com/get-npm) is necessary.
 
-Per installare le dipendenze del progetto
+For a live demo, the starting the backend is necessary. Once the backend is up and running, edit the variable `baseURL` in `/src/api/apiClient.js` to contain the endpoint of your backend.
+
+To install project dependencies 
 
 ```
 npm install
 ```
 
-Per eseguire l'applicazione
-
+To start the developement server
 ```
 npm run serve
 ```
